@@ -1,0 +1,291 @@
+/* line 15, ../../src/stylesheet/all.sass */
+.top.left {
+  -moz-border-radius-topleft: 15%;
+  -webkit-border-top-left-radius: 15%;
+  border-top-left-radius: 15%;
+}
+
+/* line 18, ../../src/stylesheet/all.sass */
+.top.right {
+  -moz-border-radius-topright: 15%;
+  -webkit-border-top-right-radius: 15%;
+  border-top-right-radius: 15%;
+}
+
+/* line 21, ../../src/stylesheet/all.sass */
+.bot.left {
+  -moz-border-radius-bottomleft: 15%;
+  -webkit-border-bottom-left-radius: 15%;
+  border-bottom-left-radius: 15%;
+}
+
+/* line 24, ../../src/stylesheet/all.sass */
+.bot.right {
+  -moz-border-radius-bottomright: 15%;
+  -webkit-border-bottom-right-radius: 15%;
+  border-bottom-right-radius: 15%;
+}
+
+/* line 28, ../../src/stylesheet/all.sass */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+/* line 33, ../../src/stylesheet/all.sass */
+body {
+  background: url(../images/body-background.png) #eae6d1;
+  text-align: center;
+  overflow: auto;
+}
+
+/* line 40, ../../src/stylesheet/all.sass */
+.half-left {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+/* line 44, ../../src/stylesheet/all.sass */
+.half-left .contain {
+  width: 90%;
+  height: 98%;
+  margin: 2% auto 0 auto;
+}
+/* line 49, ../../src/stylesheet/all.sass */
+.half-left .contain .hp {
+  width: 100%;
+  height: 25%;
+  background-color: #ea9999;
+  color: #cc0000;
+  font-size: 18vh;
+  border: 3px solid black;
+}
+/* line 56, ../../src/stylesheet/all.sass */
+.half-left .contain .contain2 {
+  width: 90%;
+  height: 75%;
+  float: right;
+}
+/* line 60, ../../src/stylesheet/all.sass */
+.half-left .contain .contain2 .sp {
+  width: 50%;
+  height: 25%;
+  background-color: #cfe2f3;
+  color: #073763;
+  font-size: 14vh;
+  float: left;
+  border: 3px solid black;
+  border-top-style: none;
+}
+/* line 69, ../../src/stylesheet/all.sass */
+.half-left .contain .contain2 .contain3 {
+  width: 82%;
+  height: 75%;
+  margin: 0 auto;
+}
+/* line 73, ../../src/stylesheet/all.sass */
+.half-left .contain .contain2 .contain3 .name {
+  width: 50%;
+  height: 10%;
+  background-color: #ffe599;
+  font-size: 4vh;
+  float: left;
+  border: 3px solid black;
+  border-top-style: none;
+}
+/* line 81, ../../src/stylesheet/all.sass */
+.half-left .contain .contain2 .contain3 .info {
+  width: 50%;
+  height: 90%;
+  padding: 3vh 3vw;
+  background-color: #fff2cc;
+  font-size: 6vh;
+  float: left;
+  border: 3px solid black;
+  border-top-style: none;
+}
+/* line 90, ../../src/stylesheet/all.sass */
+.half-left .star, .half-left .dark {
+  width: 10%;
+  background-color: #f3f3f3;
+  position: absolute;
+  top: 60%;
+  left: 0;
+  border: 3px solid black;
+}
+/* line 97, ../../src/stylesheet/all.sass */
+.half-left .dark {
+  top: 75%;
+  background-color: #434343;
+  color: white;
+  font-size: 14vh;
+}
+
+/* line 40, ../../src/stylesheet/all.sass */
+.half-right {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+/* line 44, ../../src/stylesheet/all.sass */
+.half-right .contain {
+  width: 90%;
+  height: 98%;
+  margin: 2% auto 0 auto;
+}
+/* line 49, ../../src/stylesheet/all.sass */
+.half-right .contain .hp {
+  width: 100%;
+  height: 25%;
+  background-color: #ea9999;
+  color: #cc0000;
+  font-size: 18vh;
+  border: 3px solid black;
+}
+/* line 56, ../../src/stylesheet/all.sass */
+.half-right .contain .contain2 {
+  width: 90%;
+  height: 75%;
+  float: left;
+}
+/* line 60, ../../src/stylesheet/all.sass */
+.half-right .contain .contain2 .sp {
+  width: 50%;
+  height: 25%;
+  background-color: #cfe2f3;
+  color: #073763;
+  font-size: 14vh;
+  float: right;
+  border: 3px solid black;
+  border-top-style: none;
+}
+/* line 69, ../../src/stylesheet/all.sass */
+.half-right .contain .contain2 .contain3 {
+  width: 82%;
+  height: 75%;
+  margin: 0 auto;
+}
+/* line 73, ../../src/stylesheet/all.sass */
+.half-right .contain .contain2 .contain3 .name {
+  width: 50%;
+  height: 10%;
+  background-color: #ffe599;
+  font-size: 4vh;
+  float: right;
+  border: 3px solid black;
+  border-top-style: none;
+}
+/* line 81, ../../src/stylesheet/all.sass */
+.half-right .contain .contain2 .contain3 .info {
+  width: 50%;
+  height: 90%;
+  padding: 3vh 3vw;
+  background-color: #fff2cc;
+  font-size: 6vh;
+  float: right;
+  border: 3px solid black;
+  border-top-style: none;
+}
+/* line 90, ../../src/stylesheet/all.sass */
+.half-right .star, .half-right .dark {
+  width: 10%;
+  background-color: #f3f3f3;
+  position: absolute;
+  top: 60%;
+  right: 0;
+  border: 3px solid black;
+}
+/* line 97, ../../src/stylesheet/all.sass */
+.half-right .dark {
+  top: 75%;
+  background-color: #434343;
+  color: white;
+  font-size: 14vh;
+}
+
+/* line 107, ../../src/stylesheet/all.sass */
+#middle {
+  width: 10%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+}
+/* line 114, ../../src/stylesheet/all.sass */
+#middle #env {
+  width: 100%;
+  background-color: #b45f06;
+  border: 3px solid black;
+}
+/* line 118, ../../src/stylesheet/all.sass */
+#middle #envtxt {
+  width: 60%;
+  background-color: #ea9999;
+  margin: 0 auto;
+  font-size: 8vh;
+  border: 3px solid black;
+  border-top-style: none;
+}
+/* line 125, ../../src/stylesheet/all.sass */
+#middle #tools {
+  width: 100%;
+  background-color: #f6b26b;
+  position: absolute;
+  bottom: 0;
+  border: 3px solid black;
+}
+
+/* line 132, ../../src/stylesheet/all.sass */
+.dormant {
+  display: none;
+}
+
+/* line 135, ../../src/stylesheet/all.sass */
+#hpcalcu {
+  background-color: #f4cccc;
+  width: 50vw;
+  height: 80vh;
+}
+
+/* line 139, ../../src/stylesheet/all.sass */
+#spcalcu {
+  background-color: #d0e0e3;
+  width: 50vw;
+  height: 80vh;
+}
+
+/* line 143, ../../src/stylesheet/all.sass */
+#select_career {
+  background-color: #fff2cc;
+  width: 50vw;
+  height: 80vh;
+}
+
+/* line 147, ../../src/stylesheet/all.sass */
+#select_star {
+  background-color: #fff2cc;
+  width: 50vw;
+  height: 50vh;
+}
+
+/* line 151, ../../src/stylesheet/all.sass */
+#select_env {
+  background-color: #fce5cd;
+  width: 50vw;
+  height: 50vh;
+}
+
+/* line 155, ../../src/stylesheet/all.sass */
+#select_pet {
+  background-color: #fce5cd;
+  width: 50vw;
+  height: 50vh;
+}
+
+/* line 159, ../../src/stylesheet/all.sass */
+#point {
+  background-color: transparent;
+  width: 10vw;
+  height: 10vh;
+}

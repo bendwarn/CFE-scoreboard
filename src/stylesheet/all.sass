@@ -1,57 +1,40 @@
 @import compass/css3
 
-$unit: 100px
-
-=fold($pos1, $pos2, $bor, $size, $color: white)
-  content: ''
-  position: absolute
-  width: 0
-  height: 0
-  #{$pos1}: 0
-  #{$pos2}: 0
-  border-#{$pos1}: $size solid $color
-  border-#{$bor}: $size solid transparent
-
 .top.left
-  // +fold(top, left, right, 15px)
   +border-top-left-radius(15%)
 .top.right
-  // +fold(top, right, left, 15px)
   +border-top-right-radius(15%)
 .bot.left
-  // +fold(bottom, left, right, 15px)
   +border-bottom-left-radius(15%)
 .bot.right
-  // +fold(bottom, right, left, 15px)
   +border-bottom-right-radius(15%)
 
-html
-  width: 100%
-  height: 100%
-  margin: 0
-
 body
-  @extend html
+  width: 100vw
+  height: 100vh
   background: url(../images/body-background.png) #eae6d1
   text-align: center
   overflow: auto
+  position: relative
+  line-height: normal
 
 =symmetry($main, $sub)
-  .half-#{$main}
+  #half_#{$main}
     width: 50%
     height: 100%
     float: left
     .contain
       width: 90%
-      height: 98%
-      margin: 2% auto 0 auto
+      height: 100%
+      margin: 0 auto
       $cut: 25%
       .hp
         width: 100%
         height: $cut
         background-color: #ea9999
+        position: relative
         color: #cc0000
-        font-size: 18vh
+        font-size: 20vh
         border: 3px solid black
       .contain2
         width: 90%
@@ -59,25 +42,26 @@ body
         float: $sub
         .sp
           width: 50%
-          height: 25%
+          height: $cut
           background-color: #cfe2f3
+          position: relative
           color: #073763
-          font-size: 14vh
+          font-size: 15vh
           float: $main
           border: 3px solid black
-          border-top-style: none
+          margin-top: -3px
         .contain3
           width: 82%
           height: 100% - $cut
           margin: 0 auto
           .name
             width: 50%
-            height: 10%
+            height: 12%
             background-color: #ffe599
-            font-size: 4vh
+            font-size: 5vh
             float: $main
             border: 3px solid black
-            border-top-style: none
+            margin-top: -3px
           .info
             width: 50%
             height: 90%
@@ -86,77 +70,159 @@ body
             font-size: 6vh
             float: $main
             border: 3px solid black
-            border-top-style: none
+            margin-top: -3px
+            .profession, .pet, .pet-num
+              position: relative
+            .pet, .pet-num
+              width: 10vh
+              height: 10vh
     .star
-      width: 10%
+      width: 15vh
+      height: 15vh
       background-color: #f3f3f3
       position: absolute
-      top: 60%
+      top: 60vh
       #{$main}: 0
       border: 3px solid black
     .dark
       @extend .star
-      top: 75%
+      top: 75vh
       background-color: #434343
       color: white
-      font-size: 14vh
+      font-size: 12vh
+      margin-top: -3px
 
 +symmetry(left, right)
 +symmetry(right, left)
 
-#middle
-  $w: 10%
+$w: 15vh
+#env
   width: $w
-  height: 50%
+  height: $w
+  position: absolute
+  bottom: $w + 2vh + $w * 0.6
+  margin: 0 auto
+  left: 0
+  right: 0
+  background-color: #b45f06
+  border: 3px solid black
+#envtxt
+  width: $w * 0.6
+  height: $w * 0.6
+  position: absolute
+  bottom: $w + 2vh
+  margin: 3px auto
+  left: 0
+  right: 0
+  background-color: #ea9999
+  font-size: $w * 0.5
+  border: 3px solid black
+#tools
+  width: $w
+  height: $w
   position: absolute
   bottom: 0
-  left: 50% - $w / 2
-  #env
-    width: 100%
-    background-color: #b45f06
-    border: 3px solid black
-  #envtxt
-    width: 60%
-    background-color: #ea9999
-    margin: 0 auto
-    font-size: 8vh
-    border: 3px solid black
-    border-top-style: none
-  #tools
-    width: 100%
-    background-color: #f6b26b
-    position: absolute
-    bottom: 0
-    border: 3px solid black
+  margin: 0 auto
+  left: 0
+  right: 0
+  background-color: #f6b26b
+  border: 3px solid black
 
 .dormant
   display: none
 
-#hpcalcu
+$w: 45vw
+$h: 85vh
+=output($color)
+  .output
+    width: 32.5vw !important
+    border: 3px solid $color
+    color: $color
+.for-hp
   background-color: #f4cccc
-  width: 50vw
-  height: 80vh
-#spcalcu
+  width: $w
+  height: $h
+  padding: 1vh 0
+  .row > .btn
+    width: 10vw
+    height: 15vh
+    margin: .5vh .5vw
+    font-size: 10vh
+  +output(red)
+.for-sp
   background-color: #d0e0e3
-  width: 50vw
-  height: 80vh
+  width: $w
+  height: $h
+  padding: 1vh 0
+  .row > .btn
+    width: 10vw
+    height: 15vh
+    margin: .5vh .5vw
+    font-size: 10vh
+  +output(blue)
+
 #select_career
   background-color: #fff2cc
-  width: 50vw
-  height: 80vh
-#select_star
-  background-color: #fff2cc
-  width: 50vw
+  width: $w
+  height: $h
+#select_attr
+  width: $w
   height: 50vh
-#select_env
-  background-color: #fce5cd
-  width: 50vw
-  height: 50vh
-#select_pet
-  background-color: #fce5cd
-  width: 50vw
-  height: 50vh
+  .btn
+    width: 20vh
+    height: 20vh
+    margin: 1.5vh
 #point
   background-color: transparent
-  width: 10vw
-  height: 10vh
+  width: 10vh
+  .btn
+    width: 10vh
+    height: 10vh
+    border-radius: 50%
+    background-color: yellow
+  .btn + .btn
+    position: absolute
+    left: 0
+    bottom: 0
+#menu
+  background-color: #fce5cd
+  width: $w
+  height: 50vh
+  .btn
+    width: 10vw
+    margin: 1.5vh
+
+.for-star
+  background-color: #fff2cc
+  .btn
+    border-radius: 50%
+.for-env
+  background-color: #fce5cd
+.for-pet
+  background-color: #fce5cd
+  .btn
+    border-radius: 10%
+
+.metal
+  color: white
+.wood
+  color: green
+.water
+  color: blue
+.fire
+  color: red
+.earth
+  color: yellow
+
+.for-null
+  background-color: transparent
+.for-metal
+  background-color: white
+.for-wood
+  background-color: green
+.for-water
+  background-color: blue
+.for-fire
+  background-color: red
+.for-earth
+  background-color: yellow

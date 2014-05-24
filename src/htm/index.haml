@@ -4,11 +4,11 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1, user-scalable=no")
-    %title CFE Recorder
+    %title CFE scoreboard
     %link(rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css")
     %link(rel="stylesheet" href="stylesheet/all.css")
   %body
-    .half-left
+    #half_left
       .contain
         .hp.bot.left 250
         .contain2
@@ -19,21 +19,22 @@
             .name(contenteditable) Prof. X
             .info.bot.left.right
               .profession 法幻士
-              .pet
+              .pet.pop-mid
               .pet-num
               .meteor
             .info.bot.left.right
               .profession 調律師
-              .pet
+              .pet.pop-mid
               .pet-num
               .meteor
-      .dark.bot.right.sq
-      .star.right.top.bot.sq
-    #middle
-      #env.top.left.bot.right.sq
-      #envtxt.bot.left.right.sq 火
-      #tools.top.left.right.sq
-    .half-right
+      .dark.bot.right
+      .star.right.top.pop-mid
+
+    #env.env.top.left.bot.right.pop-mid
+    #envtxt.env.bot.left.right.pop-mid 無
+    #tools.top.left.right.pop-mid
+
+    #half_right
       .contain
         .hp.bot.right 250
         .contain2
@@ -44,26 +45,63 @@
             .name(contenteditable) 幻影
             .info.bot.left.right
               .profession 影戰士
-              .pet
+              .pet.pop-mid
               .pet-num
               .meteor
             .info.bot.left.right
               .profession 道幻師
-              .pet
+              .pet.pop-mid
               .pet-num
               .meteor
-      .dark.bot.left.sq
-      .star.left.top.bot.sq
-    #hpcalcu.dormant
-    #spcalcu.dormant
-    #select_career.dormant
-    #select_star.dormant
-    #select_env.dormant
-    #select_pet.dormant
+      .dark.bot.left
+      .star.left.top.pop-mid
+
+    .calcu.dormant.container
+      .row
+        .btn.output 0
+        .btn.btn-primary.enter =
+      .row
+        .btn.btn-primary 7
+        .btn.btn-primary 8
+        .btn.btn-primary 9
+        .btn.btn-info +
+      .row
+        .btn.btn-primary 4
+        .btn.btn-primary 5
+        .btn.btn-primary 6
+        .btn.btn-info -
+      .row
+        .btn.btn-primary 1
+        .btn.btn-primary 2
+        .btn.btn-primary 3
+        .btn.btn-info *
+      .row
+        .btn.btn-primary 0
+        .btn.btn-danger C
+        .btn.btn-default Del
+        .btn.btn-info /
+
+    #select_career.dormant.container
+
+    #select_attr.dormant.container
+      .row
+        .btn.for-null
+        .btn.for-metal
+        .btn.for-wood
+      .row
+        .btn.for-water
+        .btn.for-fire
+        .btn.for-earth
+
     #point.dormant
+      .add.btn
+      .cut.btn
+
+    #menu.dormant.container
+      .btn.btn-primary 初始化
+      .btn.btn-primary 設定
     %script(src="https://code.jquery.com/jquery-1.11.1.min.js")
     %script(src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js")
     %script(src="http://malsup.github.io/jquery.blockUI.js")
-    %script(src="http://malsup.github.io/jquery.corner.js")
     %script(src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
     %script(src="javascript/all.js")

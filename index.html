@@ -13,60 +13,146 @@
       <div class='contain'>
         <div class='hp bot left'>250</div>
         <div class='contain2'>
-          <div class='sp bot left'>125</div>
+          <div class='sp bot left'>--</div>
           <div class='sp bot right'>--</div>
           <div class='contain3'>
             <div class='name' contenteditable>FallCloud</div>
             <div class='name' contenteditable>Prof. X</div>
             <div class='info bot left right'>
-              <div class='profession'>法幻士</div>
-              <div class='pet pop-mid'></div>
-              <div class='pet-num'></div>
-              <div class='meteor'></div>
+              <div class='profession'>無職業</div>
+              <div class='pet pop-mid btn'>
+                <div></div>
+              </div>
+              <div class='pet-num btn'></div>
+              <div class='meteor'>
+                <div>
+                  <div class='metal'></div>
+                </div>
+                <div>
+                  <div class='wood'></div>
+                </div>
+                <div>
+                  <div class='water'></div>
+                </div>
+                <div>
+                  <div class='fire'></div>
+                </div>
+                <div>
+                  <div class='earth'></div>
+                </div>
+              </div>
             </div>
             <div class='info bot left right'>
-              <div class='profession'>調律師</div>
-              <div class='pet pop-mid'></div>
-              <div class='pet-num'></div>
-              <div class='meteor'></div>
+              <div class='profession'>無職業</div>
+              <div class='pet pop-mid btn'>
+                <div></div>
+              </div>
+              <div class='pet-num btn'></div>
+              <div class='meteor'>
+                <div>
+                  <div class='metal'></div>
+                </div>
+                <div>
+                  <div class='wood'></div>
+                </div>
+                <div>
+                  <div class='water'></div>
+                </div>
+                <div>
+                  <div class='fire'></div>
+                </div>
+                <div>
+                  <div class='earth'></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class='dark bot right'></div>
-      <div class='star right top pop-mid'></div>
+      <div class='star right top pop-mid'>
+        <div></div>
+      </div>
     </div>
-    <div class='env top left bot right pop-mid' id='env'></div>
+    <div class='env top left bot right pop-mid' id='env'>
+      <div></div>
+    </div>
     <div class='env bot left right pop-mid' id='envtxt'>無</div>
-    <div class='top left right pop-mid' id='tools'></div>
+    <div class='top left right pop-mid' data-placement='top' data-toggle='popover' data-trigger='manual' id='tools'>
+      <div class='gear'>
+        <div class='gear-inner'>
+          <div class='bar'></div>
+          <div class='bar'></div>
+          <div class='bar'></div>
+        </div>
+      </div>
+    </div>
     <div id='half_right'>
       <div class='contain'>
         <div class='hp bot right'>250</div>
         <div class='contain2'>
-          <div class='sp bot right'>80</div>
+          <div class='sp bot right'>--</div>
           <div class='sp bot left'>--</div>
           <div class='contain3'>
             <div class='name' contenteditable>彰化王</div>
             <div class='name' contenteditable>幻影</div>
             <div class='info bot left right'>
-              <div class='profession'>影戰士</div>
-              <div class='pet pop-mid'></div>
-              <div class='pet-num'></div>
-              <div class='meteor'></div>
+              <div class='profession'>無職業</div>
+              <div class='pet pop-mid btn'>
+                <div></div>
+              </div>
+              <div class='pet-num btn'></div>
+              <div class='meteor'>
+                <div>
+                  <div class='metal'></div>
+                </div>
+                <div>
+                  <div class='wood'></div>
+                </div>
+                <div>
+                  <div class='water'></div>
+                </div>
+                <div>
+                  <div class='fire'></div>
+                </div>
+                <div>
+                  <div class='earth'></div>
+                </div>
+              </div>
             </div>
             <div class='info bot left right'>
-              <div class='profession'>道幻師</div>
-              <div class='pet pop-mid'></div>
-              <div class='pet-num'></div>
-              <div class='meteor'></div>
+              <div class='profession'>無職業</div>
+              <div class='pet pop-mid btn'>
+                <div></div>
+              </div>
+              <div class='pet-num btn'></div>
+              <div class='meteor'>
+                <div>
+                  <div class='metal'></div>
+                </div>
+                <div>
+                  <div class='wood'></div>
+                </div>
+                <div>
+                  <div class='water'></div>
+                </div>
+                <div>
+                  <div class='fire'></div>
+                </div>
+                <div>
+                  <div class='earth'></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class='dark bot left'></div>
-      <div class='star left top pop-mid'></div>
+      <div class='star left top pop-mid'>
+        <div></div>
+      </div>
     </div>
-    <div class='calcu dormant container'>
+    <div class='calcu container' hidden>
       <div class='row'>
         <div class='btn output'>0</div>
         <div class='btn btn-primary enter'>=</div>
@@ -96,24 +182,196 @@
         <div class='btn btn-info'>/</div>
       </div>
     </div>
-    <div class='dormant container' id='select_career'></div>
-    <div class='dormant container' id='select_attr'>
-      <div class='row'>
-        <div class='btn for-null'></div>
-        <div class='btn for-metal'></div>
-        <div class='btn for-wood'></div>
-      </div>
-      <div class='row'>
-        <div class='btn for-water'></div>
-        <div class='btn for-fire'></div>
-        <div class='btn for-earth'></div>
+    <div class='container' hidden id='select_career'>
+      <div class='btn-group btn-group-vertical'>
+        <a class='btn btn-primary' href='#'>無職業</a>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            戰士學派
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>戰士</a>
+            </li>
+            <li>
+              <a href='#'>戰神</a>
+            </li>
+            <li>
+              <a href='#'>勇者</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            尋道者學派
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>尋道者</a>
+            </li>
+            <li>
+              <a href='#'>述道者</a>
+            </li>
+            <li>
+              <a href='#'>仁者</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            幻術師學派
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>幻術師</a>
+            </li>
+            <li>
+              <a href='#'>幻靈使</a>
+            </li>
+            <li>
+              <a href='#'>隱者</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            法師學派
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>法師</a>
+            </li>
+            <li>
+              <a href='#'>法導</a>
+            </li>
+            <li>
+              <a href='#'>智者</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            風行者學派
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>風行者</a>
+            </li>
+            <li>
+              <a href='#'>影行者</a>
+            </li>
+            <li>
+              <a href='#'>武者</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            無學派
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>初行客</a>
+            </li>
+            <li>
+              <a href='#'>仙者</a>
+            </li>
+            <li>
+              <a href='#'>聖者</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            舊世代
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>調律師</a>
+            </li>
+            <li>
+              <a href='#'>天響師</a>
+            </li>
+            <li class='divider'></li>
+            <li>
+              <a href='#'>太陰術士</a>
+            </li>
+            <li>
+              <a href='#'>太陰導師</a>
+            </li>
+            <li class='divider'></li>
+            <li>
+              <a href='#'>風水師</a>
+            </li>
+            <li>
+              <a href='#'>龍脈使</a>
+            </li>
+          </ul>
+        </div>
+        <div class='btn-group'>
+          <div class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+            雙學派
+            <span class='caret'></span>
+          </div>
+          <ul class='dropdown-menu' role='menu'>
+            <li>
+              <a href='#'>戰道者</a>
+            </li>
+            <li>
+              <a href='#'>幻戰士</a>
+            </li>
+            <li>
+              <a href='#'>戰法師</a>
+            </li>
+            <li>
+              <a href='#'>影戰士</a>
+            </li>
+            <li>
+              <a href='#'>道幻師</a>
+            </li>
+            <li>
+              <a href='#'>道法師</a>
+            </li>
+            <li>
+              <a href='#'>影道者</a>
+            </li>
+            <li>
+              <a href='#'>法幻士</a>
+            </li>
+            <li>
+              <a href='#'>幻行者</a>
+            </li>
+            <li>
+              <a href='#'>法行者</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class='dormant' id='point'>
-      <div class='add btn'></div>
-      <div class='cut btn'></div>
+    <div class='container' hidden id='select_attr'>
+      <div class='row'>
+        <div class='btn for-null' data-attr=''></div>
+        <div class='btn for-metal' data-attr='metal'></div>
+        <div class='btn for-wood' data-attr='wood'></div>
+      </div>
+      <div class='row'>
+        <div class='btn for-water' data-attr='water'></div>
+        <div class='btn for-fire' data-attr='fire'></div>
+        <div class='btn for-earth' data-attr='earth'></div>
+      </div>
     </div>
-    <div class='dormant container' id='menu'>
+    <div hidden id='point'>
+      <div class='add btn btn-primary'>+</div>
+      <div class='cut btn btn-warning'>-</div>
+    </div>
+    <div class='container' hidden id='menu'>
       <div class='btn btn-primary'>初始化</div>
       <div class='btn btn-primary'>設定</div>
     </div>

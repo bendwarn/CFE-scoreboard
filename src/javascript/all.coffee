@@ -3,8 +3,6 @@ j11.blockUI.defaults.css = cursor: 'auto'
 
 # control function
 
-hp_point = [250, 250]
-sp_point = [0, 0, 0, 0]
 bane =
     'metal': 'wood'
     'wood': 'earth'
@@ -23,8 +21,6 @@ select_attr = j11 '#select_attr'
 point = j11 '#point'
 menu = j11 '#menu'
 
-initialize = ->
-
 opposite = (child) ->
     if j11('#half_left').has(child).length then '#half_right' else '#half_left'
 
@@ -35,44 +31,45 @@ target = null
 
 pop_widget = (wid) -> (e) ->
     # TODO: set widget position
-    target = self = j11 @
-    self.css('z-index', 1011)
+    target = j11 e.target
+    target.css('z-index', 1011)
     wid.css('opacity', 0)
     j11.blockUI
         message: wid
-        onOverlayClick: ->
-            j11.unblockUI()
-            target = null
-            self.css('z-index', 0)
+        onOverlayClick: j11.unblockUI
         onBlock: ->
             if wid.hasClass 'calcu'
-                wid.removeClass('for-hp').removeClass 'for-sp'
-                if self.hasClass 'hp'
+                wid.removeClass 'for-hp for-sp'
+                output.text target.text()
+                if target.hasClass 'hp'
                     wid.addClass 'for-hp'
-                else if self.hasClass 'sp'
+                else if target.hasClass 'sp'
                     wid.addClass 'for-sp'
 
-            if self.hasClass 'pop-mid'
-                wid.removeClass('for-star').removeClass('for-env').removeClass 'for-pet'
-                if self.hasClass 'star'
+            if target.hasClass 'pop-mid'
+                wid.removeClass 'for-star for-env for-pet'
+                if target.hasClass 'star'
                     wid.addClass 'for-star'
-                else if self.hasClass 'env'
+                else if target.hasClass 'env'
                     target = env
                     wid.addClass 'for-env'
-                else if self.hasClass 'pet'
+                else if target.hasClass 'pet'
                     wid.addClass 'for-pet'
                 wid.parent().position
                     my: 'top'
                     at: 'top+5%'
                     of: j11 '.blockOverlay'
             else if wid.is point
-                wid.height(self.outerHeight() + wid.children().outerHeight() * 2)
+                wid.height(target.outerHeight() + wid.children().outerHeight() * 2)
                 wid.parent().position
-                    of: self
+                    of: target
             else
                 wid.parent().position
-                    of: opposite(self)
+                    of: opposite(target)
             wid.css('opacity', 1)
+        onUnblock: ->
+            target.css('z-index', 0)
+            target = null
 
 hp = (j11 '.hp').click pop_widget calcu
 sp = (j11 '.sp').click pop_widget calcu
@@ -85,19 +82,69 @@ env = (j11 '#env').click pop_widget select_attr
 envtxt = (j11 '#envtxt').click pop_widget select_attr
 tools = (j11 '#tools').click pop_widget menu
 
+change_attr = (obj, attr) ->
+    obj.removeClass('metal wood water fire earth').addClass attr
+
+getCookie = (name) ->
+    document.cookie.match(name + '=\\w+')?[0].split('=')[1]
+
+initialize = ->
+    hp.text (getCookie 'hp_point') ? 250
+    sp.text ''
+    profession.text '無職業'
+    pet.children().attr class: ''
+    petnum.text ''
+    dark.text ''
+    star.children().attr class: ''
+    env.children().attr class: ''
+    change_attr(envtxt, '').text '無'
+    j11('.meteor .spawn').removeClass('spawn').children().fadeTo 'slow', 0.5
+
 spawnstar = (div, attr) ->
     if not div.hasClass attr
         op = j11(opposite(div) + ' .star div')
         opattr = op.attr 'class'
-        if bane[attr] == opattr
+        if bane[attr] is opattr
             op.attr class: ''
-        if attr isnt opattr
-            div.attr 'class', attr
+        if attr isnt opattr or not attr
+            div.attr class: attr
             true
         else
             false
     else
         false
+
+output = j11 '.output', calcu
+operator =
+    '+': (a, b) -> Number(a) + Number b
+    '-': (a, b) -> a - b
+    '*': (a, b) -> a * b
+    '/': (a, b) -> a // b
+    '**': (a, b) -> a ** b
+calculate = (s) ->
+    m = s.match(/\d+|[\+\*\/-]+/g) ? []
+    if m.length is 3
+        operator[m[1]] m[0], m[2]
+    else if s
+        Number s
+    else
+        ''
+
+(j11 '.num', calcu).click (e) -> output.append e.target.innerText
+(j11 '.op', calcu).click (e) ->
+    result = calculate output.text()
+    unless isNaN result
+        output.text result + e.target.innerText
+    else
+        output.append e.target.innerText
+(j11 '.enter', calcu).click (e) ->
+    result = calculate output.text()
+    output.text result
+    target.text(result) unless isNaN result
+    j11.unblockUI()
+
+(j11 '.btn-danger', calcu).click (e) -> output.text target.text()
+(j11 '.btn-default', calcu).click (e) -> output.text output.text()[...-1]
 
 j11('.meteor > div').click ->
     self = j11(@)
@@ -110,17 +157,16 @@ select_attr.find('.btn').click (e) ->
     div = target.children()
     attr = (j11 e.target).attr 'data-attr'
     if target.hasClass 'star'
-        spawnstar div
+        spawnstar div, attr
     else
-        div.attr 'class', attr
+        div.attr class: attr
     if target.hasClass 'pet'
         if attr
             target.next().text 2
         else
             target.next().text ''
     else if target.hasClass 'env'
-        envtxt.attr class: attr
-        envtxt.text translate[attr] ? '無'
+        change_attr(envtxt, attr).text translate[attr] ? '無'
 
 select_career.find('a').click (e) ->
     e.preventDefault()
@@ -140,7 +186,16 @@ select_career.find('a').click (e) ->
     else
         target.text ''
     if not target.text() and target.hasClass 'pet-num'
-        target.prev().children().attr 'class', ''
+        target.prev().children().attr class: ''
+
+(j11 '#initi').click initialize
+(j11 '#save_setting').click ->
+    v = (j11 '#formhp').val()
+    document.cookie = 'hp_point=' + v if v
+
+# prevent bootstrap modal from steal focus.
+(j11 '#setwindow *').bind 'click mouseup mousedown keypress keydown keyup', (e) ->
+    e.stopPropagation() if e.which isnt 27 and not (j11 e.target).hasClass 'btn'
 
 # appearance adjustment
 
@@ -148,9 +203,9 @@ tools.popover content: '''Please turn to landscape mode!
 請將螢幕橫置瀏覽！'''
 detectPortrait = ->
     if innerWidth < innerHeight
-        tools.popover('show')
+        tools.popover 'show'
     else
-        tools.popover('hide')
+        tools.popover 'hide'
 j11(window).resize detectPortrait
 detectPortrait()
 

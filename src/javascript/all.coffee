@@ -1,6 +1,5 @@
 j11 = jQuery.noConflict true
 j11.blockUI.defaults.css = cursor: 'auto'
-
 # control function
 
 bane =
@@ -30,8 +29,8 @@ sameside = (child) ->
 target = null
 
 pop_widget = (wid) -> (e) ->
-    # TODO: set widget position
-    target = j11 e.target
+    target = j11 @
+    return j11.unblockUI() if 1000 < target.css 'z-index'
     target.css('z-index', 1011)
     wid.css('opacity', 0)
     j11.blockUI
@@ -191,7 +190,8 @@ select_career.find('a').click (e) ->
 (j11 '#initi').click initialize
 (j11 '#save_setting').click ->
     v = (j11 '#formhp').val()
-    document.cookie = 'hp_point=' + v if v
+    document.cookie = 'hp_point=' + v unless isNaN Number v
+    (j11 '#setwindow').modal('hide')
 
 # prevent bootstrap modal from steal focus.
 (j11 '#setwindow *').bind 'click mouseup mousedown keypress keydown keyup', (e) ->

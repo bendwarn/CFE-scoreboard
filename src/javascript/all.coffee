@@ -129,13 +129,13 @@ calculate = (s) ->
     else
         ''
 
-(j11 '.num', calcu).click (e) -> output.append e.target.innerText
+(j11 '.num', calcu).click (e) -> output.append e.target.textContent
 (j11 '.op', calcu).click (e) ->
     result = calculate output.text()
     unless isNaN result
-        output.text result + e.target.innerText
+        output.text result + e.target.textContent
     else
-        output.append e.target.innerText
+        output.append e.target.textContent
 (j11 '.enter', calcu).click (e) ->
     result = calculate output.text()
     output.text result

@@ -54,7 +54,10 @@
 
   pop_widget = function(wid) {
     return function(e) {
-      target = j11(e.target);
+      target = j11(this);
+      if (1000 < target.css('z-index')) {
+        return j11.unblockUI();
+      }
       target.css('z-index', 1011);
       wid.css('opacity', 0);
       return j11.blockUI({
@@ -313,8 +316,9 @@
     var v;
     v = (j11('#formhp')).val();
     if (v) {
-      return document.cookie = 'hp_point=' + v;
+      document.cookie = 'hp_point=' + v;
     }
+    return (j11('#setwindow')).modal('hide');
   });
 
   (j11('#setwindow *')).bind('click mouseup mousedown keypress keydown keyup', function(e) {

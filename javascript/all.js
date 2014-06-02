@@ -213,16 +213,16 @@
   };
 
   (j11('.num', calcu)).click(function(e) {
-    return output.append(e.target.innerText);
+    return output.append(e.target.textContent);
   });
 
   (j11('.op', calcu)).click(function(e) {
     var result;
     result = calculate(output.text());
     if (!isNaN(result)) {
-      return output.text(result + e.target.innerText);
+      return output.text(result + e.target.textContent);
     } else {
-      return output.append(e.target.innerText);
+      return output.append(e.target.textContent);
     }
   });
 
@@ -315,7 +315,7 @@
   (j11('#save_setting')).click(function() {
     var v;
     v = (j11('#formhp')).val();
-    if (v) {
+    if (!isNaN(Number(v))) {
       document.cookie = 'hp_point=' + v;
     }
     return (j11('#setwindow')).modal('hide');

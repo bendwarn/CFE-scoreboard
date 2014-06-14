@@ -46,10 +46,8 @@ pop_widget = (wid) -> (e) ->
                     wid.addClass 'for-sp'
 
             if target.hasClass 'pop-mid'
-                wid.removeClass 'for-star for-env for-pet'
-                if target.hasClass 'star'
-                    wid.addClass 'for-star'
-                else if target.hasClass 'env'
+                wid.removeClass 'for-env for-pet'
+                if target.hasClass 'env'
                     target = env
                     wid.addClass 'for-env'
                 else if target.hasClass 'pet'
@@ -76,7 +74,7 @@ profession = (j11 '.profession').click pop_widget select_career
 pet = (j11 '.pet').click pop_widget select_attr
 petnum = (j11 '.pet-num').click pop_widget point
 dark = (j11 '.dark').click pop_widget point
-star = (j11 '.star').click pop_widget select_attr
+star = (j11 '.star').click (e) -> j11('div', @).attr class: ''
 env = (j11 '#env').click pop_widget select_attr
 envtxt = (j11 '#envtxt').click pop_widget select_attr
 tools = (j11 '#tools').click pop_widget menu
@@ -121,9 +119,13 @@ operator =
     '/': (a, b) -> a // b
     '**': (a, b) -> a ** b
 calculate = (s) ->
-    m = s.match(/\d+|[\+\*\/-]+/g) ? []
+    m = s.match(/-?\d+|[+*\/-]+/g) ? []
+    if m.length > 1 and m[1].replace(/-+/, '') is ''
+        m[1] = if m[1].length % 2 then '-' else '+'
     if m.length is 3
-        operator[m[1]] m[0], m[2]
+        operator[m[1]]? m[0], m[2]
+    else if m.length is 2 and m[1].length > 1
+        m[0] - m[1][1..]
     else if s
         Number s
     else
@@ -155,10 +157,7 @@ j11('.meteor > div').click ->
 select_attr.find('.btn').click (e) ->
     div = target.children()
     attr = (j11 e.target).attr 'data-attr'
-    if target.hasClass 'star'
-        spawnstar div, attr
-    else
-        div.attr class: attr
+    div.attr class: attr
     if target.hasClass 'pet'
         if attr
             target.next().text 2

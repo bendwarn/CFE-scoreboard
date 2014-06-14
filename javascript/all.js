@@ -74,10 +74,8 @@
             }
           }
           if (target.hasClass('pop-mid')) {
-            wid.removeClass('for-star for-env for-pet');
-            if (target.hasClass('star')) {
-              wid.addClass('for-star');
-            } else if (target.hasClass('env')) {
+            wid.removeClass('for-env for-pet');
+            if (target.hasClass('env')) {
               target = env;
               wid.addClass('for-env');
             } else if (target.hasClass('pet')) {
@@ -120,7 +118,11 @@
 
   dark = (j11('.dark')).click(pop_widget(point));
 
-  star = (j11('.star')).click(pop_widget(select_attr));
+  star = (j11('.star')).click(function(e) {
+    return j11('div', this).attr({
+      "class": ''
+    });
+  });
 
   env = (j11('#env')).click(pop_widget(select_attr));
 
@@ -201,10 +203,15 @@
   };
 
   calculate = function(s) {
-    var m, _ref;
-    m = (_ref = s.match(/\d+|[\+\*\/-]+/g)) != null ? _ref : [];
+    var m, _name, _ref;
+    m = (_ref = s.match(/-?\d+|[+*\/-]+/g)) != null ? _ref : [];
+    if (m.length > 1 && m[1].replace(/-+/, '') === '') {
+      m[1] = m[1].length % 2 ? '-' : '+';
+    }
     if (m.length === 3) {
-      return operator[m[1]](m[0], m[2]);
+      return typeof operator[_name = m[1]] === "function" ? operator[_name](m[0], m[2]) : void 0;
+    } else if (m.length === 2 && m[1].length > 1) {
+      return m[0] - m[1].slice(1);
     } else if (s) {
       return Number(s);
     } else {
@@ -260,13 +267,9 @@
     var attr, div, _ref;
     div = target.children();
     attr = (j11(e.target)).attr('data-attr');
-    if (target.hasClass('star')) {
-      spawnstar(div, attr);
-    } else {
-      div.attr({
-        "class": attr
-      });
-    }
+    div.attr({
+      "class": attr
+    });
     if (target.hasClass('pet')) {
       if (attr) {
         return target.next().text(2);

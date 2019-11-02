@@ -118,10 +118,12 @@ operator =
     '*': (a, b) -> a * b
     '/': (a, b) -> a // b
     '**': (a, b) -> a ** b
+    '*-': (a, b) -> a * -b
 calculate = (s) ->
     m = s.match(/-?\d+|[+*\/-]+/g) ? []
-    if m.length > 1 and m[1].replace(/-+/, '') is ''
-        m[1] = if m[1].length % 2 then '-' else '+'
+    if m.length > 1
+        m[1] = m[1].replace /-{2}/g, ''
+        m[1] = '+' if not m[1]
     if m.length is 3
         operator[m[1]]? m[0], m[2]
     else if m.length is 2 and m[1].length > 1

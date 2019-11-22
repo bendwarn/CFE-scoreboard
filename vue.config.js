@@ -10,6 +10,6 @@ module.exports = {
       })
   },
   publicPath: process.env.NODE_ENV == 'production'
-    ? '/CFE-scoreboard/dist/'
+    ? '/CFE-scoreboard/'
     : '/'
 }

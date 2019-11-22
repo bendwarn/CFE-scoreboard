@@ -1,5 +1,5 @@
-[CFE Scoreboard](https://bendwarn.github.io/CFE-scoreboard/dist/)
-==============
+[Main page](https://bendwarn.github.io/CFE-scoreboard/dist/)
+
 A board recording information about playing the card game of chinese five elements.
 
 Official site: <https://sites.google.com/site/cfecardgame/>

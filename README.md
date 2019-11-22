@@ -1,4 +1,4 @@
-CFE Scoreboard
+[CFE Scoreboard](https://bendwarn.github.io/CFE-scoreboard/dist/)
 ==============
 A board recording information about playing the card game of chinese five elements.
 

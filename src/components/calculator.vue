@@ -49,10 +49,10 @@ class Calculation {
     // Store operators keyed by their symbol/name. Some symbols may represent
     // different usages: e.g. "-" can be unary or binary, so they are also
     // keyed by their notation (prefix, infix, postfix, func):
-    if (notation === 'func') precedence = 0
+    if (notation == 'func') precedence = 0
     this._symbols[symbol] = Object.assign({}, this._symbols[symbol], {
       [notation]: {
-        symbol, f, notation, precedence, rightToLeft, argCount: 1 + (notation === 'infix')
+        symbol, f, notation, precedence, rightToLeft, argCount: 1 + (notation == 'infix')
       },
       symbol,
       regSymbol: symbol.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&') +
@@ -106,8 +106,8 @@ class Calculation {
           if (((curr.precedence - prev.precedence) || prev.rightToLeft) > 0) break
           // Apply previous operator, since it has precedence over current one
         } while (exec()) // Exit loop after executing an opening parenthesis or function
-        afterValue = curr.notation === 'postfix'
-        if (curr.symbol !== ')') {
+        afterValue = curr.notation == 'postfix'
+        if (curr.symbol != ')') {
           operators.push(curr)
           // Postfix always has precedence over any operator that follows after it
           if (afterValue) exec()
@@ -116,7 +116,7 @@ class Calculation {
         operators.push(notNumber.prefix || notNumber.func)
         if (notNumber.func) { // Require an opening parenthesis
           match = pattern.exec(expression)
-          if (!match || match[0] !== '(') return error('Function needs parentheses')
+          if (!match || match[0] != '(') return error('Function needs parentheses')
         }
       } else { // number
         values.push(+token)
@@ -180,18 +180,19 @@ $h: 85vmin
   .row
     justify-content: space-evenly
     align-items: stretch
-  .row > .btn
-    flex-basis: 18vmin
-    border-radius: 8px
-    box-shadow: 0.1rem 0.1rem 0.3rem rgb(85, 65, 65)
-    &:active
-      color: #f1f5f7
-      transform: translate(0.05rem, 0.05rem)
-      box-shadow: 0.3rem 0.3rem 0.5rem black
+    .btn
+      flex-basis: 18vmin
+      border-radius: 8px
+      box-shadow: 0.1rem 0.1rem 0.3rem rgb(85, 65, 65)
+      &:active
+        color: #f1f5f7
+        transform: translate(0.05rem, 0.05rem)
+        box-shadow: 0.3rem 0.3rem 0.5rem black
   .output
     flex-basis: 59vmin
     border: 3px solid $color
     color: $color
+    font-size: 8vmin
   .btn-primary
     color: #fff
     background-color: #428bca

@@ -1,26 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import theme from './theme'
+import plugin from './plugin'
 Vue.use(Vuex)
-// export const theme = {
-// star: {
-// namespaced: true,
-//   state() {
-//     return { type: '', summoned: [] }
-//   }
-// }
-// environment: {
-// namespaced: true,
-//   state() {
-//     return { type: '' }
-//   }
-// }
-// spirit: {
-// namespaced: true,
-//   state() {
-//     return { type: [], point: [] }
-//   }
-// }
-// }
 const base = {
   namespaced: true,
   state() {
@@ -36,14 +18,13 @@ const base = {
     }
   },
   mutations: {
-    damage(state, { pos, payload }) {
+    setHealth(state, { pos, payload }) {
       state[pos].health = payload
     },
-    shields(state, payload) {
-      0 < payload ? state.foe.shield.push(0) : state.foe.shield.pop()
-      0 < payload ? state.friend.shield.push(0) : state.friend.shield.pop()
+    swap(state) {
+      [state.foe.health, state.friend.health] = [state.friend.health, state.foe.health]
     },
-    shielding(state, { pos, index, payload }) {
+    setShield(state, { pos, index, payload }) {
       state[pos].shield.splice(index, 1, payload)
     }
   },
@@ -61,42 +42,42 @@ const store = new Vuex.Store({
   state() {
     return {
       count: 2,
-      rules: ['base'] // ['star','environment', 'spirit']
+      ingame: false,
+      rules: ['base'] // ['star', 'spirit', 'environment']
     }
   },
   modules: {
     base
   },
   mutations: {
-    retrieveFromLocal(state) {
-      if (localStorage.getItem('store')) {
-        this.replaceState(JSON.parse(localStorage.getItem('store') || '{}'))
-      }
-    },
     everyRule(state, { action, mutation }) {
+      if (state.ingame) return
       for (const rule of state.rules) {
         mutation && this.commit(`${rule}/${mutation}`)
         action && this.dispatch(`${rule}/${action}`)
       }
     },
     stepCount(state: any, payload) {
+      if (state.ingame) return
       state.count += payload
       this.commit({ type: 'everyRule', action: 'initialize' })
+    },
+    toggleIngame(state) {
+      state.ingame = !state.ingame
+    },
+    addRule(state, rule) {
+      if (state.ingame) return
+      state.rules.push(rule)
+      this.registerModule(rule, theme[rule])
+      this.dispatch(`${rule}/initialize`)
+    },
+    removeRule(state, rule) {
+      if (state.ingame) return
+      state.rules.splice(state.rules.indexOf(rule), 1)
+      this.unregisterModule(rule)
     }
-    // addRule
-    // removeRule
-  }
+  },
+  plugins: [plugin]
 })
-const listener = (mutation, state) => {
-  switch (mutation.type) {
-    case 'retrieveFromLocal':
-      break
-    default:
-      localStorage.setItem('store', JSON.stringify(state))
-      break
-  }
-}
-store.subscribe(listener)
-store.subscribeAction({ after: listener })
 
 export default store

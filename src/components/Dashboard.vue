@@ -1,76 +1,103 @@
 <template>
   <div :class="pos">
-    <div class="hp bot left right btn spot" @click="popup(health ,'for-hp', damage)">{{ health }}</div>
-    <div class="personal" ref='personal'>
+    <div class="hp bot left right btn spot" ref="hp">{{ health }}</div>
+    <div class="personal" ref="personal">
       <div class="person bot left right spot" v-for="n in count" :key='n'>
-        <div class="shield bot left right btn spot" @click="popup(shield[n-1], 'for-sp', shielding(n-1))">{{ shield[n-1] }}</div>
+        <div class="shield bot left right btn spot" ref="sp" @click="popup(shield[n-1], 'for-sp', setShield(n-1))">{{ shield[n-1] }}</div>
+        <portal-target :name="`${pos}${n-1}`" multiple/>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
+import { Component, Prop, Vue, Ref } from 'vue-property-decorator'
 import { State, Mutation } from 'vuex-class'
-import VModal from 'vue-js-modal'
 import interact from 'interactjs'
 
+import { opponent } from '../store/theme'
 import calculator from './calculator.vue'
-Vue.use(VModal, { dynamic: true, injectModalsContainer: true })
+
+enum countChange { decrease = -1, initial, increase }
+
 @Component
 export default class DashBoard extends Vue {
   @Prop() private pos!: string
   @State(function(state) { return state.base[this.pos].health }) health
   @State(function(state) { return state.base[this.pos].shield.map(x => 0 < x ? x : '') }) shield
   @State count
+  @State ingame
   @State rules
   @Mutation stepCount
-  canAddPeople = true
-  pinchActivated = false
-  test = 1
-  damage(hp) {
-    this.$store.commit('base/damage', { pos: this.pos, payload: hp })
+  @Mutation toggleIngame
+  @Ref() readonly hp!: HTMLElement
+  @Ref() readonly personal!: HTMLElement
+  pinchActivated = countChange.initial
+  setHealth(hp) {
+    this.$store.commit('base/setHealth', { pos: this.pos, payload: hp })
+    if (hp < 1) {
+      this.toggleIngame()
+    }
   }
-  shielding(index) {
-    return sp => this.$store.commit('base/shielding', { pos: this.pos, index, payload: sp })
+  setShield(index) {
+    return sp => this.$store.commit('base/setShield', { pos: this.pos, index, payload: sp })
   }
   popup(value, caller, handler) {
     this.$modal.show(calculator, { initial: value, container: caller, handler }, { width: '85vmin', height: '85vmin', pivotX: 0, pivotY: 0 })
   }
+
   mounted() {
-    interact(this.$refs.personal as HTMLElement).gesturable({
+    interact(this.personal).gesturable({
       onmove: ({ scale }) => {
-        if (this.canAddPeople) {
-          if (1.5 < scale) {
-            this.canAddPeople = false
-            this.pinchActivated = true
-            navigator.vibrate(1)
+        if (!this.ingame) {
+          if (1.5 < scale && this.pinchActivated < countChange.increase) {
+            this.pinchActivated++
+            navigator.vibrate && navigator.vibrate(1)
             this.stepCount(1)
-          } else if (scale < 0.5) {
-            this.canAddPeople = false
-            this.pinchActivated = true
-            navigator.vibrate(1)
+          } else if (scale < 0.5 && countChange.decrease < this.pinchActivated) {
+            this.pinchActivated--
+            navigator.vibrate && navigator.vibrate(1)
             this.stepCount(-1)
+          } else if (0.5 < scale && scale < 1.5 && countChange.initial != this.pinchActivated) {
+            this.stepCount(-this.pinchActivated)
+            navigator.vibrate && navigator.vibrate(1)
+            this.pinchActivated = countChange.initial
           }
         }
       },
-      onend: _ => {
-        if (this.pinchActivated) {
-          this.canAddPeople = true
-          this.pinchActivated = false
+      onend: () => {
+        this.pinchActivated = countChange.initial
+      }
+    })
+    interact(this.hp).on('tap', () => {
+      this.popup(this.health, 'for-hp', this.setHealth)
+    }).draggable({}).dropzone({
+      accept: '.hp',
+      ondropactivate: ({ target, relatedTarget }) => {
+        if (relatedTarget != target) {
+          target.classList.add('drop-activated')
         }
+      },
+      ondropdeactivate: ({ target, relatedTarget }) => { target.classList.remove('drop-activated') },
+      ondrop: () => {
+        this.$store.commit('base/swap')
       }
     })
   }
   beforeDestroy() {
-    interact(this.$refs.personal as HTMLElement).unset()
+    interact(this.personal).unset()
+    interact(this.hp).unset()
   }
 }
 </script>
 
 <style scoped lang="sass">
 $radius: 10px
-$border: 3px solid black
+=hang
+  border:
+    right: 3px solid black
+    bottom: 3px solid black
+    left: 3px solid black
 .hp
   width: 90%
   flex: 3
@@ -78,9 +105,7 @@ $border: 3px solid black
   color: #cc0000
   font-size: 50px
   padding: 0 5px
-  border-left: $border
-  border-right: $border
-  border-bottom: $border
+  +hang
   z-index: 1
 .personal
   touch-action: none
@@ -90,16 +115,23 @@ $border: 3px solid black
   .person
     flex: 1
     background-color: #ffe599
-    border-left: $border
-    border-right: $border
-    border-bottom: $border
-    align-items: flex-start
+    +hang
+    flex-direction: column
+    align-items: stretch
     .shield
-      width: 100%
       height: 8vh
       font-size: 36px
       background-color: #cfe2f3
       color: #073763
+    .vue-portal-target
+      flex-grow: 1
+      flex-direction: column
+      justify-content: flex-start
+.drop-activated
+  border:
+    right-style: dotted
+    bottom-style: dotted
+    left-style: dotted
 </style>
 <style lang="sass">
 .v--modal

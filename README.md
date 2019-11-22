@@ -7,19 +7,17 @@ Official site: <https://sites.google.com/site/cfecardgame/>
 Build
 =====
 ### Prerequisites
-* Rake
-* Haml
-* CoffeeScript
-* Compass
-
+* yarn
 
 To set the environment, you can
 ```
 git clone https://github.com/<user>/<repository>.git
 cd <repository>
-git clone --branch gh-pages -- https://github.com/<user>/<repository>.git gh-pages
+yarn install
 ```
-To build all sources, use `rake`.
+To start local server, use `yarn serve`.
+
+To build all sources, use `yarn build`.
 
 License
 -------

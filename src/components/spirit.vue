@@ -28,7 +28,7 @@
     border-style: none
     justify-content: space-evenly
     &:focus
-      outline-width: 0
+      outline-width: 1
 ::v-deep .int-pm-btn.int-pm-increment
   background-color: #5cb85c
 ::v-deep .int-pm-btn.int-pm-decrement
@@ -60,7 +60,7 @@ export default class spirit extends Vue {
   @spi.Mutation spawn
   @spi.Mutation void
   movePos = ''
-  moveIndex = -1
+  moveIndex = -2
   moveType = ''
   dx = 0
   dy = 0

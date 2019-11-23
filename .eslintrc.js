@@ -14,6 +14,7 @@ module.exports = {
         eqeqeq: 'off',
         'space-before-function-paren': ['error', 'never'],
         'no-unused-vars': 'off',
+        'lines-between-class-members': 'off',
         // '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         yoda: 'off'

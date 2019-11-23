@@ -70,12 +70,12 @@ class Calculation {
     const values = []
     const operators = [this._symbols['('].prefix]
     const exec = _ => {
-      let op = operators.pop()
+      const op = operators.pop()
       values.push(op.f(...[].concat(...values.splice(-op.argCount))))
       return op.precedence
     }
     const error = msg => {
-      let notation = match ? match.index : expression.length
+      const notation = match ? match.index : expression.length
       return `${msg} at ${notation}:\n${expression}\n${' '.repeat(notation)}^`
     }
     const pattern = new RegExp(

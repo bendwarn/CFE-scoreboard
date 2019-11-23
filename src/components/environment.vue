@@ -85,7 +85,7 @@ export default class environment extends Vue {
       onend: () => {
         this.moving = false
         this.dy = 0
-        for (let k of Object.keys(fontmap)) {
+        for (const k of Object.keys(fontmap)) {
           if (fontmap[k] == this.moveType) {
             this.change(k)
             this.moveType = ''

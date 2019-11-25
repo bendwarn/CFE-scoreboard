@@ -8,7 +8,7 @@ body
   height: 100vh
   margin: 0
   background: #eae6d1
-  touch-action: none
+  touch-action: pan-y
   user-select: none
 div
   display: flex

@@ -26,18 +26,13 @@ export default class DashBoard extends Vue {
   @State(function(state) { return state.base[this.pos].health }) health
   @State(function(state) { return state.base[this.pos].shield.map(x => 0 < x ? x : '') }) shield
   @State count
-  @State ingame
   @State rules
   @Mutation stepCount
-  @Mutation toggleIngame
   @Ref() readonly hp!: HTMLElement
   @Ref() readonly personal!: HTMLElement
   pinchActivated = countChange.initial
   setHealth(hp) {
     this.$store.commit('base/setHealth', { pos: this.pos, payload: hp })
-    if (hp < 1) {
-      this.toggleIngame()
-    }
   }
   setShield(index) {
     return sp => this.$store.commit('base/setShield', { pos: this.pos, index, payload: sp })
@@ -49,20 +44,18 @@ export default class DashBoard extends Vue {
   mounted() {
     interact(this.personal).gesturable({
       onmove: ({ scale }) => {
-        if (!this.ingame) {
-          if (1.5 < scale && this.pinchActivated < countChange.increase) {
-            this.pinchActivated++
-            navigator.vibrate && navigator.vibrate(1)
-            this.stepCount(1)
-          } else if (scale < 0.5 && countChange.decrease < this.pinchActivated) {
-            this.pinchActivated--
-            navigator.vibrate && navigator.vibrate(1)
-            this.stepCount(-1)
-          } else if (0.5 < scale && scale < 1.5 && countChange.initial != this.pinchActivated) {
-            this.stepCount(-this.pinchActivated)
-            navigator.vibrate && navigator.vibrate(1)
-            this.pinchActivated = countChange.initial
-          }
+        if (1.5 < scale && this.pinchActivated < countChange.increase) {
+          this.pinchActivated++
+          navigator.vibrate && navigator.vibrate(1)
+          this.stepCount(1)
+        } else if (scale < 0.5 && countChange.decrease < this.pinchActivated) {
+          this.pinchActivated--
+          navigator.vibrate && navigator.vibrate(1)
+          this.stepCount(-1)
+        } else if (0.5 < scale && scale < 1.5 && countChange.initial != this.pinchActivated) {
+          this.stepCount(-this.pinchActivated)
+          navigator.vibrate && navigator.vibrate(1)
+          this.pinchActivated = countChange.initial
         }
       },
       onend: () => {
@@ -106,7 +99,7 @@ $radius: 10px
   font-size: 50px
   padding: 0 5px
   +hang
-  z-index: 1
+  z-index: 0
 .personal
   touch-action: none
   width: 80%
@@ -134,8 +127,8 @@ $radius: 10px
     left-style: dotted
 </style>
 <style lang="sass">
-.v--modal
-  background: transparent
-.v--modal-overlay .v--modal-box
+.v--modal-overlay .v--modal.v--modal-box
+  background-color: transparent
+  border-radius: 40px
   overflow: initial
 </style>

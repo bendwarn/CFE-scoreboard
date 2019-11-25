@@ -71,7 +71,6 @@ export default {
     },
     mutations: {
       setPoint(state, { pos, index, payload }) {
-        console.log(pos, index, payload)
         state[pos][index].point = payload
         if (state[pos][index].point < 1) {
           state[pos][index].type = ''

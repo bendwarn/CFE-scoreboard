@@ -165,8 +165,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$w: 85vmin
-$h: 85vmin
+$w: 90vmin
+$h: 90vmin
 =output($bc, $color)
   flex-direction: column
   justify-content: space-evenly
@@ -176,7 +176,7 @@ $h: 85vmin
   height: $h
   user-select: none
   font-size: 10vmin
-  border-radius: 0.4rem
+  border-radius: 40px
   .row
     justify-content: space-evenly
     align-items: stretch

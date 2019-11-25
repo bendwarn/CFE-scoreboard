@@ -6,7 +6,6 @@ class HtmlWebpackPathAssetsFix {
         htmlPluginData => {
           for (const entry of Object.values(compilation.chunks)) {
             entry.files = entry.files.map(path => 'dist/' + path)
-            console.log(entry.files)
           }
           // above is going to fix preload
           const assets = htmlPluginData.assets

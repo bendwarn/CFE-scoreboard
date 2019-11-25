@@ -1,28 +1,33 @@
 <template>
-<div class="env btn spot" ref="env">
+<div class="env btn spot" :class="font" ref="env">
   <font-awesome-icon :icon="font" v-if="font"/>
 </div>
 </template>
 <style lang="sass" scoped>
+=harmony($c)
+  background-color: $c
+  color: darken($c, 20%)
 .env
   position: absolute
   width: 8vmax
   height: 8vmax
   font-size: 8vmin
-  z-index: 2
+  z-index: 1
   background-color: gainsboro
+  border: 3px solid black
   border-radius: 8px
   transition: all .5s
-.fa-dragon
-  color: green
-.fa-cat
-  color: silver
-.fa-phoenix-framework
-  color: red
-.fa-water
-  color: blue
-.fa-mountain
-  color: yellow
+  touch-action: none
+  &.dragon
+    +harmony(green)
+  &.cat
+    +harmony(silver)
+  &.phoenix-framework
+    +harmony(red)
+  &.water
+    +harmony(blue)
+  &.mountain
+    +harmony(yellow)
 @media (min-aspect-ratio: 1/1)
   .env
     bottom: 10vmax
@@ -53,6 +58,7 @@ export default class environment extends Vue {
     }
     return attr
   }) font
+  @env.State type
   @env.Mutation change
   @Ref() readonly env!: HTMLElement
   moving = false
@@ -67,7 +73,7 @@ export default class environment extends Vue {
         this.moveType = this.font
       },
       onmove: ({ dy }) => {
-        this.dy -= dy
+        this.dy -= dy * devicePixelRatio
         if (this.dy < 0) {
           this.moveType = ''
         } else if (this.dy < 100) {
@@ -85,16 +91,16 @@ export default class environment extends Vue {
       onend: () => {
         this.moving = false
         this.dy = 0
-        for (const k of Object.keys(fontmap)) {
-          if (fontmap[k] == this.moveType) {
-            this.change(k)
-            this.moveType = ''
-            return
+        if (this.moveType != fontmap[this.type]) {
+          for (const k of Object.keys(fontmap)) {
+            if (fontmap[k] == this.moveType) {
+              return this.change(k)
+            }
           }
         }
       }
     }).on('tap', () => {
-      this.change('')
+      this.type && this.change('')
     })
   }
   beforeDestroy() {

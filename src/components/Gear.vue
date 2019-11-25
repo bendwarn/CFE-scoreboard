@@ -1,6 +1,6 @@
 <template>
 <transition>
-  <div class="setting btn spot" :class="{ingame:!ingame}" key="setting" @click="folded=!folded" v-if="folded">
+  <div class="setting btn spot" key="setting" @click="folded=!folded" v-if="folded">
     <font-awesome-icon icon="cogs"/>
   </div>
   <div class="overlay" key="overlay" @click.self="folded=!folded" v-else>
@@ -43,8 +43,6 @@
 .setting
   +common
   +gear
-  &.ingame
-    background-color: lawngreen
   &.v-enter, &.v-leave-to
     +menu
 .menu
@@ -70,7 +68,7 @@
   width: 100vw
   height: 100vh
   background-color: rgba(0, 0, 0, .35)
-  z-index: 1
+  z-index: 2
   &.v-enter, &.v-leave-to
     background-color: transparent
 @media (min-aspect-ratio: 1/1)
@@ -102,7 +100,6 @@ import PrettyCheck from 'pretty-checkbox-vue/check'
 export default class gear extends Vue {
   folded = true
   @State rules
-  @State ingame
   @Mutation everyRule
   @Mutation addRule
   @Mutation removeRule

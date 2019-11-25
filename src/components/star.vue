@@ -21,6 +21,7 @@
   background-color: black
   border: 3px solid black
     radius: 8px
+  margin-top: 10px
   &.v-enter, &.v-leave-to
     opacity: 0
   &.v-leave, &.v-enter-to
@@ -32,7 +33,7 @@
   flex-wrap: wrap
 .meteor
   border: 3px solid transparent
-  margin: 10px
+  margin-right: 10px
 .wood
   color: green
 .metal

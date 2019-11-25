@@ -3,9 +3,10 @@
   <template v-for="(spirits, pos) in spirit">
     <portal slim v-for="(s, index) of spirits" :to='pos+index' :key='pos+index' :order='1'>
       <integer-plusminus
-        :max='s.type?6:0'
+        :max='s.type ? 6 : 0'
         :value="s.point"
         @input="setPoint({pos, index, payload: $event})"
+        @focus.native.capture="$event.target.blur"
       >
         <font-awesome-icon icon="ghost" :class="['slider', selected(pos, index)? moveType : s.type]" :data-pos="pos" :data-index="index"/>
         <div v-if="s.type">{{ s.point }}</div>
@@ -27,8 +28,6 @@
     width: 100%
     border-style: none
     justify-content: space-evenly
-    &:focus
-      outline-width: 1
 ::v-deep .int-pm-btn.int-pm-increment
   background-color: #5cb85c
 ::v-deep .int-pm-btn.int-pm-decrement
@@ -76,6 +75,8 @@ export default class spirit extends Vue {
         this.moveIndex = currentTarget.dataset.index
       },
       onmove: ({ dx, dy }) => {
+        dx *= devicePixelRatio
+        dy *= devicePixelRatio
         this.dx += dx
         if (this.movePos == 'foe' && matchMedia('(max-aspect-ratio: 1/1)').matches) {
           this.dy += dy
@@ -96,14 +97,14 @@ export default class spirit extends Vue {
           } else {
             this.moveType = 'metal'
           }
-        } else {
+        } else if (100 < this.dx) {
           this.moveType = ''
         }
       },
       onend: () => {
         if (0 < this.dy && this.dx < this.dy) {
           this.spawn({ pos: this.movePos, index: this.moveIndex, type: this.moveType })
-        } else if (0 < this.dx) {
+        } else if (100 < this.dx) {
           this.void()
         }
         this.movePos = ''

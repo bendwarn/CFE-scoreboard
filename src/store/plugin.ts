@@ -14,17 +14,6 @@ export default store => {
     localStorage.setItem('store', JSON.stringify(state))
   }
   const listener = (mutation, state) => {
-    if (mutation.type.includes('/') && !mutation.type.includes('/initialize') && !state.ingame) {
-      store.commit('toggleIngame')
-    }
-    if (mutation.type == 'base/setHealth' && mutation.payload < 1) {
-      store.commit('toggleIngame')
-    }
-    if (mutation.type == 'star/toggle') {
-      const { pos, index } = mutation.payload
-      const allTrue = Object.values(state.star[pos].summoned[index]).every(Boolean)
-      allTrue && store.commit('toggleIngame')
-    }
     console.dir(mutation)
     localStorage.setItem('store', JSON.stringify(state))
     history.pushState(state, '')

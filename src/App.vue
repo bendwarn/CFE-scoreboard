@@ -8,7 +8,6 @@ body
   height: 100vh
   margin: 0
   background: #eae6d1
-  touch-action: pan-y
   user-select: none
 div
   display: flex
@@ -21,6 +20,7 @@ div
   font-family: "Avenir", Helvetica, Arial, sans-serif
   text-align: center
   color: #2c3e50
+  touch-action: pan-y
 .top.left
   border-top-left-radius: 20px
 .top.right

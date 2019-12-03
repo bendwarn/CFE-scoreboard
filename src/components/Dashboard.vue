@@ -1,9 +1,10 @@
 <template>
   <div :class="pos">
-    <div class="hp bot left right btn spot" ref="hp">{{ health }}</div>
+    <div class="hp bot left right btn spot" ref="hp" @click="popup(health, 'for-hp', setHealth)">{{ health }}</div>
     <div class="personal" ref="personal">
+      <portal-target :name="pos" class="team" multiple/>
       <div class="person bot left right spot" v-for="n in count" :key='n'>
-        <div class="shield bot left right btn spot" ref="sp" @click="popup(shield[n-1], 'for-sp', setShield(n-1))">{{ shield[n-1] }}</div>
+        <div class="shield bot left right btn spot" @click="popup(shield[n-1], 'for-sp', setShield(n-1))">{{ shield[n-1] }}</div>
         <portal-target :name="`${pos}${n-1}`" multiple/>
       </div>
     </div>
@@ -62,9 +63,7 @@ export default class DashBoard extends Vue {
         this.pinchActivated = countChange.initial
       }
     })
-    interact(this.hp).on('tap', () => {
-      this.popup(this.health, 'for-hp', this.setHealth)
-    }).draggable({}).dropzone({
+    interact(this.hp).draggable({}).dropzone({
       accept: '.hp',
       ondropactivate: ({ target, relatedTarget }) => {
         if (relatedTarget != target) {
@@ -100,6 +99,7 @@ $radius: 10px
   padding: 0 5px
   +hang
   z-index: 0
+  touch-action: none
 .personal
   touch-action: none
   width: 80%
@@ -125,6 +125,10 @@ $radius: 10px
     right-style: dotted
     bottom-style: dotted
     left-style: dotted
+.team
+  position: absolute
+  bottom: 0
+  overflow: visible
 </style>
 <style lang="sass">
 .v--modal-overlay .v--modal.v--modal-box

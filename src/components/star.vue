@@ -5,8 +5,10 @@
       <div class="starbox">
         <font-awesome-icon icon="star" v-for="(val, key) in summoned" :key="key" :class="['meteor', key, {summoned: val, spot: val}]" :data-pos="pos" :data-index="index" :data-type="key"/>
       </div>
+    </portal>
+    <portal slim :to='pos' :key="pos">
       <transition>
-        <font-awesome-icon icon="star" class="star btn spot" :class="s.type" :data-pos="pos" v-if="index==0" v-show="s.type"/>
+        <font-awesome-icon icon="star" class="star btn spot" :class="s.type" :data-pos="pos" v-if="s.type"/>
       </transition>
     </portal>
   </template>

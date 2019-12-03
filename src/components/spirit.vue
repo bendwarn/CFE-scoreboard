@@ -97,7 +97,7 @@ export default class spirit extends Vue {
           } else {
             this.moveType = 'metal'
           }
-        } else if (100 < this.dx) {
+        } else if (0 < this.dx) {
           this.moveType = ''
         }
       },

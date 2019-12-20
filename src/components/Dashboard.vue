@@ -100,6 +100,9 @@ $radius: 10px
   +hang
   z-index: 0
   touch-action: none
+  @media (max-aspect-ratio: 1/1)
+    align-items: flex-end
+    line-height: 33px
 .personal
   touch-action: none
   width: 80%

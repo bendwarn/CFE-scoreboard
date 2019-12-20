@@ -9,6 +9,7 @@
       <p-check class="p-switch p-fill" color="success" v-model="star"> 星辰</p-check>
       <p-check class="p-switch p-fill" color="success" v-model="environment"> 環境</p-check>
       <p-check class="p-switch p-fill" color="success" v-model="spirit"> 精靈</p-check>
+      v1.0.0
     </div>
   </div>
 </transition>

@@ -5,7 +5,7 @@
   </div>
   <div class="overlay" key="overlay" @click.self="folded=!folded" v-else>
     <div class="menu" key="menu">
-      <div class="btn btn-danger" @click="everyRule({ action: 'initialize' })">初始化</div>
+      <div class="btn btn-danger" @click="initHandler">初始化</div>
       <p-check class="p-switch p-fill" color="success" v-model="star"> 星辰</p-check>
       <p-check class="p-switch p-fill" color="success" v-model="environment"> 環境</p-check>
       <p-check class="p-switch p-fill" color="success" v-model="spirit"> 精靈</p-check>
@@ -128,6 +128,10 @@ export default class gear extends Vue {
     } else {
       this.removeRule(rule)
     }
+  }
+  initHandler() {
+    this.everyRule({ action: 'initialize' })
+    this.folded = !this.folded
   }
 }
 </script>

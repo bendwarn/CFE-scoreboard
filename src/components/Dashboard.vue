@@ -92,7 +92,7 @@ $radius: 10px
     left: 3px solid black
 .hp
   width: 90%
-  flex: 3
+  flex: 4
   background-color: #ea9999
   color: #cc0000
   font-size: 50px

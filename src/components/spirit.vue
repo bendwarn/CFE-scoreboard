@@ -1,19 +1,30 @@
 <template>
-<div>
-  <template v-for="(spirits, pos) in spirit">
-    <portal slim v-for="(s, index) of spirits" :to='pos+index' :key='pos+index' :order='1'>
-      <integer-plusminus
-        :max='s.type ? 6 : 0'
-        :value="s.point"
-        @input="setPoint({pos, index, payload: $event})"
-        @focus.native.capture="$event.target.blur"
+  <div>
+    <template v-for="(spirits, pos) in spirit">
+      <portal
+        slim
+        v-for="(s, index) of spirits"
+        :to="pos + index"
+        :key="pos + index"
+        :order="1"
       >
-        <font-awesome-icon icon="ghost" :class="['slider', selected(pos, index)? moveType : s.type]" :data-pos="pos" :data-index="index"/>
-        <div v-if="s.type">{{ s.point }}</div>
-      </integer-plusminus>
-    </portal>
-  </template>
-</div>
+        <integer-plusminus
+          :max="s.type ? 6 : 0"
+          :value="s.point"
+          @input="setPoint({ pos, index, payload: $event })"
+          @focus.native.capture="$event.target.blur"
+        >
+          <font-awesome-icon
+            icon="ghost"
+            :class="['slider', selected(pos, index) ? moveType : s.type]"
+            :data-pos="pos"
+            :data-index="index"
+          />
+          <div v-if="s.type">{{ s.point }}</div>
+        </integer-plusminus>
+      </portal>
+    </template>
+  </div>
 </template>
 <style lang="sass" scoped>
 .int-pm
@@ -69,52 +80,65 @@ export default class spirit extends Vue {
   }
 
   mounted() {
-    interact('.slider').draggable({
-      onstart: ({ currentTarget }) => {
-        this.movePos = currentTarget.dataset.pos
-        this.moveIndex = currentTarget.dataset.index
-      },
-      onmove: ({ dx, dy }) => {
-        dx *= devicePixelRatio
-        dy *= devicePixelRatio
-        this.dx += dx
-        if (this.movePos == 'foe' && matchMedia('(max-aspect-ratio: 1/1)').matches) {
-          this.dy += dy
-        } else {
-          this.dy -= dy
-        }
-        if (this.dx < this.dy) {
-          if (this.dy < 0) {
-            this.moveType = ''
-          } else if (this.dy < 100) {
-            this.moveType = 'earth'
-          } else if (100 < this.dy && this.dy < 200) {
-            this.moveType = 'fire'
-          } else if (200 < this.dy && this.dy < 300) {
-            this.moveType = 'water'
-          } else if (300 < this.dy && this.dy < 400) {
-            this.moveType = 'wood'
+    interact('.slider')
+      .draggable({
+        onstart: ({ currentTarget }) => {
+          this.movePos = currentTarget.dataset.pos
+          this.moveIndex = currentTarget.dataset.index
+        },
+        onmove: ({ dx, dy }) => {
+          dx *= devicePixelRatio
+          dy *= devicePixelRatio
+          this.dx += dx
+          if (
+            this.movePos == 'foe' &&
+            matchMedia('(max-aspect-ratio: 1/1)').matches
+          ) {
+            this.dy += dy
           } else {
-            this.moveType = 'metal'
+            this.dy -= dy
           }
-        } else if (0 < this.dx) {
+          if (this.dx < this.dy) {
+            if (this.dy < 0) {
+              this.moveType = ''
+            } else if (this.dy < 100) {
+              this.moveType = 'earth'
+            } else if (100 < this.dy && this.dy < 200) {
+              this.moveType = 'fire'
+            } else if (200 < this.dy && this.dy < 300) {
+              this.moveType = 'water'
+            } else if (300 < this.dy && this.dy < 400) {
+              this.moveType = 'wood'
+            } else {
+              this.moveType = 'metal'
+            }
+          } else if (0 < this.dx) {
+            this.moveType = ''
+          }
+        },
+        onend: () => {
+          if (0 < this.dy && this.dx < this.dy) {
+            this.spawn({
+              pos: this.movePos,
+              index: this.moveIndex,
+              type: this.moveType
+            })
+          } else if (100 < this.dx) {
+            this.void()
+          }
+          this.movePos = ''
+          this.moveIndex = -1
           this.moveType = ''
+          this.dy = this.dx = 0
         }
-      },
-      onend: () => {
-        if (0 < this.dy && this.dx < this.dy) {
-          this.spawn({ pos: this.movePos, index: this.moveIndex, type: this.moveType })
-        } else if (100 < this.dx) {
-          this.void()
-        }
-        this.movePos = ''
-        this.moveIndex = -1
-        this.moveType = ''
-        this.dy = this.dx = 0
-      }
-    }).on('tap', ({ currentTarget }) => {
-      this.setPoint({ pos: currentTarget.dataset.pos, index: currentTarget.dataset.index, payload: 0 })
-    })
+      })
+      .on('tap', ({ currentTarget }) => {
+        this.setPoint({
+          pos: currentTarget.dataset.pos,
+          index: currentTarget.dataset.index,
+          payload: 0
+        })
+      })
   }
   beforeDestroy() {
     interact('.slider').unset()

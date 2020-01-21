@@ -1,18 +1,38 @@
 <template>
-<div>
-  <template v-for="(s, pos) in star">
-    <portal slim v-for="(summoned, index) of s.summoned" :to='pos+index' :key='pos+index' :order='2'>
-      <div class="starbox">
-        <font-awesome-icon icon="star" v-for="(val, key) in summoned" :key="key" :class="['meteor', key, {summoned: val, spot: val}]" :data-pos="pos" :data-index="index" :data-type="key"/>
-      </div>
-    </portal>
-    <portal slim :to='pos' :key="pos">
-      <transition>
-        <font-awesome-icon icon="star" class="star btn spot" :class="s.type" :data-pos="pos" v-if="s.type"/>
-      </transition>
-    </portal>
-  </template>
-</div>
+  <div>
+    <template v-for="(s, pos) in star">
+      <portal
+        slim
+        v-for="(summoned, index) of s.summoned"
+        :to="pos + index"
+        :key="pos + index"
+        :order="2"
+      >
+        <div class="starbox">
+          <font-awesome-icon
+            icon="star"
+            v-for="(val, key) in summoned"
+            :key="key"
+            :class="['meteor', key, { summoned: val, spot: val }]"
+            :data-pos="pos"
+            :data-index="index"
+            :data-type="key"
+          />
+        </div>
+      </portal>
+      <portal slim :to="pos" :key="pos">
+        <transition>
+          <font-awesome-icon
+            icon="star"
+            class="star btn spot"
+            :class="s.type"
+            :data-pos="pos"
+            v-if="s.type"
+          />
+        </transition>
+      </portal>
+    </template>
+  </div>
 </template>
 <style lang="sass" scoped>
 .star, .meteor

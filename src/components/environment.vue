@@ -1,7 +1,7 @@
 <template>
-<div class="env btn spot" :class="font" ref="env">
-  <font-awesome-icon :icon="font" v-if="font"/>
-</div>
+  <div class="env btn spot" :class="font" ref="env">
+    <font-awesome-icon :icon="font" v-if="font" />
+  </div>
 </template>
 <style lang="sass" scoped>
 =harmony($c)
@@ -46,7 +46,7 @@ enum fontmap {
   water = 'water',
   earth = 'mountain',
   wood = 'dragon',
-  [''] = ''
+  '' = ''
 }
 
 @Component
@@ -57,7 +57,8 @@ export default class environment extends Vue {
       attr = ['fab', 'phoenix-framework']
     }
     return attr
-  }) font
+  })
+  font
   @env.State type
   @env.Mutation change
   @Ref() readonly env!: HTMLElement
@@ -66,42 +67,44 @@ export default class environment extends Vue {
   dy = 0
 
   mounted() {
-    interact(this.env).draggable({
-      lockAxis: 'y',
-      onstart: () => {
-        this.moving = true
-        this.moveType = this.font
-      },
-      onmove: ({ dy }) => {
-        this.dy -= dy * devicePixelRatio
-        if (this.dy < 0) {
-          this.moveType = ''
-        } else if (this.dy < 100) {
-          this.moveType = 'mountain'
-        } else if (100 < this.dy && this.dy < 200) {
-          this.moveType = 'phoenix-framework'
-        } else if (200 < this.dy && this.dy < 300) {
-          this.moveType = 'water'
-        } else if (300 < this.dy && this.dy < 400) {
-          this.moveType = 'dragon'
-        } else {
-          this.moveType = 'cat'
-        }
-      },
-      onend: () => {
-        this.moving = false
-        this.dy = 0
-        if (this.moveType != fontmap[this.type]) {
-          for (const k of Object.keys(fontmap)) {
-            if (fontmap[k] == this.moveType) {
-              return this.change(k)
+    interact(this.env)
+      .draggable({
+        lockAxis: 'y',
+        onstart: () => {
+          this.moving = true
+          this.moveType = this.font
+        },
+        onmove: ({ dy }) => {
+          this.dy -= dy * devicePixelRatio
+          if (this.dy < 0) {
+            this.moveType = ''
+          } else if (this.dy < 100) {
+            this.moveType = 'mountain'
+          } else if (100 < this.dy && this.dy < 200) {
+            this.moveType = 'phoenix-framework'
+          } else if (200 < this.dy && this.dy < 300) {
+            this.moveType = 'water'
+          } else if (300 < this.dy && this.dy < 400) {
+            this.moveType = 'dragon'
+          } else {
+            this.moveType = 'cat'
+          }
+        },
+        onend: () => {
+          this.moving = false
+          this.dy = 0
+          if (this.moveType != fontmap[this.type]) {
+            for (const k of Object.keys(fontmap)) {
+              if (fontmap[k] == this.moveType) {
+                return this.change(k)
+              }
             }
           }
         }
-      }
-    }).on('tap', () => {
-      this.type && this.change('')
-    })
+      })
+      .on('tap', () => {
+        this.type && this.change('')
+      })
   }
   beforeDestroy() {
     interact(this.env).unset()

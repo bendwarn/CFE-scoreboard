@@ -1,9 +1,13 @@
 <template>
   <div class="home">
-    <DashBoard pos="foe"/>
-    <DashBoard pos="friend"/>
-    <gear/>
-    <component v-for="rule of $store.state.rules.slice(1)" :is="rule" :key="rule"></component>
+    <DashBoard pos="foe" />
+    <DashBoard pos="friend" />
+    <gear />
+    <component
+      v-for="rule of $store.state.rules.slice(1)"
+      :is="rule"
+      :key="rule"
+    ></component>
   </div>
 </template>
 <style scoped lang="sass">

@@ -1,11 +1,22 @@
 <template>
   <div :class="pos">
-    <div class="hp bot left right btn spot" ref="hp" @click="popup(health, 'for-hp', setHealth)">{{ health }}</div>
+    <div
+      class="hp bot left right btn spot"
+      ref="hp"
+      @click="popup(health, 'for-hp', setHealth)"
+    >
+      {{ health }}
+    </div>
     <div class="personal" ref="personal">
-      <portal-target :name="pos" class="team" multiple/>
-      <div class="person bot left right spot" v-for="n in count" :key='n'>
-        <div class="shield bot left right btn spot" @click="popup(shield[n-1], 'for-sp', setShield(n-1))">{{ shield[n-1] }}</div>
-        <portal-target :name="`${pos}${n-1}`" multiple/>
+      <portal-target :name="pos" class="team" multiple />
+      <div class="person bot left right spot" v-for="n in count" :key="n">
+        <div
+          class="shield bot left right btn spot"
+          @click="popup(shield[n - 1], 'for-sp', setShield(n - 1))"
+        >
+          {{ shield[n - 1] }}
+        </div>
+        <portal-target :name="`${pos}${n - 1}`" multiple />
       </div>
     </div>
   </div>
@@ -19,13 +30,23 @@ import interact from 'interactjs'
 import { opponent } from '../store/theme'
 import calculator from './calculator.vue'
 
-enum countChange { decrease = -1, initial, increase }
+enum countChange {
+  decrease = -1,
+  initial,
+  increase
+}
 
 @Component
 export default class DashBoard extends Vue {
   @Prop() private pos!: string
-  @State(function(state) { return state.base[this.pos].health }) health
-  @State(function(state) { return state.base[this.pos].shield.map(x => 0 < x ? x : '') }) shield
+  @State(function(state) {
+    return state.base[this.pos].health
+  })
+  health
+  @State(function(state) {
+    return state.base[this.pos].shield.map(x => (0 < x ? x : ''))
+  })
+  shield
   @State count
   @State rules
   @Mutation stepCount
@@ -36,10 +57,19 @@ export default class DashBoard extends Vue {
     this.$store.commit('base/setHealth', { pos: this.pos, payload: hp })
   }
   setShield(index) {
-    return sp => this.$store.commit('base/setShield', { pos: this.pos, index, payload: sp })
+    return sp =>
+      this.$store.commit('base/setShield', {
+        pos: this.pos,
+        index,
+        payload: sp
+      })
   }
   popup(value, caller, handler) {
-    this.$modal.show(calculator, { initial: value, container: caller, handler }, { width: '85vmin', height: '85vmin', pivotX: 0, pivotY: 0 })
+    this.$modal.show(
+      calculator,
+      { initial: value, container: caller, handler },
+      { width: '85vmin', height: '85vmin', pivotX: 0, pivotY: 0 }
+    )
   }
 
   mounted() {
@@ -53,7 +83,11 @@ export default class DashBoard extends Vue {
           this.pinchActivated--
           navigator.vibrate && navigator.vibrate(1)
           this.stepCount(-1)
-        } else if (0.5 < scale && scale < 1.5 && countChange.initial != this.pinchActivated) {
+        } else if (
+          0.5 < scale &&
+          scale < 1.5 &&
+          countChange.initial != this.pinchActivated
+        ) {
           this.stepCount(-this.pinchActivated)
           navigator.vibrate && navigator.vibrate(1)
           this.pinchActivated = countChange.initial
@@ -63,18 +97,22 @@ export default class DashBoard extends Vue {
         this.pinchActivated = countChange.initial
       }
     })
-    interact(this.hp).draggable({}).dropzone({
-      accept: '.hp',
-      ondropactivate: ({ target, relatedTarget }) => {
-        if (relatedTarget != target) {
-          target.classList.add('drop-activated')
+    interact(this.hp)
+      .draggable({})
+      .dropzone({
+        accept: '.hp',
+        ondropactivate: ({ target, relatedTarget }) => {
+          if (relatedTarget != target) {
+            target.classList.add('drop-activated')
+          }
+        },
+        ondropdeactivate: ({ target, relatedTarget }) => {
+          target.classList.remove('drop-activated')
+        },
+        ondrop: () => {
+          this.$store.commit('base/swap')
         }
-      },
-      ondropdeactivate: ({ target, relatedTarget }) => { target.classList.remove('drop-activated') },
-      ondrop: () => {
-        this.$store.commit('base/swap')
-      }
-    })
+      })
   }
   beforeDestroy() {
     interact(this.personal).unset()

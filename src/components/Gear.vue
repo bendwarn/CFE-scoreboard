@@ -1,18 +1,29 @@
 <template>
-<transition>
-  <div class="setting btn spot" key="setting" @click="folded=!folded" v-if="folded">
-    <font-awesome-icon icon="cogs"/>
-  </div>
-  <div class="overlay" key="overlay" @click.self="folded=!folded" v-else>
-    <div class="menu" key="menu">
-      <div class="btn btn-danger" @click="initHandler">初始化</div>
-      <p-check class="p-switch p-fill" color="success" v-model="star"> 星辰</p-check>
-      <p-check class="p-switch p-fill" color="success" v-model="environment"> 環境</p-check>
-      <p-check class="p-switch p-fill" color="success" v-model="spirit"> 精靈</p-check>
-      v1.0.0
+  <transition>
+    <div
+      class="setting btn spot"
+      key="setting"
+      @click="folded = !folded"
+      v-if="folded"
+    >
+      <font-awesome-icon icon="cogs" />
     </div>
-  </div>
-</transition>
+    <div class="overlay" key="overlay" @click.self="folded = !folded" v-else>
+      <div class="menu" key="menu">
+        <div class="btn btn-danger" @click="initHandler">初始化</div>
+        <p-check class="p-switch p-fill" color="success" v-model="star">
+          星辰</p-check
+        >
+        <p-check class="p-switch p-fill" color="success" v-model="environment">
+          環境</p-check
+        >
+        <p-check class="p-switch p-fill" color="success" v-model="spirit">
+          精靈</p-check
+        >
+        v1.0.0
+      </div>
+    </div>
+  </transition>
 </template>
 <style lang="sass">
 @import '~pretty-checkbox/src/pretty-checkbox.scss'

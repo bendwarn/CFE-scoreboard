@@ -1,13 +1,7 @@
 <template>
   <div>
     <template v-for="(spirits, pos) in spirit">
-      <portal
-        slim
-        v-for="(s, index) of spirits"
-        :to="pos + index"
-        :key="pos + index"
-        :order="1"
-      >
+      <portal slim v-for="(s, index) of spirits" :to="pos + index" :key="pos + index" :order="1">
         <integer-plusminus
           :max="s.type ? 6 : 0"
           :value="s.point"
@@ -90,10 +84,7 @@ export default class spirit extends Vue {
           dx *= devicePixelRatio
           dy *= devicePixelRatio
           this.dx += dx
-          if (
-            this.movePos == 'foe' &&
-            matchMedia('(max-aspect-ratio: 1/1)').matches
-          ) {
+          if (this.movePos == 'foe' && matchMedia('(max-aspect-ratio: 1/1)').matches) {
             this.dy += dy
           } else {
             this.dy -= dy

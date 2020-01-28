@@ -16,7 +16,7 @@
   background-color: gainsboro
   border: 3px solid black
   border-radius: 8px
-  transition: all .5s
+  transition: all .8s
   touch-action: none
   &.dragon
     +harmony(green)

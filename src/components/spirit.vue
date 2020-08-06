@@ -20,6 +20,7 @@
     </template>
   </div>
 </template>
+
 <style lang="sass" scoped>
 .int-pm
   width: 100%
@@ -48,6 +49,7 @@
 .earth
   color: yellow
 </style>
+
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { namespace, State } from 'vuex-class'
@@ -56,7 +58,7 @@ import interact from 'interactjs'
 const spi = namespace('spirit')
 
 @Component({
-  components: { IntegerPlusminus }
+  components: { IntegerPlusminus },
 })
 export default class spirit extends Vue {
   @State spirit
@@ -112,7 +114,7 @@ export default class spirit extends Vue {
             this.spawn({
               pos: this.movePos,
               index: this.moveIndex,
-              type: this.moveType
+              type: this.moveType,
             })
           } else if (100 < this.dx) {
             this.void()
@@ -121,13 +123,13 @@ export default class spirit extends Vue {
           this.moveIndex = -1
           this.moveType = ''
           this.dy = this.dx = 0
-        }
+        },
       })
       .on('tap', ({ currentTarget }) => {
         this.setPoint({
           pos: currentTarget.dataset.pos,
           index: currentTarget.dataset.index,
-          payload: 0
+          payload: 0,
         })
       })
   }

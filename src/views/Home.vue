@@ -3,11 +3,7 @@
     <DashBoard pos="foe" />
     <DashBoard pos="friend" />
     <gear />
-    <component
-      v-for="rule of $store.state.rules.slice(1)"
-      :is="rule"
-      :key="rule"
-    ></component>
+    <component v-for="rule of $store.state.rules.slice(1)" :is="rule" :key="rule"></component>
   </div>
 </template>
 <style scoped lang="sass">
@@ -40,7 +36,7 @@ export default {
     gear,
     environment,
     star,
-    spirit
-  }
+    spirit,
+  },
 }
 </script>

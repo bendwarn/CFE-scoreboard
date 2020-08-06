@@ -45,13 +45,7 @@ class Calculation {
     this.defineOperator('(', this.last, 'prefix')
     this.defineOperator(')', null, 'postfix')
   }
-  defineOperator(
-    symbol,
-    f,
-    notation = 'func',
-    precedence = 0,
-    rightToLeft = false
-  ) {
+  defineOperator(symbol, f, notation = 'func', precedence = 0, rightToLeft = false) {
     // Store operators keyed by their symbol/name. Some symbols may represent
     // different usages: e.g. "-" can be unary or binary, so they are also
     // keyed by their notation (prefix, infix, postfix, func):
@@ -63,12 +57,10 @@ class Calculation {
         notation,
         precedence,
         rightToLeft,
-        argCount: 1 + (notation == 'infix')
+        argCount: 1 + (notation == 'infix'),
       },
       symbol,
-      regSymbol:
-        symbol.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&') +
-        (/\w$/.test(symbol) ? '\\b' : '') // add a break if it's a name
+      regSymbol: symbol.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&') + (/\w$/.test(symbol) ? '\\b' : ''), // add a break if it's a name
     })
   }
   last(...a) {
@@ -93,12 +85,12 @@ class Calculation {
     let match
     const values = []
     const operators = [this._symbols['('].prefix]
-    const exec = _ => {
+    const exec = (_) => {
       const op = operators.pop()
       values.push(op.f(...[].concat(...values.splice(-op.argCount))))
       return op.precedence
     }
-    const error = msg => {
+    const error = (msg) => {
       const notation = match ? match.index : expression.length
       return `${msg} at ${notation}:\n${expression}\n${' '.repeat(notation)}^`
     }
@@ -109,7 +101,7 @@ class Calculation {
         Object.values(this._symbols)
           // longer symbols should be listed first
           .sort((a, b) => b.symbol.length - a.symbol.length)
-          .map(val => val.regSymbol)
+          .map((val) => val.regSymbol)
           .join('|') +
         '|(\\S)',
       'g'
@@ -121,8 +113,7 @@ class Calculation {
       const [token, bad] = match || [')', undefined]
       const notNumber = this._symbols[token]
       const notNewValue = notNumber && !notNumber.prefix && !notNumber.func
-      const notAfterValue =
-        !notNumber || !(notNumber.postfix || notNumber.infix)
+      const notAfterValue = !notNumber || !(notNumber.postfix || notNumber.infix)
       // Check for syntax errors:
       if (bad || (afterValue ? notAfterValue : notNewValue)) {
         return error('Syntax error')
@@ -173,7 +164,7 @@ export default {
   data() {
     return {
       formula: '',
-      result: this.initial
+      result: this.initial,
     }
   },
 
@@ -197,8 +188,8 @@ export default {
     clean() {
       this.formula = ''
       this.result = this.initial
-    }
-  }
+    },
+  },
 }
 </script>
 

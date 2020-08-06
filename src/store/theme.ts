@@ -4,19 +4,19 @@ function newSummon() {
 function starInit(n = 2) {
   return {
     foe: { type: '', summoned: Array(n).fill(1).map(newSummon) },
-    friend: { type: '', summoned: Array(n).fill(1).map(newSummon) }
+    friend: { type: '', summoned: Array(n).fill(1).map(newSummon) },
   }
 }
 export enum opponent {
   foe = 'friend',
-  friend = 'foe'
+  friend = 'foe',
 }
 enum bane {
   metal = 'fire',
   fire = 'water',
   water = 'earth',
   earth = 'wood',
-  wood = 'metal'
+  wood = 'metal',
 }
 export default {
   star: {
@@ -36,14 +36,14 @@ export default {
       },
       eliminate(state, pos) {
         state[pos].type = ''
-      }
+      },
     },
     actions: {
       initialize({ state, rootState }) {
         const n = rootState.count
         Object.assign(state, starInit(n))
-      }
-    }
+      },
+    },
   },
   environment: {
     namespaced: true,
@@ -53,20 +53,26 @@ export default {
     mutations: {
       change(state, payload) {
         state.type = payload
-      }
+      },
     },
     actions: {
       initialize({ state }) {
         state.type = ''
-      }
-    }
+      },
+    },
   },
   spirit: {
     namespaced: true,
     state() {
       return {
-        foe: [{ type: '', point: 0 }, { type: '', point: 0 }],
-        friend: [{ type: '', point: 0 }, { type: '', point: 0 }]
+        foe: [
+          { type: '', point: 0 },
+          { type: '', point: 0 },
+        ],
+        friend: [
+          { type: '', point: 0 },
+          { type: '', point: 0 },
+        ],
       }
     },
     mutations: {
@@ -94,14 +100,18 @@ export default {
             }
           }
         }
-      }
+      },
     },
     actions: {
       initialize({ state, rootState }) {
         const n = rootState.count
-        state.foe = Array(n).fill(1).map(_ => ({ type: '', point: 0 }))
-        state.friend = Array(n).fill(1).map(_ => ({ type: '', point: 0 }))
-      }
-    }
-  }
+        state.foe = Array(n)
+          .fill(1)
+          .map((_) => ({ type: '', point: 0 }))
+        state.friend = Array(n)
+          .fill(1)
+          .map((_) => ({ type: '', point: 0 }))
+      },
+    },
+  },
 }

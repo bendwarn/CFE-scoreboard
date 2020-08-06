@@ -1,26 +1,15 @@
 <template>
   <transition>
-    <div
-      class="setting btn spot"
-      key="setting"
-      @click="folded = !folded"
-      v-if="folded"
-    >
+    <div class="setting btn spot" key="setting" @click="folded = !folded" v-if="folded">
       <font-awesome-icon icon="cogs" />
     </div>
     <div class="overlay" key="overlay" @click.self="folded = !folded" v-else>
       <div class="menu" key="menu">
         <div class="btn btn-danger" @click="initHandler">初始化</div>
-        <p-check class="p-switch p-fill" color="success" v-model="star">
-          星辰</p-check
-        >
-        <p-check class="p-switch p-fill" color="success" v-model="environment">
-          環境</p-check
-        >
-        <p-check class="p-switch p-fill" color="success" v-model="spirit">
-          精靈</p-check
-        >
-        v1.0.0
+        <p-check class="p-switch p-fill" color="success" v-model="star"> 星辰</p-check>
+        <p-check class="p-switch p-fill" color="success" v-model="environment"> 環境</p-check>
+        <p-check class="p-switch p-fill" color="success" v-model="spirit"> 精靈</p-check>
+        v1.0.1
       </div>
     </div>
   </transition>
@@ -107,7 +96,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { State, Mutation } from 'vuex-class'
 import PrettyCheck from 'pretty-checkbox-vue/check'
 @Component({
-  components: { pCheck: PrettyCheck }
+  components: { pCheck: PrettyCheck },
 })
 export default class gear extends Vue {
   folded = true

@@ -3,7 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCogs, faDragon, faCat, faWater, faMountain, faStar, faGhost } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCogs,
+  faDragon,
+  faCat,
+  faWater,
+  faMountain,
+  faStar,
+  faGhost,
+} from '@fortawesome/free-solid-svg-icons'
 import { faPhoenixFramework } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import PortalVue from 'portal-vue'
@@ -19,5 +27,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app')

@@ -1,22 +1,20 @@
 module.exports = {
-    extends: [
-        'standard',
-        "plugin:vue/base"
-    ],
-    parser: 'vue-eslint-parser',
-    parserOptions: {
-        parser: '@typescript-eslint/parser',
-        ecmaFeatures: {
-            jsx: false
-        }
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    parser: '@typescript-eslint/parser',
+    ecmaFeatures: {
+      jsx: false,
     },
-    rules: {
-        eqeqeq: 'off',
-        'space-before-function-paren': ['error', 'never'],
-        'no-unused-vars': 'off',
-        'lines-between-class-members': 'off',
-        // '@typescript-eslint/no-unused-vars': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        yoda: 'off'
-    }
+  },
+  ignorePatterns: ['/node_modules/*', '/bower_components/*', '.eslint*'],
+  extends: ['plugin:vue/essential', 'prettier', 'prettier/vue', 'plugin:prettier/recommended'],
+  plugins: ['prettier'],
+  rules: {
+    eqeqeq: 'off',
+    'no-unused-vars': 'off',
+    'lines-between-class-members': 'off',
+    // '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    yoda: 'off',
+  },
 }

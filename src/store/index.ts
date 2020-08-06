@@ -9,12 +9,12 @@ const base = {
     return {
       foe: {
         health: 250,
-        shield: [0, 0]
+        shield: [0, 0],
       },
       friend: {
         health: 250,
-        shield: [0, 0]
-      }
+        shield: [0, 0],
+      },
     }
   },
   mutations: {
@@ -22,11 +22,11 @@ const base = {
       state[pos].health = payload
     },
     swap(state) {
-      [state.foe.health, state.friend.health] = [state.friend.health, state.foe.health]
+      ;[state.foe.health, state.friend.health] = [state.friend.health, state.foe.health]
     },
     setShield(state, { pos, index, payload }) {
       state[pos].shield.splice(index, 1, payload)
-    }
+    },
   },
   actions: {
     initialize({ state, rootState }) {
@@ -35,18 +35,18 @@ const base = {
         state[team].health = hp
         state[team].shield = Array(rootState.count).fill(0)
       }
-    }
-  }
+    },
+  },
 }
 const store = new Vuex.Store({
   state() {
     return {
       count: 2,
-      rules: ['base'] // ['star', 'spirit', 'environment']
+      rules: ['base'], // ['star', 'spirit', 'environment']
     }
   },
   modules: {
-    base
+    base,
   },
   mutations: {
     everyRule(state, { action, mutation }) {
@@ -67,9 +67,9 @@ const store = new Vuex.Store({
     removeRule(state, rule) {
       state.rules.splice(state.rules.indexOf(rule), 1)
       this.unregisterModule(rule)
-    }
+    },
   },
-  plugins: [plugin]
+  plugins: [plugin],
 })
 
 export default store

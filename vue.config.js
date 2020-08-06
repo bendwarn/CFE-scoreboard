@@ -22,14 +22,12 @@
 //   }
 // }
 module.exports = {
-  chainWebpack: config => {
-    config.when(process.env.NODE_ENV == 'production', config => {
-      config
-        .plugin('html')
-        .tap(args => {
-          args[0].filename = '../index.html'
-          return args
-        })
+  chainWebpack: (config) => {
+    config.when(process.env.NODE_ENV == 'production', (config) => {
+      config.plugin('html').tap((args) => {
+        args[0].filename = '../index.html'
+        return args
+      })
       // config
       //   .plugin('assetsFix')
       //   .use(HtmlWebpackPathAssetsFix)
@@ -37,7 +35,5 @@ module.exports = {
     })
   },
   // dist will be removed in router
-  publicPath: process.env.NODE_ENV == 'production'
-    ? '/CFE-scoreboard/dist/'
-    : '/'
+  publicPath: process.env.NODE_ENV == 'production' ? '/CFE-scoreboard/dist/' : '/',
 }

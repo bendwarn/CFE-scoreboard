@@ -1,6 +1,6 @@
 import theme from './theme'
 
-export default store => {
+export default (store) => {
   let preserveState = false
   if (localStorage.getItem('store')) {
     store.replaceState(JSON.parse(localStorage.getItem('store')!))

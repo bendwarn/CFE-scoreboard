@@ -1,15 +1,11 @@
 <template>
   <div :class="pos">
-    <div
-      class="hp bot left right btn spot"
-      ref="hp"
-      @click="popup(health, 'for-hp', setHealth)"
-    >
+    <div ref="hp" class="hp bot left right btn spot" @click="popup(health, 'for-hp', setHealth)">
       {{ health }}
     </div>
-    <div class="personal" ref="personal">
+    <div ref="personal" class="personal">
       <portal-target :name="pos" class="team" multiple />
-      <div class="person bot left right spot" v-for="n in count" :key="n">
+      <div v-for="n in count" :key="n" class="person bot left right spot">
         <div
           class="shield bot left right btn spot"
           @click="popup(shield[n - 1], 'for-sp', setShield(n - 1))"
@@ -33,18 +29,18 @@ import calculator from './calculator.vue'
 enum countChange {
   decrease = -1,
   initial,
-  increase
+  increase,
 }
 
 @Component
 export default class DashBoard extends Vue {
   @Prop() private pos!: string
-  @State(function(state) {
+  @State(function (state) {
     return state.base[this.pos].health
   })
   health
-  @State(function(state) {
-    return state.base[this.pos].shield.map(x => (0 < x ? x : ''))
+  @State(function (state) {
+    return state.base[this.pos].shield.map((x) => (0 < x ? x : ''))
   })
   shield
   @State count
@@ -57,18 +53,18 @@ export default class DashBoard extends Vue {
     this.$store.commit('base/setHealth', { pos: this.pos, payload: hp })
   }
   setShield(index) {
-    return sp =>
+    return (sp) =>
       this.$store.commit('base/setShield', {
         pos: this.pos,
         index,
-        payload: sp
+        payload: sp,
       })
   }
   popup(value, caller, handler) {
     this.$modal.show(
       calculator,
       { initial: value, container: caller, handler },
-      { width: '85vmin', height: '85vmin', pivotX: 0, pivotY: 0 }
+      { width: '85vmin', height: '85vmin', styles: { 'border-radius': '40px' } }
     )
   }
 
@@ -83,11 +79,7 @@ export default class DashBoard extends Vue {
           this.pinchActivated--
           navigator.vibrate && navigator.vibrate(1)
           this.stepCount(-1)
-        } else if (
-          0.5 < scale &&
-          scale < 1.5 &&
-          countChange.initial != this.pinchActivated
-        ) {
+        } else if (0.5 < scale && scale < 1.5 && countChange.initial != this.pinchActivated) {
           this.stepCount(-this.pinchActivated)
           navigator.vibrate && navigator.vibrate(1)
           this.pinchActivated = countChange.initial
@@ -95,7 +87,7 @@ export default class DashBoard extends Vue {
       },
       onend: () => {
         this.pinchActivated = countChange.initial
-      }
+      },
     })
     interact(this.hp)
       .draggable({})
@@ -111,7 +103,7 @@ export default class DashBoard extends Vue {
         },
         ondrop: () => {
           this.$store.commit('base/swap')
-        }
+        },
       })
   }
   beforeDestroy() {

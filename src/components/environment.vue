@@ -3,6 +3,7 @@
     <font-awesome-icon :icon="font" v-if="font" />
   </div>
 </template>
+
 <style lang="sass" scoped>
 =harmony($c)
   background-color: $c
@@ -35,6 +36,7 @@
   .env
     right: 0
 </style>
+
 <script lang="ts">
 import { Component, Vue, Ref } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
@@ -46,12 +48,12 @@ enum fontmap {
   water = 'water',
   earth = 'mountain',
   wood = 'dragon',
-  '' = ''
+  '' = '',
 }
 
 @Component
 export default class environment extends Vue {
-  @env.State(function(state) {
+  @env.State(function (state) {
     let attr = this.moving ? this.moveType : fontmap[state.type]
     if (attr == 'phoenix-framework') {
       attr = ['fab', 'phoenix-framework']
@@ -100,7 +102,7 @@ export default class environment extends Vue {
               }
             }
           }
-        }
+        },
       })
       .on('tap', () => {
         this.type && this.change('')

@@ -8,8 +8,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
-  }
+    component: Home,
+  },
   // {
   //   path: '/about',
   //   name: 'about',
@@ -24,5 +24,5 @@ const githubPage = '/CFE-scoreboard/'
 export default new VueRouter({
   mode: 'history',
   base: process.env.NODE_ENV == 'production' ? githubPage : process.env.BASE_URL,
-  routes
+  routes,
 })

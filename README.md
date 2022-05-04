@@ -1,24 +1,29 @@
-Description
-=====
-A board recording information about playing the card game of chinese five elements.
+# Nuxt 3 Minimal Starter
 
-Official site: <https://sites.google.com/site/cfecardgame/>
+We recommend to look at the [documentation](https://v3.nuxtjs.org).
 
-Build
-=====
-### Prerequisites
-* yarn
+## Setup
 
-To set the environment, you can
+Make sure to install the dependencies
+
+```bash
+pnpm install
 ```
-git clone https://github.com/<user>/<repository>.git
-cd <repository>
-yarn install
+
+## Development
+
+Start the development server on http://localhost:3000
+
+```bash
+pnpm dev
 ```
-To start local server, use `yarn serve`.
 
-To build all sources, use `yarn build`.
+## Production
 
-License
--------
-MIT License
+Build the application for production:
+
+```bash
+pnpm build
+```
+
+Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).

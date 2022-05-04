@@ -1,6 +1,7 @@
-.DS_Store
-.sass-cache
-
-# gh-pages branch
-/gh-pages/
 node_modules
+*.log
+.nuxt
+nuxt.d.ts
+.output
+
+.yarn

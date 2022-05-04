@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   app: {
     // baseURL: '/CFE-scoreboard/',
     baseURL: '',
-    buildAssetsDir: './_nuxt/',
+    buildAssetsDir: '/CFE-scoreboard/',
     head: {
       meta: [
         {

@@ -6,15 +6,15 @@ We recommend to look at the [documentation](https://v3.nuxtjs.org).
 
 Make sure to install the dependencies
 
-```bash
-pnpm install
+```zsh
+pnpm install --shamefully-hoist
 ```
 
 ## Development
 
 Start the development server on http://localhost:3000
 
-```bash
+```zsh
 pnpm dev
 ```
 
@@ -22,8 +22,8 @@ pnpm dev
 
 Build the application for production:
 
-```bash
-pnpm build
+```zsh
+pnpm generate
 ```
 
 Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).

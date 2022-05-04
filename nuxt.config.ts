@@ -16,6 +16,8 @@ export default defineNuxtConfig({
   modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
   app: {
     // baseURL: '/CFE-scoreboard/',
+    baseURL: '',
+    buildAssetsDir: './_nuxt/',
     head: {
       meta: [
         {

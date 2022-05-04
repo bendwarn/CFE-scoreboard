@@ -1,0 +1,26 @@
+{
+    "categories": [
+        "utilities"
+    ],
+    "description": "A board recording information about playing the card game of chinese five elements.",
+    "short_name": "CFE",
+    "name": "CFE scoreboard",
+    "icons": [
+        {
+            "src": "32.ico",
+            "sizes": "32x32"
+        },
+        {
+            "src": "180.png",
+            "sizes": "180x180"
+        },
+        {
+            "src": "card.png",
+            "sizes": "160x240"
+        }
+    ],
+    "start_url": "/CFE-scoreboard",
+    "display": "standalone",
+    "background_color": "#eae6d1",
+    "theme_color": "#eae6d1"
+}

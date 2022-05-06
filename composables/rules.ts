@@ -1,4 +1,4 @@
-import { times, constant, toPlainObject } from 'lodash-es'
+import { times, constant, toPlainObject, each } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { Ref } from 'vue'
 
@@ -48,6 +48,10 @@ export const useHealth = defineStore('health', {
     swap() {
       ;[this.enemy, this.friend] = [this.friend, this.enemy]
     },
+    parse(lsValue: any) {
+      this.enemy = lsValue.enemy
+      this.friend = lsValue.friend
+    },
   },
 })
 
@@ -63,6 +67,16 @@ export const useShield = defineStore('shield', {
         Array.from({ length: people.count }, () => useClamp(0, 0, hplimit))
       ),
     }
+  },
+  actions: {
+    parse(lsValue: any) {
+      each(this.enemy, (v, i) => {
+        v = lsValue.enemy[i]
+      })
+      each(this.friend, (v, i) => {
+        v = lsValue.friend[i]
+      })
+    },
   },
 })
 

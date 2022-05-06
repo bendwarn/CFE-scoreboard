@@ -18,3 +18,11 @@ export const swipeHistory = (history: Store, swipe: Vector2, memo: any) => {
   }
   return memo
 }
+
+export const allreset = () => {
+  useHealth().$reset()
+  useShield().$reset()
+  useStar().$reset()
+  useField().$reset()
+  useSpirit().$reset()
+}

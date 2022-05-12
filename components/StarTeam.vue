@@ -1,9 +1,10 @@
 <template>
   <transition>
     <div
-      class="w-16 h-16 text-3xl bg-black rounded-xl shadow-lg transition duration-300"
+      class="w-14 h-14 text-3xl bg-black rounded-xl shadow-lg transition duration-500 star"
       :class="type"
-      v-drag:[dragOption]="dragHandler"
+      ref="starref"
+      @click="delete star[props.pos].type"
     >
       <font-awesome-icon icon="star" />
     </div>
@@ -11,22 +12,19 @@
 </template>
 
 <script lang="ts" setup>
-import { Handler } from '@vueuse/gesture'
+import interact from 'interactjs'
 
 import { opponent } from '~~/composables/rules'
 import { elementColor } from '~~/composables/color'
 
 const props = defineProps<{ pos: opponent }>()
+const starref = ref()
 const star = useStar()
 const type = computed(() => elementColor[star[props.pos].type ?? 5])
-
-const dragOption = { preventWindowScrollY: true }
-const dragHandler: Handler<'drag'> = ({ swipe, tap, distance, memo = 0 }) => {
-  if (50 < distance) {
-    return swipeHistory(star, swipe, memo)
-  } else if (tap) {
-    delete star[props.pos].type
-  }
-  return memo
-}
+onMounted(() => {
+  interact(unrefElement(starref)).draggable(true)
+})
+onBeforeUnmount(() => {
+  interact(unrefElement(starref)).unset()
+})
 </script>

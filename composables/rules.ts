@@ -31,7 +31,12 @@ interface spiritRecord {
 
 export const usePeople = defineStore('people', {
   state: () => {
-    return { count: useClamp(useLocalStorage('people', 2), 1, 10) }
+    return { count: useClamp(2, 1, 10) }
+  },
+  actions: {
+    parse(lsValue: any) {
+      this.count = lsValue.count
+    },
   },
 })
 
@@ -70,11 +75,11 @@ export const useShield = defineStore('shield', {
   },
   actions: {
     parse(lsValue: any) {
-      each(this.enemy, (v, i) => {
-        v = lsValue.enemy[i]
+      each(this.enemy, (_, i) => {
+        this.enemy[i] = lsValue.enemy[i]
       })
       each(this.friend, (v, i) => {
-        v = lsValue.friend[i]
+        this.friend[i] = lsValue.friend[i]
       })
     },
   },
@@ -96,7 +101,7 @@ export const useStar = defineStore('star', {
     return { enemy, friend }
   },
   actions: {
-    toggle(pos: keyof typeof opponent, index: number, type: element) {
+    toggle(pos: opponent, index: number, type: element) {
       if (this[opponent[pos]].type != type && this[pos].type != type) {
         this[pos].summoned[index][type] = true
         this[pos].type = type
@@ -119,7 +124,7 @@ export const useField = defineStore('field', {
     field: null as element | null,
   }),
   actions: {
-    parse(lsValue: typeof this) {
+    parse(lsValue: any) {
       this.field = lsValue.field
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full text-3xl justify-around flex-wrap" v-drag:[dragOption]="dragHandler">
+  <div class="w-full text-3xl justify-around flex-wrap">
     <font-awesome-icon
       icon="star"
       v-for="(n, i) in 5"
@@ -16,17 +16,10 @@
 </template>
 
 <script setup lang="ts">
-import { Handler } from '@vueuse/gesture'
-
 import { opponent } from '~~/composables/rules'
 import { elementColor } from '~~/composables/color'
 
 const props = defineProps<{ pos: opponent; index: number }>()
 const star = useStar()
 const summoned = computed(() => star[props.pos].summoned[props.index])
-
-const dragOption = { preventWindowScrollY: true }
-const dragHandler: Handler<'drag'> = ({ swipe, distance, memo = 0 }) => {
-  if (50 < distance) return swipeHistory(star, swipe, memo)
-}
 </script>

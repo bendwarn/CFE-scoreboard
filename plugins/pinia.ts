@@ -1,6 +1,6 @@
 import { defineNuxtPlugin } from '#app'
-import { PiniaPluginContext, storeToRefs } from 'pinia'
-import 'pinia'
+import { PiniaPluginContext } from 'pinia'
+import { parse, stringify } from 'flatted'
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
@@ -14,27 +14,38 @@ declare module 'pinia' {
 
 function piniaLocal({ store }: PiniaPluginContext) {
   const isExist = localStorage.getItem(store.$id)
-  const ls = useLocalStorage<object>(store.$id, store.$state)
-  // store.$id == 'shield' && console.log(toPlainObject(store.$state))
-  isExist && store.parse?.(ls.value)
-  const reset = store.$reset
-  store.$reset = () => {
-    reset()
-    ls.value = store.$state
-  }
-  store.$subscribe((mutations, state) => {
-    ls.value = state
+  const history = useRefHistory(ref(store.$state), {
+    deep: true,
+    dump: stringify,
+    parse(text) {
+      store.parse(parse(text))
+      return store.$state
+    },
   })
-}
-
-function piniaHistory({ store }: PiniaPluginContext) {
-  const { canRedo, canUndo, redo, undo, clear } = useRefHistory(
-    ref(storeToRefs(store))
+  const ls = useLocalStorage(
+    store.$id,
+    ref(reactivePick(history, 'source', 'undoStack', 'redoStack')),
+    {
+      serializer: {
+        read: parse,
+        write: stringify,
+      },
+    }
   )
+  if (isExist) {
+    store.parse(ls.value.source)
+    history.undoStack.value = ls.value.undoStack
+    history.redoStack.value = ls.value.redoStack
+    ls.value.source = history.source
+  }
+  store.reset = () => {
+    store.$reset()
+    history.clear()
+  }
+  const { canRedo, canUndo, redo, undo, clear } = history
   return { canRedo, canUndo, redo, undo, clear }
 }
 
 export default defineNuxtPlugin(({ $pinia }) => {
   $pinia.use(piniaLocal)
-  $pinia.use(piniaHistory)
 })

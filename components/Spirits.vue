@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full my-3 justify-between text-4xl">
+  <div class="relative w-full my-3 justify-between text-4xl spirit" ref="spref">
     <font-awesome-icon
       icon="minus-circle"
       :class="{
@@ -7,16 +7,12 @@
           spiritPersonal.type
         ),
       }"
-      v-drag="
-        ({ tap }: State['drag']) => {
-          if (tap && spiritPersonal.type) spirit[pos][index].point--
-        }
-      "
+      @click="isNil(spiritPersonal.type) || spirit[pos][index].point--"
     />
     <font-awesome-icon
       icon="ghost"
       :class="elementColor[spiritPersonal.type ?? 5]"
-      v-drag:[dragOption]="dragHandler"
+      @click="clickIcon"
     />
     <digit-wheel
       v-if="spiritPersonal.point"
@@ -31,11 +27,7 @@
           spiritPersonal.type
         ),
       }"
-      v-drag="
-        ({ tap }: State['drag']) => {
-          if (tap && spiritPersonal.type) spirit[pos][index].point++
-        }
-      "
+      @click="isNil(spiritPersonal.type) || spirit[pos][index].point++"
     />
     <OnClickOutside @trigger="modal" class="absolute left-1/2">
       <transition-group
@@ -61,13 +53,14 @@
 
 <script lang="ts" setup>
 import { OnClickOutside } from '@vueuse/components'
-import type { Handler, State } from '@vueuse/gesture'
 import { isNil } from 'lodash-es'
+import interact from 'interactjs'
 
 import { element, opponent } from '~~/composables/rules'
 import { elementColor } from '~~/composables/color'
 
 const props = defineProps<{ pos: opponent; index: element }>()
+const spref = ref()
 const spirit = useSpirit()
 const spiritPersonal = computed(() => spirit[props.pos][props.index])
 const [show, toggle] = useToggle()
@@ -81,16 +74,10 @@ const transform = [
   'translate-y-12',
 ]
 
-const dragOption = { preventWindowScrollY: true }
-const dragHandler: Handler<'drag'> = ({ swipe, tap, distance, memo = 0 }) => {
-  if (distance < 50) {
-    if (tap && isNil(spiritPersonal.value.type)) {
-      throttleToggle()
-    }
-  } else {
-    return swipeHistory(spirit, swipe, memo)
+const clickIcon = () => {
+  if (isNil(spiritPersonal.value.type)) {
+    throttleToggle()
   }
-  return memo
 }
 
 const modal = () => {
@@ -103,4 +90,10 @@ const assignSpirit = (i: element) => {
   spirit[props.pos][props.index].point = 2
   throttleToggle()
 }
+onMounted(() => {
+  interact(unrefElement(spref)).draggable(true)
+})
+onBeforeUnmount(() => {
+  interact(unrefElement(spref)).unset()
+})
 </script>

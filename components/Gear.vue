@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute w-24 h-24 shadow-lg bg-orange-300 border-2 border-black text-5xl rounded-xl left-0 lg:left-auto lg:bottom-0"
+    class="absolute w-16 h-16 shadow-lg bg-orange-300 border-2 border-black text-5xl rounded-xl left-0 lg:left-auto lg:bottom-0"
     ref="setting"
   >
     <font-awesome-icon
@@ -17,6 +17,7 @@
 
 <script lang="ts" setup>
 import { useGesture } from '@vueuse/gesture'
+
 const setting = ref()
 const show = autoResetRef(false, 2000)
 const turnRed = ref(false)
@@ -40,11 +41,7 @@ useGesture(
     },
     onWheelEnd({ touches }) {
       if (turnRed.value && !touches) {
-        useHealth().$reset()
-        useShield().$reset()
-        useStar().$reset()
-        useField().$reset()
-        useSpirit().$reset()
+        allreset()
       }
       rotateTh.value = `0deg`
       turnRed.value = false
@@ -59,11 +56,7 @@ useGesture(
     },
     onPinchEnd({ touches }) {
       if (turnRed.value && !touches) {
-        useHealth().$reset()
-        useShield().$reset()
-        useStar().$reset()
-        useField().$reset()
-        useSpirit().$reset()
+        allreset()
       }
       rotateTh.value = `0deg`
       turnRed.value = false

@@ -5,11 +5,7 @@
       :class="hpBorder"
       ref="hpref"
     >
-      <digit-animation-group
-        size="inherit"
-        :digits="hp[pos]"
-        :duration="500"
-      ></digit-animation-group>
+      {{ hptrans.toFixed() }}
     </div>
     <div class="w-4/5 h-4/5 items-stretch" ref="team">
       <div
@@ -21,12 +17,7 @@
         <div
           class="h-1/6 text-4xl text-blue-800 bg-sky-200 rounded-b-2xl shadow-lg shield"
         >
-          <digit-animation-group
-            v-if="0 < shield[pos][i]"
-            size="inherit"
-            :digits="shield[pos][i]"
-            :duration="500"
-          ></digit-animation-group>
+          <div v-show="shtrans[i]">{{ shtrans[i].toFixed() }}</div>
         </div>
         <Spirits :pos="pos" :index="i" />
         <StarPersonal :pos="pos" :index="i" />
@@ -38,11 +29,11 @@
 
 <script lang="ts" setup>
 import interact from 'interactjs'
+import { map } from 'lodash-es'
 
 import { opponent } from '~~/composables/rules'
 import { countChange } from '~~/composables/utils'
 
-let pinchActivated = countChange.initial
 const props = defineProps<{ pos: opponent }>()
 const emit = defineEmits<{
   (
@@ -60,6 +51,12 @@ const hpref = ref()
 const team = ref()
 const shieldrefs = useTemplateRefsList()
 
+const hpoint = computed(() => hp[props.pos])
+const hptrans = useTransition(hpoint)
+const shpoints = computed(() => map(shield[props.pos]))
+const shtrans = useTransition(shpoints)
+
+let pinchActivated = countChange.initial
 onMounted(() => {
   interact(unrefElement(hpref))
     .draggable(true)
@@ -106,7 +103,7 @@ onMounted(() => {
       .draggable(true)
       .on(['tap', 'click'], () => {
         emit('reqCal', shield[props.pos][i], 'sp', (sh: string) => {
-          shield[props.pos][i] = sh
+          shield[props.pos][i] = +sh
         })
       })
   })

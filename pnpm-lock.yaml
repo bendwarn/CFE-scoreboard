@@ -21,7 +21,6 @@ specifiers:
   pinia: ^2.0.14
   postcss: ^8.4.13
   tailwindcss: ^3.0.24
-  ts-pattern: ^4.0.2
   vue-digit-animation: ^0.3.1
 
 dependencies:
@@ -47,7 +46,6 @@ devDependencies:
   nuxt: 3.0.0-rc.2
   postcss: 8.4.13
   tailwindcss: 3.0.24
-  ts-pattern: 4.0.2
   vue-digit-animation: 0.3.1
 
 packages:
@@ -5613,10 +5611,6 @@ packages:
     resolution: {integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=}
     dependencies:
       punycode: 2.1.1
-    dev: true
-
-  /ts-pattern/4.0.2:
-    resolution: {integrity: sha512-eHqR/7A6fcw05vCOfnL6RwgGJbVi9G/YHTdYdjYmElhDdJ1SMn7pWs+6+YuxygaFwQS/g+cIDlu+UD8IVpur1A==}
     dev: true
 
   /tslib/2.4.0:

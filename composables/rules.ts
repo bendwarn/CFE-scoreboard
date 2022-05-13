@@ -20,6 +20,9 @@ export enum bane {
   wood,
   metal,
 }
+interface shieldRecord {
+  [_: number]: Ref<number>
+}
 interface starRecord {
   type?: element
   summoned: boolean[][]
@@ -67,19 +70,19 @@ export const useShield = defineStore('shield', {
     return {
       enemy: toPlainObject(
         Array.from({ length: people.count }, () => useClamp(0, 0, hplimit))
-      ),
+      ) as shieldRecord,
       friend: toPlainObject(
         Array.from({ length: people.count }, () => useClamp(0, 0, hplimit))
-      ),
+      ) as shieldRecord,
     }
   },
   actions: {
     parse(lsValue: any) {
       each(this.enemy, (_, i) => {
-        this.enemy[i] = lsValue.enemy[i]
+        this.enemy[+i] = lsValue.enemy[i]
       })
       each(this.friend, (v, i) => {
-        this.friend[i] = lsValue.friend[i]
+        this.friend[+i] = lsValue.friend[i]
       })
     },
   },

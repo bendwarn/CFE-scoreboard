@@ -14,7 +14,9 @@ export default defineNuxtConfig({
     },
   },
   app: {
+    // baseURL: '/CFE-scoreboard/',
     buildAssetsDir: 'assets',
+    cdnURL: 'https://bendwarn.github.io/CFE-scoreboard/',
     head: {
       meta: [
         {

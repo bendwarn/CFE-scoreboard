@@ -3,22 +3,22 @@
     <font-awesome-icon
       icon="minus-circle"
       :class="{
-        'text-red-700 border-dashed rounded-sm active:border-8 active:border-green-800 transition-all duration-200': !isNil(
-          type
-        ),
+        'text-red-700 border-dashed rounded-sm active:border-8 active:border-green-800 transition-all duration-200': point,
       }"
-      @click="isNil(type) || spirit[pos][index].point--"
+      @click="point && spirit[pos][index].point--"
     />
-    <font-awesome-icon icon="ghost" :class="elementColor[type ?? 5]" @click="clickIcon" />
+    <font-awesome-icon
+      icon="ghost"
+      :class="elementColor[point ? type : 5]"
+      @click="throttleToggle()"
+    />
     <digit-wheel v-show="point" size="5xl" :digit="point" :duration="500"></digit-wheel>
     <font-awesome-icon
       icon="plus-circle"
       :class="{
-        'text-green-400 border-dashed rounded-sm active:border-8 active:border-green-800 transition-all duration-200': !isNil(
-          type
-        ),
+        'text-green-400 border-dashed rounded-sm active:border-8 active:border-green-800 transition-all duration-200': point,
       }"
-      @click="isNil(type) || spirit[pos][index].point++"
+      @click="point && spirit[pos][index].point++"
     />
     <OnClickOutside @trigger="modal" class="absolute left-1/2">
       <transition-group
@@ -44,7 +44,6 @@
 
 <script lang="ts" setup>
 import { OnClickOutside } from '@vueuse/components'
-import { isNil } from 'lodash-es'
 import interact from 'interactjs'
 
 import { element, opponent } from '~~/composables/rules'
@@ -66,11 +65,7 @@ const transform = [
   '-translate-x-12 translate-y-12',
   'translate-y-12',
 ]
-const clickIcon = () => {
-  if (isNil(type.value)) {
-    throttleToggle()
-  }
-}
+
 const modal = () => {
   if (show.value) {
     throttleToggle()

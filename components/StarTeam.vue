@@ -4,7 +4,7 @@
       class="w-14 h-14 text-3xl bg-black rounded-xl shadow-lg transition duration-500 star"
       :class="type"
       ref="starref"
-      @click="delete star[props.pos].type"
+      @click="star[props.pos].type = undefined"
     >
       <font-awesome-icon icon="star" />
     </div>

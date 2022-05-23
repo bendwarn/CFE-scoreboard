@@ -28,7 +28,7 @@ interface starRecord {
   summoned: boolean[][]
 }
 interface spiritRecord {
-  type?: element
+  type: element
   point: Ref<number>
 }
 
@@ -109,7 +109,7 @@ export const useStar = defineStore('star', {
         this[pos].summoned[index][type] = true
         this[pos].type = type
         if (element[type] == bane[this[opponent[pos]].type ?? type]) {
-          delete this[opponent[pos]].type
+          this[opponent[pos]].type = undefined
         }
       }
     },
@@ -138,9 +138,11 @@ export const useSpirit = defineStore('spirit', {
     const people = usePeople()
     const enemy: spiritRecord[] = Array.from({ length: people.count }, () => ({
       point: useClamp(0, 0, 6),
+      type: 0,
     }))
     const friend: spiritRecord[] = Array.from({ length: people.count }, () => ({
       point: useClamp(0, 0, 6),
+      type: 0,
     }))
     return { enemy, friend }
   },

@@ -8,7 +8,7 @@ declare module 'pinia' {
     canUndo: boolean
     redo: () => void
     undo: () => void
-    clear: () => void
+    reset: () => void
   }
 }
 
@@ -38,12 +38,17 @@ function piniaLocal({ store }: PiniaPluginContext) {
     history.redoStack.value = ls.value.redoStack
     ls.value.source = history.source
   }
-  store.reset = () => {
-    store.$reset()
-    history.clear()
+  const { canRedo, canUndo, redo, undo } = history
+  return {
+    canRedo,
+    canUndo,
+    redo,
+    undo,
+    reset() {
+      store.$reset()
+      history.clear()
+    },
   }
-  const { canRedo, canUndo, redo, undo, clear } = history
-  return { canRedo, canUndo, redo, undo, clear }
 }
 
 export default defineNuxtPlugin(({ $pinia }) => {

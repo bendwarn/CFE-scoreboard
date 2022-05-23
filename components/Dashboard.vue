@@ -24,12 +24,15 @@
       </div>
       <StarTeam :pos="pos" class="absolute bottom-16" />
     </div>
+    <div class="absolute flex-col z-20" v-show="show" v-motion-roll-visible-bottom>
+      <p>計算結果為 NaN</p>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import interact from 'interactjs'
-import { map } from 'lodash-es'
+import { map, isNaN } from 'lodash-es'
 
 import { opponent } from '~~/composables/rules'
 import { countChange } from '~~/composables/utils'
@@ -56,6 +59,8 @@ const hptrans = useTransition(hpoint)
 const shpoints = computed(() => map(shield[props.pos]))
 const shtrans = useTransition(shpoints)
 
+const show = autoResetRef(false, 2000)
+
 let pinchActivated = countChange.initial
 onMounted(() => {
   interact(unrefElement(hpref))
@@ -72,7 +77,11 @@ onMounted(() => {
     })
     .on(['tap', 'click'], () => {
       emit('reqCal', hp[props.pos], 'hp', (payload: string) => {
-        hp[props.pos] = +payload
+        if (isNaN(+payload)) {
+          show.value = true
+        } else {
+          hp[props.pos] = +payload
+        }
       })
     })
   interact(unrefElement(team)).gesturable({
@@ -103,7 +112,11 @@ onMounted(() => {
       .draggable(true)
       .on(['tap', 'click'], () => {
         emit('reqCal', shield[props.pos][i], 'sp', (sh: string) => {
-          shield[props.pos][i] = +sh
+          if (isNaN(+sh)) {
+            show.value = true
+          } else {
+            shield[props.pos][i] = +sh
+          }
         })
       })
   })

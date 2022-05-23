@@ -13,10 +13,8 @@ export default defineNuxtConfig({
       },
     },
   },
-  modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
   app: {
-    // baseURL: '/CFE-scoreboard/',
-    buildAssetsDir: 'CFE-scoreboard/',
+    buildAssetsDir: 'assets',
     head: {
       meta: [
         {
@@ -42,6 +40,14 @@ export default defineNuxtConfig({
         },
         { rel: 'manifest', href: 'manifest.json' },
       ],
+    },
+  },
+  modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
+  nitro: {
+    output: {
+      dir: '~/docs',
+      serverDir: '~/.output/server',
+      publicDir: '~/docs',
     },
   },
   typescript: {

@@ -3,7 +3,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate && mv .output/public/* docs && mv docs/CFE-scoreboard/* docs && rmdir docs/CFE-scoreboard",
+    "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
   "devDependencies": {

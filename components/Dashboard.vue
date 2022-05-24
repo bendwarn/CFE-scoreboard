@@ -63,6 +63,7 @@ const show = autoResetRef(false, 2000)
 
 let pinchActivated = countChange.initial
 onMounted(() => {
+  const clickType = navigator.maxTouchPoints ? 'tap' : 'click'
   interact(unrefElement(hpref))
     .draggable(true)
     .dropzone({
@@ -75,7 +76,7 @@ onMounted(() => {
       },
       ondrop: hp.swap,
     })
-    .on(['tap', 'click'], () => {
+    .on(clickType, () => {
       emit('reqCal', hp[props.pos], 'hp', (payload: string) => {
         if (isNaN(+payload)) {
           show.value = true
@@ -110,7 +111,7 @@ onMounted(() => {
   shieldrefs.value.forEach((ele, i) => {
     interact(ele.firstElementChild as HTMLDivElement)
       .draggable(true)
-      .on(['tap', 'click'], () => {
+      .on(clickType, () => {
         emit('reqCal', shield[props.pos][i], 'sp', (sh: string) => {
           if (isNaN(+sh)) {
             show.value = true

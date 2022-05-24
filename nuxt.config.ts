@@ -1,21 +1,9 @@
 import { defineNuxtConfig } from 'nuxt'
-import { VitePWA } from 'vite-plugin-pwa'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
-  build: {
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          tailwindcss: {},
-          autoprefixer: {},
-        },
-      },
-    },
-  },
   app: {
-    // baseURL: '/CFE-scoreboard/',
     buildAssetsDir: 'assets',
     cdnURL: 'https://bendwarn.github.io/CFE-scoreboard/',
     head: {
@@ -25,9 +13,9 @@ export default defineNuxtConfig({
           content: 'IE=edge',
         },
         {
-          name: 'description',
+          name: 'viewport',
           content:
-            'A board recording information about playing the card game of chinese five elements. 五行戰鬥牌計算機。',
+            'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui',
         },
         { name: 'theme-color', content: '#eae6d1' },
       ],
@@ -45,15 +33,19 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
+  modules: [
+    '@vueuse/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    '@kevinmarrec/nuxt-pwa',
+  ],
   nitro: {
     output: {
-      dir: '~/docs',
+      dir: '.output',
       serverDir: '~/.output/server',
       publicDir: '~/docs',
     },
   },
-  vite: { plugins: [VitePWA({ registerType: 'autoUpdate' })] },
   typescript: {
     shim: false,
     strict: true,

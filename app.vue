@@ -36,7 +36,7 @@ import interact from 'interactjs'
 import { noop, capitalize, find } from 'lodash-es'
 
 import './assets/css/tailwind.css'
-import { opponent } from '~~/composables/rules'
+import type { opponent } from '~~/composables/rules'
 import { countChange } from '~~/composables/utils'
 
 enum cando {
@@ -62,9 +62,15 @@ const rules = {
 }
 let done = countChange.initial
 onMounted(async () => {
-  const { useRegisterSW } = await import('virtual:pwa-register/vue')
-  const { needRefresh, updateServiceWorker } = useRegisterSW()
-  if (needRefresh.value) updateServiceWorker()
+  // @ts-ignore
+  const workbox = await window.$workbox
+  if (workbox) {
+    workbox.addEventListener('installed', (event: any) => {
+      if (event.isUpdate) {
+        location.reload()
+      }
+    })
+  }
 
   interact('#undo, #redo').dropzone({
     accept: '.hp, .shield, .star, .field, .spirit',

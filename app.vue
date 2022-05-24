@@ -61,7 +61,11 @@ const rules = {
   spirit: useSpirit(),
 }
 let done = countChange.initial
-onMounted(() => {
+onMounted(async () => {
+  const { useRegisterSW } = await import('virtual:pwa-register/vue')
+  const { needRefresh, updateServiceWorker } = useRegisterSW()
+  if (needRefresh.value) updateServiceWorker()
+
   interact('#undo, #redo').dropzone({
     accept: '.hp, .shield, .star, .field, .spirit',
     ondropactivate() {

@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -52,6 +53,7 @@ export default defineNuxtConfig({
       publicDir: '~/docs',
     },
   },
+  vite: { plugins: [VitePWA({ registerType: 'autoUpdate' })] },
   typescript: {
     shim: false,
     strict: true,

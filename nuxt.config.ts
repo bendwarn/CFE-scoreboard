@@ -17,7 +17,6 @@ export default defineNuxtConfig({
           content:
             'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui',
         },
-        { name: 'theme-color', content: '#eae6d1' },
       ],
       link: [
         {
@@ -25,11 +24,6 @@ export default defineNuxtConfig({
           href: 'https://bendwarn.github.io/CFE-scoreboard/',
         },
         { rel: 'icon', href: '32.ico' },
-        {
-          rel: 'apple-touch-icon',
-          href: '180.png',
-        },
-        { rel: 'manifest', href: 'manifest.json' },
       ],
     },
   },
@@ -41,7 +35,7 @@ export default defineNuxtConfig({
   ],
   nitro: {
     output: {
-      dir: '.output',
+      dir: '~/.output',
       serverDir: '~/.output/server',
       publicDir: '~/docs',
     },
@@ -49,5 +43,12 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
     strict: true,
+  },
+  pwa: {
+    manifest: {
+      background_color: '#eae6d1',
+      start_url: '/CFE-scoreboard',
+      theme_color: '#eae6d1',
+    },
   },
 })

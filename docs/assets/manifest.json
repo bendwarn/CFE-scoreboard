@@ -1,0 +1,10 @@
+{
+  "node_modules/.pnpm/nuxt@3.0.0-rc.2/node_modules/nuxt/dist/app/entry.mjs": {
+    "file": "entry-8b793c28.mjs",
+    "src": "node_modules/.pnpm/nuxt@3.0.0-rc.2/node_modules/nuxt/dist/app/entry.mjs",
+    "isEntry": true,
+    "css": [
+      "entry.3a6fe73c.css"
+    ]
+  }
+}

@@ -49,7 +49,7 @@ const emit = defineEmits<{
 const people = usePeople()
 const hp = useHealth()
 const shield = useShield()
-const hpBorder = ref('border-solid')
+const hpBorder = ref('')
 const hpref = ref()
 const team = ref()
 const shieldrefs = useTemplateRefsList()
@@ -72,7 +72,7 @@ onMounted(() => {
         hpBorder.value = 'border-dashed'
       },
       ondropdeactivate() {
-        hpBorder.value = 'border-solid'
+        hpBorder.value = ''
       },
       ondrop: hp.swap,
     })

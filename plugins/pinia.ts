@@ -45,7 +45,9 @@ function piniaLocal({ store }: PiniaPluginContext) {
     redo,
     undo,
     reset() {
+      history.pause()
       store.$reset()
+      history.resume()
       history.clear()
     },
   }

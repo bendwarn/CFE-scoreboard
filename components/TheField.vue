@@ -1,7 +1,7 @@
 <template>
   <div
     class="absolute right-0 lg:right-auto lg:bottom-1/2 w-16 h-16 z-0 bg-gray-300 text-5xl border-2 border-black rounded-xl shadow-xl transition duration-500 field"
-    :class="bg"
+    :class="[bg, fborder]"
     ref="fieldref"
   >
     <div class="w-full h-full" :class="text" @click="clickIcon">
@@ -38,6 +38,7 @@ import { element } from '~~/composables/rules'
 
 const fontmap = ['cat', ['fab', 'phoenix-framework'], 'water', 'mountain', 'dragon', '']
 const fieldref = ref()
+const fborder = ref('')
 const field = useField()
 const [show, toggle] = useToggle()
 const throttleToggle = useThrottleFn(toggle, 50, false)
@@ -70,7 +71,27 @@ const assignField = (i: element) => {
   throttleToggle()
 }
 onMounted(() => {
-  interact(unrefElement(fieldref)).draggable(true)
+  interact(unrefElement(fieldref))
+    .draggable(true)
+    .dropzone({
+      accept: '.gear',
+      ondropactivate() {
+        fborder.value = 'border-dashed'
+      },
+      ondropdeactivate() {
+        fborder.value = ''
+      },
+      ondragenter({ relatedTarget }) {
+        relatedTarget.firstElementChild.classList.add('fa-spin')
+      },
+      ondragleave({ relatedTarget }) {
+        relatedTarget.firstElementChild.classList.remove('fa-spin')
+      },
+      ondrop({ relatedTarget }) {
+        relatedTarget.firstElementChild.classList.remove('fa-spin')
+        allreset()
+      },
+    })
 })
 onBeforeUnmount(() => {
   interact(unrefElement(fieldref)).unset()

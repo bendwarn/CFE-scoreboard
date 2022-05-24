@@ -10,7 +10,6 @@
         { 'border-black shadow-lg': summoned[i], 'border-transparent': !summoned[i] },
       ]"
       @click="star.toggle(pos, index, i)"
-      @dblclick="star[pos].summoned[index][i] = !star[pos].summoned[index][i]"
     />
   </div>
 </template>

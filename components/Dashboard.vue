@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="flex-col">
     <div
-      class="w-11/12 h-1/5 bg-red-300 text-red-600 text-5xl border-x-2 border-b-2 border-black items-end lg:items-center rounded-b-xl shadow-xl hp"
+      class="w-11/12 h-1/5 bg-red-300 text-red-600 text-5xl border-x-2 border-b-2 border-black items-end lg:items-center rounded-b-xl shadow-xl touch-none hp"
       :class="hpBorder"
       ref="hpref"
     >
       {{ hptrans.toFixed() }}
     </div>
-    <div class="w-4/5 h-4/5 items-stretch" ref="team">
+    <div class="w-4/5 h-4/5 items-stretch relative touch-none" ref="team">
       <div
         v-for="(n, i) in people.count"
         :key="i"
@@ -19,10 +19,10 @@
         >
           <div v-show="shtrans[i]">{{ shtrans[i].toFixed() }}</div>
         </div>
-        <Spirits :pos="pos" :index="i" />
+        <Spirits :pos="pos" :index="i" class="-mt-14" />
         <StarPersonal :pos="pos" :index="i" />
       </div>
-      <StarTeam :pos="pos" class="absolute bottom-16" />
+      <StarTeam :pos="pos" class="absolute bottom-20" />
     </div>
     <div class="absolute flex-col z-20" v-show="show" v-motion-roll-visible-bottom>
       <p>計算結果為 NaN</p>

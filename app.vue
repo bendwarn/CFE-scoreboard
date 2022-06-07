@@ -1,10 +1,10 @@
 <template>
   <Title>CFE scoreboard</Title>
   <div
-    class="w-screen h-screen m-0 overflow-hidden bg-green-100 text-gray-700 font-sans text-center flex-col lg:flex-row"
+    class="w-screen h-[90vh] lg:h-screen m-0 bg-green-100 text-gray-700 font-sans flex-col lg:flex-row"
   >
-    <div id="undo" class="w-1/12 h-screen absolute pointer-events-none left-0"></div>
-    <div id="redo" class="w-1/12 h-screen absolute pointer-events-none right-0"></div>
+    <div id="undo" class="w-1/12 h-full absolute pointer-events-none left-0"></div>
+    <div id="redo" class="w-1/12 h-full absolute pointer-events-none right-0"></div>
     <div
       class="absolute z-10 w-full h-full bg-transparent/20 transition duration-200"
       v-if="container"
@@ -18,16 +18,16 @@
     </div>
     <Dashboard
       :pos="'enemy' as opponent"
-      class="flex-col w-full h-1/2 lg:h-full lg:flex-1 rotate-180 lg:rotate-0 border-black border-t-2 lg:border-t-0 lg:border-r-2"
+      class="w-full h-1/2 lg:h-full lg:flex-1 rotate-180 lg:rotate-0 border-black border-t-2 lg:border-t-0 lg:border-r-2"
       @req-cal="showCal"
     />
     <Dashboard
       :pos="'friend' as opponent"
-      class="flex-col w-full h-1/2 lg:h-full lg:flex-1 border-black border-t-2 lg:border-t-0 lg:border-l-2"
+      class="w-full h-1/2 lg:h-full lg:flex-1 border-black border-t-2 lg:border-t-0 lg:border-l-2"
       @req-cal="showCal"
     />
-    <TheField />
-    <Gear />
+    <TheField class="absolute right-0 lg:right-auto" />
+    <Gear class="absolute left-0 lg:left-auto lg:bottom-0" />
   </div>
 </template>
 
@@ -107,6 +107,6 @@ onBeforeUnmount(() => {
 
 <style>
 div {
-  @apply flex justify-center items-center select-none touch-none;
+  @apply flex justify-center items-center text-center select-none;
 }
 </style>

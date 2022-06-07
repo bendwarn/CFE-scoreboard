@@ -1,6 +1,7 @@
 <template>
   <div
-    class="absolute w-16 h-16 shadow-lg bg-orange-300 border-2 border-black text-5xl rounded-xl left-0 lg:left-auto lg:bottom-0 gear"
+    class="w-16 h-16 shadow-lg bg-orange-300 border-2 border-black text-5xl rounded-xl touch-none gear"
+    :="$attrs"
     ref="gear"
     @click="show = true"
   >

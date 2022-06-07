@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute right-0 lg:right-auto lg:bottom-1/2 w-16 h-16 z-0 bg-gray-300 text-5xl border-2 border-black rounded-xl shadow-xl transition duration-500 field"
+    class="w-16 h-16 z-0 bg-gray-300 text-5xl border-2 border-black rounded-xl shadow-xl touch-none transition duration-500 field"
     :class="[bg, fborder]"
     ref="fieldref"
   >

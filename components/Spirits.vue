@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full my-3 justify-between text-4xl spirit" ref="spref">
+  <div class="relative w-full justify-between text-4xl spirit" ref="spref">
     <font-awesome-icon
       icon="minus-circle"
       :class="{
@@ -20,7 +20,7 @@
       }"
       @click="point && spirit[pos][index].point++"
     />
-    <OnClickOutside @trigger="modal" class="absolute left-1/2">
+    <OnClickOutside @trigger="modal" class="absolute left-1/2 z-10">
       <transition-group
         enter-from-class="opacity-0 transform-none"
         leave-to-class="opacity-0 transform-none"
@@ -31,7 +31,7 @@
           v-show="show"
           v-for="(n, i) in 5"
           :key="i"
-          class="absolute w-20 h-20"
+          class="absolute w-12 h-12"
           :class="[elementColor[i], transform[i], delay[i]]"
           @click="assignSpirit(i)"
         >
@@ -59,11 +59,11 @@ const [show, toggle] = useToggle()
 const throttleToggle = useThrottleFn(toggle, 50, false)
 const delay = ['', 'delay-100', 'delay-200', 'delay-300', 'delay-[400ms]']
 const transform = [
-  '-translate-y-12',
-  '-translate-x-12 -translate-y-12',
-  '-translate-x-12',
-  '-translate-x-12 translate-y-12',
-  'translate-y-12',
+  '-translate-y-10',
+  '-translate-x-10 -translate-y-10',
+  '-translate-x-10',
+  '-translate-x-10 translate-y-10',
+  'translate-y-10',
 ]
 
 const modal = () => {

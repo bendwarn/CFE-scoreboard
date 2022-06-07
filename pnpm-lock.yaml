@@ -5,7 +5,7 @@ specifiers:
   '@fortawesome/free-brands-svg-icons': ^6.1.1
   '@fortawesome/free-solid-svg-icons': ^6.1.1
   '@fortawesome/vue-fontawesome': ^3.0.0-5
-  '@kevinmarrec/nuxt-pwa': ^0.2.1
+  '@kevinmarrec/nuxt-pwa': ^0.2.2
   '@nuxtjs/tailwindcss': ^5.1.2
   '@pinia/nuxt': ^0.1.9
   '@types/lodash-es': ^4.17.6
@@ -15,7 +15,7 @@ specifiers:
   '@vueuse/nuxt': ^8.6.0
   autoprefixer: ^10.4.7
   flatted: ^3.2.5
-  interactjs: ^1.10.11
+  interactjs: ^1.10.13
   lodash-es: ^4.17.21
   nuxt: 3.0.0-rc.3
   pinia: ^2.0.14
@@ -33,12 +33,12 @@ dependencies:
   '@vueuse/core': 8.6.0
   '@vueuse/motion': 2.0.0-beta.12
   flatted: 3.2.5
-  interactjs: 1.10.11
+  interactjs: 1.10.13
   lodash-es: 4.17.21
   pinia: 2.0.14
 
 devDependencies:
-  '@kevinmarrec/nuxt-pwa': 0.2.1
+  '@kevinmarrec/nuxt-pwa': 0.2.2
   '@nuxtjs/tailwindcss': 5.1.2
   '@types/lodash-es': 4.17.6
   '@vueuse/nuxt': 8.6.0
@@ -416,8 +416,8 @@ packages:
       '@fortawesome/fontawesome-svg-core': 6.1.1
     dev: false
 
-  /@interactjs/types/1.10.11:
-    resolution: {integrity: sha512-YRsVFWjL8Gkkvlx3qnjeaxW4fnibSJ9791g8BA7Pv5ANByI64WmtR1vU7A2rXcrOn8XvyCEfY0ss1s8NhZP+MA==}
+  /@interactjs/types/1.10.13:
+    resolution: {integrity: sha512-VdsUBs2YSdrgB2ZuL2UL0WW3fH6XuINjdk7XE9K+r64X9k2IC3nQm7pIg7HjO3iiLtuBNUVEGy+eJwU1G8t/Lg==}
     dev: false
 
   /@ioredis/commands/1.1.1:
@@ -453,8 +453,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.13
     dev: true
 
-  /@kevinmarrec/nuxt-pwa/0.2.1:
-    resolution: {integrity: sha512-DZSGs57WEYgO7IxI77OywoeAnN6SsV5U/KccNqnkn+y/7hcxh/fePPe6nEDXm/S/+plXu4bSe77lQGXfB28vZg==}
+  /@kevinmarrec/nuxt-pwa/0.2.2:
+    resolution: {integrity: sha512-OAx6cFqlDSvAwqC2foXIZPu2masnloSkx1j9N9que2ztVnbqozJoGjR/i7e6FRxI0gPaxKk4HH6BGQYKW2rJvw==}
     dependencies:
       hasha: 5.2.2
       sharp: 0.30.6
@@ -3018,10 +3018,10 @@ packages:
       wrap-ansi: 7.0.0
     dev: true
 
-  /interactjs/1.10.11:
-    resolution: {integrity: sha512-VPUWsGAOPmrZe1YF7Fq/4AIBBZ+3FikZRS8bpzT6VsAfUuhxl/CKJY73IAiZHd3fz9p174CXErn0Qs81XEFICA==}
+  /interactjs/1.10.13:
+    resolution: {integrity: sha512-wvzcTBjB4gGITQvWGAEKVTfgs/oyxDRas+j948W/E8B/46Ogac1jsLHWvaM1Qka5GqvLKAqABocY7jx4T7VDNg==}
     dependencies:
-      '@interactjs/types': 1.10.11
+      '@interactjs/types': 1.10.13
     dev: false
 
   /ioredis/5.0.4:

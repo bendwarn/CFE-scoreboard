@@ -32,7 +32,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    // '@kevinmarrec/nuxt-pwa',
+    '@kevinmarrec/nuxt-pwa',
   ],
   nitro: {
     output: {
@@ -50,9 +50,6 @@ export default defineNuxtConfig({
       background_color: '#eae6d1',
       start_url: '/CFE-scoreboard/',
       theme_color: '#eae6d1',
-    },
-    workbox: {
-      enabled: false,
     },
   },
 })

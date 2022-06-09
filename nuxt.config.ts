@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@kevinmarrec/nuxt-pwa',
+    // '@kevinmarrec/nuxt-pwa',
   ],
   nitro: {
     output: {

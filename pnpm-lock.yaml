@@ -5,7 +5,7 @@ specifiers:
   '@fortawesome/free-brands-svg-icons': ^6.1.1
   '@fortawesome/free-solid-svg-icons': ^6.1.1
   '@fortawesome/vue-fontawesome': ^3.0.0-5
-  '@kevinmarrec/nuxt-pwa': ^0.2.2
+  '@kevinmarrec/nuxt-pwa': ^0.3.0
   '@nuxtjs/tailwindcss': ^5.1.2
   '@pinia/nuxt': ^0.1.9
   '@types/lodash-es': ^4.17.6
@@ -38,7 +38,7 @@ dependencies:
   pinia: 2.0.14
 
 devDependencies:
-  '@kevinmarrec/nuxt-pwa': 0.2.2
+  '@kevinmarrec/nuxt-pwa': 0.3.0
   '@nuxtjs/tailwindcss': 5.1.2
   '@types/lodash-es': 4.17.6
   '@vueuse/nuxt': 8.6.0
@@ -453,8 +453,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.13
     dev: true
 
-  /@kevinmarrec/nuxt-pwa/0.2.2:
-    resolution: {integrity: sha512-OAx6cFqlDSvAwqC2foXIZPu2masnloSkx1j9N9que2ztVnbqozJoGjR/i7e6FRxI0gPaxKk4HH6BGQYKW2rJvw==}
+  /@kevinmarrec/nuxt-pwa/0.3.0:
+    resolution: {integrity: sha512-Zt81fELv1jWYUXlURipYiQC2QtdmUzxhBMZiqIFndDnVopvtP+Q9ItmccHLlm3CmDgLROzC4j3olf8qpg3olpQ==}
     dependencies:
       hasha: 5.2.2
       sharp: 0.30.6
@@ -2143,7 +2143,7 @@ packages:
     resolution: {integrity: sha512-Ol/IPXUARn9CSbkrdV4VJo7uCy1I3VuSiWCaFSg+8BdUOzF9n3jefIpcgAydvUZbTdEBZs2vEiTiS9m61ssiDA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
-      type-fest: 2.12.2
+      type-fest: 2.13.0
     dev: true
 
   /dotenv/16.0.1:
@@ -4671,8 +4671,8 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /prebuild-install/7.1.0:
-    resolution: {integrity: sha512-CNcMgI1xBypOyGqjp3wOc8AAo1nMhZS3Cwd3iHIxOdAUbb+YxdNuM4Z5iIrZ8RLvOsf3F3bl7b7xGq6DjQoNYA==}
+  /prebuild-install/7.1.1:
+    resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -4683,7 +4683,6 @@ packages:
       mkdirp-classic: 0.5.3
       napi-build-utils: 1.0.2
       node-abi: 3.22.0
-      npmlog: 4.1.2
       pump: 3.0.0
       rc: 1.2.8
       simple-get: 4.0.1
@@ -5085,7 +5084,7 @@ packages:
       color: 4.2.3
       detect-libc: 2.0.1
       node-addon-api: 5.0.0
-      prebuild-install: 7.1.0
+      prebuild-install: 7.1.1
       semver: 7.3.7
       simple-get: 4.0.1
       tar-fs: 2.1.1
@@ -5129,7 +5128,7 @@ packages:
     dev: true
 
   /simple-swizzle/0.2.2:
-    resolution: {integrity: sha1-pNprY1/8zMoz9w0Xy5JZLeleVXo=}
+    resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
     dependencies:
       is-arrayish: 0.3.2
     dev: true
@@ -5533,8 +5532,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /type-fest/2.12.2:
-    resolution: {integrity: sha512-qt6ylCGpLjZ7AaODxbpyBZSs9fCI9SkL3Z9q2oxMBQhs/uyY+VD8jHA8ULCGmWQJlBgqvO3EJeAngOHD8zQCrQ==}
+  /type-fest/2.13.0:
+    resolution: {integrity: sha512-lPfAm42MxE4/456+QyIaaVBAwgpJb6xZ8PRu09utnhPdWwcyj9vgy6Sq0Z5yNbJ21EdxB5dRU/Qg8bsyAMtlcw==}
     engines: {node: '>=12.20'}
     dev: true
 

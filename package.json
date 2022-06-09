@@ -10,7 +10,7 @@
   "author": "bendwarn",
   "description": "A board recording information about playing the card game of chinese five elements. 五行戰鬥牌計算機。",
   "devDependencies": {
-    "@kevinmarrec/nuxt-pwa": "^0.2.2",
+    "@kevinmarrec/nuxt-pwa": "^0.3.0",
     "@nuxtjs/tailwindcss": "^5.1.2",
     "@types/lodash-es": "^4.17.6",
     "@vueuse/nuxt": "^8.6.0",

@@ -9,85 +9,85 @@
   "theme_color": "#eae6d1",
   "icons": [
     {
-      "src": "assets/icons/64x64.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/64x64.4e6e757a.png",
       "type": "image/png",
       "sizes": "64x64",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/64x64.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/64x64.maskable.4e6e757a.png",
       "type": "image/png",
       "sizes": "64x64",
       "purpose": "maskable"
     },
     {
-      "src": "assets/icons/120x120.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/120x120.4e6e757a.png",
       "type": "image/png",
       "sizes": "120x120",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/120x120.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/120x120.maskable.4e6e757a.png",
       "type": "image/png",
       "sizes": "120x120",
       "purpose": "maskable"
     },
     {
-      "src": "assets/icons/144x144.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/144x144.4e6e757a.png",
       "type": "image/png",
       "sizes": "144x144",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/144x144.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/144x144.maskable.4e6e757a.png",
       "type": "image/png",
       "sizes": "144x144",
       "purpose": "maskable"
     },
     {
-      "src": "assets/icons/152x152.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/152x152.4e6e757a.png",
       "type": "image/png",
       "sizes": "152x152",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/152x152.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/152x152.maskable.4e6e757a.png",
       "type": "image/png",
       "sizes": "152x152",
       "purpose": "maskable"
     },
     {
-      "src": "assets/icons/192x192.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/192x192.4e6e757a.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/192x192.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/192x192.maskable.4e6e757a.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "maskable"
     },
     {
-      "src": "assets/icons/384x384.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/384x384.4e6e757a.png",
       "type": "image/png",
       "sizes": "384x384",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/384x384.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/384x384.maskable.4e6e757a.png",
       "type": "image/png",
       "sizes": "384x384",
       "purpose": "maskable"
     },
     {
-      "src": "assets/icons/512x512.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/512x512.4e6e757a.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "assets/icons/512x512.4e6e757a.png",
+      "src": "/CFE-scoreboard/assets/icons/512x512.maskable.4e6e757a.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"

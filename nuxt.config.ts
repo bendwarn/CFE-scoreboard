@@ -4,8 +4,9 @@ import { defineNuxtConfig } from 'nuxt'
 export default defineNuxtConfig({
   ssr: false,
   app: {
-    baseURL: '/CFE-scoreboard/',
+    baseURL: './',
     buildAssetsDir: 'assets',
+    cdnURL: 'https://bendwarn.github.io/CFE-scoreboard/',
     head: {
       meta: [
         {

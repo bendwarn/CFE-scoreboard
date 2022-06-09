@@ -1,7 +1,4 @@
 {
-  "name": "cfe-scoreboard",
-  "short_name": "cfe-scoreboard",
-  "description": "A board recording information about playing the card game of chinese five elements. 五行戰鬥牌計算機。",
   "lang": "en",
   "start_url": "/CFE-scoreboard/",
   "display": "standalone",

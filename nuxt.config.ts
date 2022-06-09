@@ -50,5 +50,8 @@ export default defineNuxtConfig({
       start_url: '/CFE-scoreboard/',
       theme_color: '#eae6d1',
     },
+    workbox: {
+      enabled: false,
+    },
   },
 })

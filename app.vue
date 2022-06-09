@@ -67,6 +67,7 @@ onMounted(async () => {
   if (workbox) {
     workbox.addEventListener('installed', (event: any) => {
       if (event.isUpdate) {
+        alert('New version installed, please refresh the page.')
         location.reload()
       }
     })

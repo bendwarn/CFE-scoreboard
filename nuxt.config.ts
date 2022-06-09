@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/CFE-scoreboard/',
     buildAssetsDir: 'assets',
-    // cdnURL: 'https://bendwarn.github.io/CFE-scoreboard/',
     head: {
       meta: [
         {
@@ -48,7 +47,7 @@ export default defineNuxtConfig({
   pwa: {
     manifest: {
       background_color: '#eae6d1',
-      start_url: '/CFE-scoreboard',
+      start_url: '/CFE-scoreboard/',
       theme_color: '#eae6d1',
     },
   },

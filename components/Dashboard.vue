@@ -1,21 +1,21 @@
 <template>
   <div class="flex-col">
     <div
-      class="w-11/12 h-1/5 bg-red-300 text-red-600 text-5xl border-x-2 border-b-2 border-black items-end lg:items-center rounded-b-xl shadow-xl touch-none hp"
+      class="hp h-1/5 w-11/12 touch-none items-end rounded-b-xl border-x-2 border-b-2 border-black bg-red-300 text-5xl text-red-600 shadow-xl lg:items-center"
       :class="hpBorder"
       ref="hpref"
     >
       {{ hptrans.toFixed() }}
     </div>
-    <div class="w-4/5 h-4/5 items-stretch relative touch-none" ref="team">
+    <div class="relative h-4/5 w-4/5 touch-none items-stretch" ref="team">
       <div
         v-for="(n, i) in people.count"
         :key="i"
         :ref="shieldrefs.set"
-        class="flex-1 border-x-2 border-b-2 border-black bg-amber-200 flex-col items-stretch justify-between rounded-b-xl shadow-lg"
+        class="flex-1 flex-col items-stretch justify-between rounded-b-xl border-x-2 border-b-2 border-black bg-amber-200 shadow-lg"
       >
         <div
-          class="h-1/6 text-4xl text-blue-800 bg-sky-200 rounded-b-2xl shadow-lg shield"
+          class="shield h-1/6 rounded-b-2xl bg-sky-200 text-4xl text-blue-800 shadow-lg"
         >
           <div v-show="shtrans[i]">{{ shtrans[i].toFixed() }}</div>
         </div>
@@ -24,7 +24,7 @@
       </div>
       <StarTeam :pos="pos" class="absolute bottom-20" />
     </div>
-    <div class="absolute flex-col z-20" v-show="show" v-motion-roll-visible-bottom>
+    <div class="absolute z-20 flex-col" v-show="show" v-motion-roll-visible-bottom>
       <p>計算結果為 NaN</p>
     </div>
   </div>

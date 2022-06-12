@@ -1,7 +1,7 @@
 <template>
   <transition>
     <div
-      class="w-14 h-14 text-3xl bg-black rounded-xl shadow-lg transition duration-500 star"
+      class="star h-14 w-14 rounded-xl bg-black text-3xl shadow-lg transition duration-500"
       :class="type"
       ref="starref"
       @click="star[props.pos].type = undefined"

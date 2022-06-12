@@ -1,10 +1,10 @@
 <template>
   <div
-    class="w-16 h-16 z-0 bg-gray-300 text-5xl border-2 border-black rounded-xl shadow-xl touch-none transition duration-500 field"
+    class="field z-0 h-16 w-16 touch-none rounded-xl border-2 border-black bg-gray-300 text-5xl shadow-xl transition duration-500"
     :class="[bg, fborder]"
     ref="fieldref"
   >
-    <div class="w-full h-full" :class="text" @click="clickIcon">
+    <div class="h-full w-full" :class="text" @click="clickIcon">
       <font-awesome-icon v-if="font" :icon="font" />
     </div>
     <OnClickOutside @trigger="modal">
@@ -18,7 +18,7 @@
           v-show="show"
           v-for="(n, i) in 5"
           :key="i"
-          class="absolute w-16 h-16 left-0 rounded-xl z-10"
+          class="absolute left-0 z-10 h-16 w-16 rounded-xl"
           :class="[elementbgColor[i], elementTextColor[i], transform[i], delay[i]]"
           @click="assignField(i)"
         >

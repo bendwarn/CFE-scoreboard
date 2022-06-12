@@ -1,9 +1,10 @@
 <template>
-  <div class="relative w-full justify-between text-4xl spirit" ref="spref">
+  <div class="spirit relative w-full justify-between text-4xl" ref="spref">
     <font-awesome-icon
       icon="minus-circle"
       :class="{
-        'text-red-700 border-dashed rounded-sm active:border-8 active:border-green-800 transition-all duration-200': point,
+        'rounded-sm border-dashed text-red-700 transition-all duration-200 active:border-8 active:border-green-800':
+          point,
       }"
       @click="point && spirit[pos][index].point--"
     />
@@ -16,7 +17,8 @@
     <font-awesome-icon
       icon="plus-circle"
       :class="{
-        'text-green-400 border-dashed rounded-sm active:border-8 active:border-green-800 transition-all duration-200': point,
+        'rounded-sm border-dashed text-green-400 transition-all duration-200 active:border-8 active:border-green-800':
+          point,
       }"
       @click="point && spirit[pos][index].point++"
     />
@@ -31,7 +33,7 @@
           v-show="show"
           v-for="(n, i) in 5"
           :key="i"
-          class="absolute w-12 h-12"
+          class="absolute h-12 w-12"
           :class="[elementColor[i], transform[i], delay[i]]"
           @click="assignSpirit(i)"
         >

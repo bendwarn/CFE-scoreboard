@@ -5,8 +5,7 @@ export default defineNuxtConfig({
   ssr: false,
   app: {
     baseURL: './',
-    buildAssetsDir: 'assets',
-    cdnURL: 'https://bendwarn.github.io/CFE-scoreboard/',
+    buildAssetsDir: process.env.NODE_ENV == 'production' ? 'assets' : '',
     head: {
       meta: [
         {

@@ -59,6 +59,17 @@ const rules = {
 }
 let done = countChange.initial
 onMounted(async () => {
+  // @ts-ignore
+  const workbox = await window.$workbox
+  if (workbox) {
+    workbox.addEventListener('installed', (event: any) => {
+      if (event.isUpdate) {
+        alert('New version installed, please refresh the page.')
+        location.reload()
+      }
+    })
+  }
+
   interact('#undo, #redo').dropzone({
     accept: '.hp, .shield, .star, .field, .spirit',
     ondropactivate() {

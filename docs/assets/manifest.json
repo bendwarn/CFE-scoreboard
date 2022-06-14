@@ -1,10 +1,10 @@
 {
-  "node_modules/.pnpm/nuxt@3.0.0-rc.3/node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-5218bfbf.mjs",
-    "src": "node_modules/.pnpm/nuxt@3.0.0-rc.3/node_modules/nuxt/dist/app/entry.mjs",
+  "node_modules/.pnpm/nuxt@3.0.0-rc.4/node_modules/nuxt/dist/app/entry.mjs": {
+    "file": "entry-340db030.mjs",
+    "src": "node_modules/.pnpm/nuxt@3.0.0-rc.4/node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "css": [
-      "entry.a13ea4a7.css"
+      "entry.67ab7437.css"
     ]
   }
 }

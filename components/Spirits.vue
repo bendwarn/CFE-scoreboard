@@ -1,24 +1,22 @@
 <template>
   <div class="spirit relative w-full justify-between text-4xl" ref="spref">
-    <font-awesome-icon
-      icon="minus-circle"
+    <span
+      class="i-akar-icons:circle-minus-fill"
       :class="{
-        'rounded-sm border-dashed text-red-700 transition-all duration-200 active:border-8 active:border-green-800':
-          point,
+        'rounded-sm border-dashed text-red-700 transition-all duration-200': point,
       }"
       @click="point && spirit[pos][index].point--"
     />
-    <font-awesome-icon
-      icon="ghost"
-      :class="elementColor[point ? type : 5]"
+    <span
+      class="i-icon-park-solid:ghost"
+      :class="elementFill[point ? type : 5]"
       @click="throttleToggle()"
     />
     <digit-wheel v-show="point" size="5xl" :digit="point" :duration="500"></digit-wheel>
-    <font-awesome-icon
-      icon="plus-circle"
+    <span
+      class="i-akar-icons:circle-plus-fill"
       :class="{
-        'rounded-sm border-dashed text-green-400 transition-all duration-200 active:border-8 active:border-green-800':
-          point,
+        'rounded-sm border-dashed text-green-400 transition-all duration-200': point,
       }"
       @click="point && spirit[pos][index].point++"
     />
@@ -34,10 +32,10 @@
           v-for="(n, i) in 5"
           :key="i"
           class="absolute h-12 w-12"
-          :class="[elementColor[i], transform[i], delay[i]]"
+          :class="[elementFill[i], transform[i], delay[i]]"
           @click="assignSpirit(i)"
         >
-          <font-awesome-icon icon="ghost" />
+          <span class="i-icon-park-solid:ghost" />
         </div>
       </transition-group>
     </OnClickOutside>
@@ -49,7 +47,7 @@ import { OnClickOutside } from '@vueuse/components'
 import interact from 'interactjs'
 
 import { element, opponent } from '~~/composables/rules'
-import { elementColor } from '~~/composables/color'
+import { elementFill } from '~~/composables/color'
 
 const props = defineProps<{ pos: opponent; index: element }>()
 const spref = ref()
@@ -59,7 +57,7 @@ const point = computed(() => spirit[props.pos][props.index].point)
 
 const [show, toggle] = useToggle()
 const throttleToggle = useThrottleFn(toggle, 50, false)
-const delay = ['', 'delay-100', 'delay-200', 'delay-300', 'delay-[400ms]']
+const delay = ['', 'delay-100', 'delay-200', 'delay-300', 'delay-400']
 const transform = [
   '-translate-y-10',
   '-translate-x-10 -translate-y-10',

@@ -1,4 +1,5 @@
-export const elementColor = [
+// @unocss-include
+export const elementFill = [
   'text-white',
   'text-red-500',
   'text-blue-500',
@@ -7,7 +8,7 @@ export const elementColor = [
   'text-black',
 ]
 
-export const elementbgColor = [
+export const elementBG = [
   'bg-white',
   'bg-red-500',
   'bg-blue-500',
@@ -16,8 +17,8 @@ export const elementbgColor = [
   'bg-black',
 ]
 
-export const elementTextColor = [
-  'text-gray-200',
+export const elementStroke = [
+  'text-gray-500',
   'text-red-700',
   'text-blue-700',
   'text-yellow-900',

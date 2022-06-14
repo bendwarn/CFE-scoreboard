@@ -1,7 +1,7 @@
 <template>
   <Title>CFE scoreboard</Title>
   <div
-    class="m-0 h-[90vh] w-screen flex-col bg-green-100 font-sans text-gray-700 lg:h-screen lg:flex-row"
+    class="h-90vh m-0 w-screen flex-col bg-green-100 font-sans text-gray-700 lg:h-screen lg:flex-row"
   >
     <div id="undo" class="pointer-events-none absolute left-0 h-full w-1/12"></div>
     <div id="redo" class="pointer-events-none absolute right-0 h-full w-1/12"></div>
@@ -30,7 +30,6 @@
 import interact from 'interactjs'
 import { noop, capitalize, find } from 'lodash-es'
 
-import './assets/css/tailwind.css'
 import type { opponent } from '~~/composables/rules'
 import { countChange } from '~~/composables/utils'
 

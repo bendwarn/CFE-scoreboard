@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
+import transformerDirective from '@unocss/transformer-directives'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -27,12 +28,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: [
-    '@vueuse/nuxt',
-    '@nuxtjs/tailwindcss',
-    '@pinia/nuxt',
-    '@kevinmarrec/nuxt-pwa',
-  ],
+  modules: ['@vueuse/nuxt', '@pinia/nuxt', '@unocss/nuxt', '@kevinmarrec/nuxt-pwa'],
   nitro: {
     output: {
       dir: '~/.output',
@@ -50,5 +46,11 @@ export default defineNuxtConfig({
       start_url: '/CFE-scoreboard/',
       theme_color: '#eae6d1',
     },
+  },
+  unocss: {
+    uno: true,
+    icons: true,
+    preflight: true,
+    transformers: [transformerDirective()],
   },
 })

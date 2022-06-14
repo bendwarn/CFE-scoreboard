@@ -1,22 +1,22 @@
 <template>
   <div class="w-full flex-wrap justify-around text-3xl">
-    <font-awesome-icon
-      icon="star"
+    <div
       v-for="(n, i) in 5"
       :key="i"
       class="rounded-lg border-2 transition-all duration-300"
       :class="[
-        elementColor[i],
+        elementFill[i],
         { 'border-black shadow-lg': summoned[i], 'border-transparent': !summoned[i] },
       ]"
-      @click="star.toggle(pos, index, i)"
-    />
+    >
+      <span class="i-bi:star-fill" @click="star.toggle(pos, index, i)" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { opponent } from '~~/composables/rules'
-import { elementColor } from '~~/composables/color'
+import { elementFill } from '~~/composables/color'
 
 const props = defineProps<{ pos: opponent; index: number }>()
 const star = useStar()

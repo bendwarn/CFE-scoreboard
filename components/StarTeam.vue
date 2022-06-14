@@ -6,7 +6,7 @@
       ref="starref"
       @click="star[props.pos].type = undefined"
     >
-      <font-awesome-icon icon="star" />
+      <span class="i-bi:star-fill" />
     </div>
   </transition>
 </template>
@@ -15,12 +15,12 @@
 import interact from 'interactjs'
 
 import { opponent } from '~~/composables/rules'
-import { elementColor } from '~~/composables/color'
+import { elementFill } from '~~/composables/color'
 
 const props = defineProps<{ pos: opponent }>()
 const starref = ref()
 const star = useStar()
-const type = computed(() => elementColor[star[props.pos].type ?? 5])
+const type = computed(() => elementFill[star[props.pos].type ?? 5])
 onMounted(() => {
   interact(unrefElement(starref)).draggable(true)
 })

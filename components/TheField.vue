@@ -5,7 +5,7 @@
     ref="fieldref"
   >
     <div class="h-full w-full" :class="text" @click="clickIcon">
-      <font-awesome-icon v-if="font" :icon="font" />
+      <span v-if="font" :class="font" />
     </div>
     <OnClickOutside @trigger="modal">
       <transition-group
@@ -19,10 +19,10 @@
           v-for="(n, i) in 5"
           :key="i"
           class="absolute left-0 z-10 h-16 w-16 rounded-xl"
-          :class="[elementbgColor[i], elementTextColor[i], transform[i], delay[i]]"
+          :class="[elementBG[i], elementStroke[i], transform[i], delay[i]]"
           @click="assignField(i)"
         >
-          <font-awesome-icon :icon="fontmap[i]" /></div
+          <span :class="fontmap[i]" /></div
       ></transition-group>
     </OnClickOutside>
   </div>
@@ -33,19 +33,26 @@ import { OnClickOutside } from '@vueuse/components'
 import { isNil } from 'lodash-es'
 import interact from 'interactjs'
 
-import { elementbgColor, elementTextColor } from '~~/composables/color'
+import { elementBG, elementStroke } from '~~/composables/color'
 import { element } from '~~/composables/rules'
 
-const fontmap = ['cat', ['fab', 'phoenix-framework'], 'water', 'mountain', 'dragon', '']
+const fontmap = [
+  'i-emojione-monotone:tiger-face',
+  'i-fa-brands:phoenix-framework',
+  'i-fa-solid:water',
+  'i-emojione-monotone:mountain',
+  'i-simple-icons:dungeonsanddragons',
+  '',
+]
 const fieldref = ref()
 const fborder = ref('')
 const field = useField()
 const [show, toggle] = useToggle()
 const throttleToggle = useThrottleFn(toggle, 50, false)
 const font = computed(() => fontmap[field.field ?? 5])
-const bg = computed(() => elementbgColor[field.field ?? 5])
-const text = computed(() => elementTextColor[field.field ?? 5])
-const delay = ['', 'delay-100', 'delay-200', 'delay-300', 'delay-[400ms]']
+const bg = computed(() => elementBG[field.field ?? 5])
+const text = computed(() => elementStroke[field.field ?? 5])
+const delay = ['', 'delay-100', 'delay-200', 'delay-300', 'delay-400']
 const transform = [
   '-translate-y-16',
   '-translate-x-16 -translate-y-16',
@@ -82,13 +89,16 @@ onMounted(() => {
         fborder.value = ''
       },
       ondragenter({ relatedTarget }) {
-        relatedTarget.firstElementChild.classList.add('fa-spin')
+        relatedTarget.firstElementChild.classList.add('i-eos-icons:rotating-gear')
+        relatedTarget.firstElementChild.classList.remove('i-fa6-solid:gear')
       },
       ondragleave({ relatedTarget }) {
-        relatedTarget.firstElementChild.classList.remove('fa-spin')
+        relatedTarget.firstElementChild.classList.remove('i-eos-icons:rotating-gear')
+        relatedTarget.firstElementChild.classList.add('i-fa6-solid:gear')
       },
       ondrop({ relatedTarget }) {
-        relatedTarget.firstElementChild.classList.remove('fa-spin')
+        relatedTarget.firstElementChild.classList.remvoe('i-eos-icons:rotating-gear')
+        relatedTarget.firstElementChild.classList.add('i-fa6-solid:gear')
         allreset()
       },
     })

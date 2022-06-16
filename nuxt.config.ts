@@ -18,6 +18,10 @@ export default defineNuxtConfig({
           content:
             'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
         },
+        {
+          name: 'google-site-verification',
+          content: 'SXWUSBHMpATvVS-7XVNpUFobg7yIlqkEavrDzn66YSg',
+        },
       ],
       link: [
         {
@@ -30,7 +34,6 @@ export default defineNuxtConfig({
   },
   modules: ['@vueuse/nuxt', '@pinia/nuxt', '@unocss/nuxt', '@kevinmarrec/nuxt-pwa'],
   nitro: {
-    sourceMap: true,
     output: {
       dir: '~/.output',
       serverDir: '~/.output/server',

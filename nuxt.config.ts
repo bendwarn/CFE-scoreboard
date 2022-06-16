@@ -5,7 +5,7 @@ import transformerDirective from '@unocss/transformer-directives'
 export default defineNuxtConfig({
   ssr: false,
   app: {
-    baseURL: './',
+    baseURL: '/CFE-scoreboard/',
     buildAssetsDir: process.env.NODE_ENV == 'production' ? 'assets' : '',
     head: {
       meta: [
@@ -30,6 +30,7 @@ export default defineNuxtConfig({
   },
   modules: ['@vueuse/nuxt', '@pinia/nuxt', '@unocss/nuxt', '@kevinmarrec/nuxt-pwa'],
   nitro: {
+    sourceMap: true,
     output: {
       dir: '~/.output',
       serverDir: '~/.output/server',

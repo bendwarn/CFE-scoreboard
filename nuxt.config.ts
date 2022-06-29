@@ -30,6 +30,7 @@ export default defineNuxtConfig({
   },
   modules: ['@vueuse/nuxt', '@pinia/nuxt', '@unocss/nuxt', '@kevinmarrec/nuxt-pwa'],
   nitro: {
+    minify: true,
     output: {
       dir: '~/.output',
       serverDir: '~/.output/server',

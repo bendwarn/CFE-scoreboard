@@ -3,32 +3,30 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "serve": "python3 -m http.server 8000",
-    "preview": "nuxt preview"
+    "generate": "nuxt generate"
   },
   "name": "cfe-scoreboard",
   "author": "bendwarn",
   "description": "A board recording information about playing the card game of chinese five elements. 五行戰鬥牌計算機。",
   "devDependencies": {
-    "@iconify/json": "^2.1.62",
-    "@kevinmarrec/nuxt-pwa": "^0.3.0",
+    "@iconify/json": "^2.1.69",
+    "@kevinmarrec/nuxt-pwa": "^0.3.1",
     "@types/lodash-es": "^4.17.6",
-    "@unocss/nuxt": "^0.39.0",
-    "@unocss/transformer-directives": "^0.39.0",
-    "@vueuse/nuxt": "^8.6.0",
+    "@unocss/nuxt": "^0.41.2",
+    "@unocss/transformer-directives": "^0.41.2",
+    "@vueuse/nuxt": "^8.7.5",
     "nuxt": "3.0.0-rc.4",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",
-    "unocss": "^0.39.0",
+    "unocss": "^0.41.2",
     "vue-digit-animation": "^0.3.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.1.9",
-    "@vueuse/components": "^8.6.0",
-    "@vueuse/core": "^8.6.0",
+    "@vueuse/components": "^8.7.5",
+    "@vueuse/core": "^8.7.5",
     "@vueuse/motion": "2.0.0-beta.12",
-    "flatted": "^3.2.5",
+    "flatted": "^3.2.6",
     "interactjs": "^1.10.14",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.14"

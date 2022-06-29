@@ -97,7 +97,7 @@ onMounted(() => {
         relatedTarget.firstElementChild.classList.add('i-fa6-solid:gear')
       },
       ondrop({ relatedTarget }) {
-        relatedTarget.firstElementChild.classList.remvoe('i-eos-icons:rotating-gear')
+        relatedTarget.firstElementChild.classList.remove('i-eos-icons:rotating-gear')
         relatedTarget.firstElementChild.classList.add('i-fa6-solid:gear')
         allreset()
       },

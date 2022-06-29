@@ -1,6 +1,6 @@
 <template>
   <dialog
-    class="aspect-4/5 -z-10 grid grid-cols-4 gap-2 rounded-lg p-3 text-5xl opacity-0 shadow-lg transition duration-200 backdrop:backdrop-blur open:z-10 open:opacity-100"
+    class="aspect-4/5 backdrop:backdrop-blur -z-10 grid grid-cols-4 gap-2 rounded-lg p-3 text-5xl opacity-0 shadow-lg transition duration-200 open:z-10 open:opacity-100"
     :class="bg"
     ref="dialog"
     @click.self="close"
@@ -268,8 +268,12 @@ const pop = () => {
 }
 const equal = () => {
   try {
-    result.value = `${calcu.calculate(result.value + formula.value)}`
-    emit('giveResult', result.value)
+    if (result.value + formula.value == '') {
+      emit('giveResult', '0')
+    } else {
+      result.value = `${calcu.calculate(result.value + formula.value)}`
+      emit('giveResult', result.value == '' ? '0' : result.value)
+    }
   } finally {
     popError.value = '語法錯誤'
   }

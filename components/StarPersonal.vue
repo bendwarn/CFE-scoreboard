@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex-wrap justify-around text-3xl">
+  <div class="w-full flex-wrap justify-around text-4xl">
     <div
       v-for="(n, i) in 5"
       :key="i"

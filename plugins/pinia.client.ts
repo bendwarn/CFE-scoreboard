@@ -33,13 +33,13 @@ function piniaLocal({ store }: PiniaPluginContext) {
     }
   )
   if (isExist) {
-    history.pause()
-    history.undoStack.value = ls.value.undoStack
-    history.redoStack.value = ls.value.redoStack
-    store.parse(ls.value.source)
-    // console.log(ls.value.undoStack)
-    ls.value.source = history.source
-    history.resume()
+    history.batch((cancel) => {
+      cancel()
+      history.undoStack.value = ls.value.undoStack
+      history.redoStack.value = ls.value.redoStack
+      store.parse(ls.value.source)
+      ls.value.source = history.source
+    })
   }
   const { canRedo, canUndo, redo, undo } = history
   return {
@@ -48,10 +48,11 @@ function piniaLocal({ store }: PiniaPluginContext) {
     redo,
     undo,
     reset() {
-      history.pause()
-      store.$reset()
-      history.clear()
-      history.resume()
+      history.batch((cancel) => {
+        cancel()
+        store.$reset()
+        history.clear()
+      })
     },
   }
 }

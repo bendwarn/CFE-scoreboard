@@ -5,7 +5,7 @@
       :class="hpBorder"
       ref="hpref"
     >
-      {{ hptrans.toFixed() }}
+      {{ hptrans }}
     </div>
     <div class="relative h-4/5 w-4/5 touch-none items-stretch" ref="team">
       <div
@@ -31,6 +31,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useToFixed } from '@vueuse/math'
 import interact from 'interactjs'
 import { map, isNaN } from 'lodash-es'
 
@@ -54,8 +55,8 @@ const hpref = ref()
 const team = ref()
 const shieldrefs = useTemplateRefsList()
 
-const hpoint = computed(() => hp[props.pos])
-const hptrans = useTransition(hpoint)
+const hpoint = toRefs(hp)[props.pos]
+const hptrans = useToFixed(useTransition(hpoint),0)
 const shpoints = computed(() => map(shield[props.pos]))
 const shtrans = useTransition(shpoints)
 

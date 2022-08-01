@@ -10,26 +10,27 @@
   "description": "A board recording information about playing the card game of chinese five elements. 五行戰鬥牌計算機。",
   "type": "module",
   "devDependencies": {
-    "@iconify/json": "^2.1.81",
+    "@iconify/json": "^2.1.86",
     "@kevinmarrec/nuxt-pwa": "^0.4.2",
+    "@pinia/nuxt": "^0.3.1",
     "@types/lodash-es": "^4.17.6",
-    "@unocss/nuxt": "^0.44.5",
-    "@unocss/transformer-directives": "^0.44.5",
-    "@vueuse/nuxt": "^8.9.4",
+    "@unocss/nuxt": "^0.45.1",
+    "@unocss/transformer-directives": "^0.45.1",
+    "@vueuse/components": "^9.0.2",
+    "@vueuse/core": "^9.0.2",
+    "@vueuse/math": "^9.0.2",
+    "@vueuse/motion": "2.0.0-beta.12",
+    "@vueuse/nuxt": "^9.0.2",
     "nuxt": "3.0.0-rc.6",
     "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.1.12",
-    "unocss": "^0.44.5",
+    "prettier-plugin-tailwindcss": "^0.1.13",
+    "unocss": "^0.45.1",
     "vue-digit-animation": "^0.3.1"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.3.0",
-    "@vueuse/components": "^8.9.4",
-    "@vueuse/core": "^8.9.4",
-    "@vueuse/motion": "2.0.0-beta.12",
     "flatted": "^3.2.6",
     "interactjs": "^1.10.17",
     "lodash-es": "^4.17.21",
-    "pinia": "^2.0.16"
+    "pinia": "^2.0.17"
   }
 }

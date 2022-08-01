@@ -1,6 +1,7 @@
 import { times, constant, toPlainObject, each } from 'lodash-es'
 import { defineStore } from 'pinia'
 import { Ref } from 'vue'
+import { useClamp } from '@vueuse/math'
 
 export enum element {
   metal,
@@ -21,7 +22,7 @@ export enum bane {
   metal,
 }
 interface shieldRecord {
-  [_: number]: Ref<number>
+  [_: number]: number
 }
 interface starRecord {
   type?: element
@@ -81,7 +82,7 @@ export const useShield = defineStore('shield', {
       each(this.enemy, (_, i) => {
         this.enemy[+i] = lsValue.enemy[i]
       })
-      each(this.friend, (v, i) => {
+      each(this.friend, (_, i) => {
         this.friend[+i] = lsValue.friend[i]
       })
     },

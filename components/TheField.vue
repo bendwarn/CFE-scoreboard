@@ -1,6 +1,6 @@
 <template>
   <div
-    class="field z-0 h-16 w-16 touch-none rounded-xl border-2 border-black bg-gray-300 text-5xl shadow-xl transition duration-500"
+    class="field z-0 h-16 w-16 touch-none rounded-xl border-2 border-black text-5xl shadow-xl transition duration-500"
     :class="[bg, fborder]"
     ref="fieldref"
   >

@@ -14,7 +14,7 @@ export const elementBG = [
   'bg-blue-500',
   'bg-yellow-500',
   'bg-green-600',
-  'bg-black',
+  'bg-gray-300',
 ]
 
 export const elementStroke = [

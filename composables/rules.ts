@@ -1,6 +1,6 @@
 import { times, constant, toPlainObject, each } from 'lodash-es'
 import { defineStore } from 'pinia'
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { useClamp } from '@vueuse/math'
 
 export enum element {
@@ -93,14 +93,10 @@ export const useStar = defineStore('star', {
   state: () => {
     const people = usePeople()
     const enemy: starRecord = {
-      summoned: Array.from({ length: people.count }, () =>
-        times(5, constant(false))
-      ),
+      summoned: Array.from({ length: people.count }, () => times(5, constant(false))),
     }
     const friend: starRecord = {
-      summoned: Array.from({ length: people.count }, () =>
-        times(5, constant(false))
-      ),
+      summoned: Array.from({ length: people.count }, () => times(5, constant(false))),
     }
     return { enemy, friend }
   },
@@ -150,14 +146,10 @@ export const useSpirit = defineStore('spirit', {
   actions: {
     parse(lsValue: any) {
       this.enemy.forEach(
-        (v, i) => (
-          (v.type = lsValue.enemy[i].type), (v.point = lsValue.enemy[i].point)
-        )
+        (v, i) => ((v.type = lsValue.enemy[i].type), (v.point = lsValue.enemy[i].point))
       )
       this.friend.forEach(
-        (v, i) => (
-          (v.type = lsValue.friend[i].type), (v.point = lsValue.friend[i].point)
-        )
+        (v, i) => ((v.type = lsValue.friend[i].type), (v.point = lsValue.friend[i].point))
       )
     },
   },

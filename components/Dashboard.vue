@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useToFixed } from '@vueuse/math'
+import { usePrecision } from '@vueuse/math'
 import interact from 'interactjs'
 import { map, isNaN } from 'lodash-es'
 
@@ -56,7 +56,7 @@ const team = ref()
 const shieldrefs = useTemplateRefsList()
 
 const hpoint = toRefs(hp)[props.pos]
-const hptrans = useToFixed(useTransition(hpoint),0)
+const hptrans = usePrecision(useTransition(hpoint), 0)
 const shpoints = computed(() => map(shield[props.pos]))
 const shtrans = useTransition(shpoints)
 

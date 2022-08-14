@@ -1,0 +1,64 @@
+{
+  "node_modules/.pnpm/nuxt@3.0.0-rc.8/node_modules/nuxt/dist/app/entry.mjs": {
+    "file": "assets/entry.d6ba9a43.mjs",
+    "src": "node_modules/.pnpm/nuxt@3.0.0-rc.8/node_modules/nuxt/dist/app/entry.mjs",
+    "isEntry": true,
+    "dynamicImports": [
+      "virtual:nuxt:/Users/bendwarn/Documents/CFE-scoreboard/.nuxt/error-component.mjs"
+    ],
+    "css": [
+      "assets/entry.ca81b273.css"
+    ]
+  },
+  "virtual:nuxt:/Users/bendwarn/Documents/CFE-scoreboard/.nuxt/error-component.mjs": {
+    "file": "assets/error-component.0f18e920.mjs",
+    "src": "virtual:nuxt:/Users/bendwarn/Documents/CFE-scoreboard/.nuxt/error-component.mjs",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/.pnpm/nuxt@3.0.0-rc.8/node_modules/nuxt/dist/app/entry.mjs"
+    ],
+    "dynamicImports": [
+      "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-404.vue",
+      "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-500.vue"
+    ]
+  },
+  "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-404.vue": {
+    "file": "assets/error-404.29c6b729.mjs",
+    "src": "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-404.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/.pnpm/nuxt@3.0.0-rc.8/node_modules/nuxt/dist/app/entry.mjs",
+      "__plugin-vue_export-helper.43be4956.mjs"
+    ],
+    "css": [
+      "assets/error-404.042bd6ca.css"
+    ]
+  },
+  "__plugin-vue_export-helper.43be4956.mjs": {
+    "file": "assets/_plugin-vue_export-helper.43be4956.mjs"
+  },
+  "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-500.vue": {
+    "file": "assets/error-500.214a7aaa.mjs",
+    "src": "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-500.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/.pnpm/nuxt@3.0.0-rc.8/node_modules/nuxt/dist/app/entry.mjs",
+      "__plugin-vue_export-helper.43be4956.mjs"
+    ],
+    "css": [
+      "assets/error-500.de29328c.css"
+    ]
+  },
+  "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-500.css": {
+    "file": "assets/error-500.de29328c.css",
+    "src": "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-500.css"
+  },
+  "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-404.css": {
+    "file": "assets/error-404.042bd6ca.css",
+    "src": "node_modules/.pnpm/@nuxt+ui-templates@0.3.2/node_modules/@nuxt/ui-templates/dist/templates/error-404.css"
+  },
+  "node_modules/.pnpm/nuxt@3.0.0-rc.8/node_modules/nuxt/dist/app/entry.css": {
+    "file": "assets/entry.ca81b273.css",
+    "src": "node_modules/.pnpm/nuxt@3.0.0-rc.8/node_modules/nuxt/dist/app/entry.css"
+  }
+}

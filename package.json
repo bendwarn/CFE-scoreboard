@@ -9,27 +9,27 @@
   "author": "bendwarn",
   "description": "A board recording information about playing the card game of chinese five elements. 五行戰鬥牌計算機。",
   "devDependencies": {
-    "@iconify/json": "^2.1.89",
-    "@kevinmarrec/nuxt-pwa": "^0.4.2",
-    "@pinia/nuxt": "^0.4.0",
+    "@iconify/json": "^2.1.133",
+    "@kevinmarrec/nuxt-pwa": "^0.9.1",
+    "@pinia/nuxt": "^0.4.3",
     "@types/lodash-es": "^4.17.6",
-    "@unocss/nuxt": "^0.45.6",
-    "@unocss/transformer-directives": "^0.45.6",
-    "@vueuse/components": "^9.1.0",
-    "@vueuse/core": "^9.1.0",
-    "@vueuse/math": "^9.1.0",
+    "@unocss/nuxt": "^0.46.3",
+    "@unocss/transformer-directives": "^0.46.3",
+    "@vueuse/components": "^9.4.0",
+    "@vueuse/core": "^9.4.0",
+    "@vueuse/math": "^9.4.0",
     "@vueuse/motion": "2.0.0-beta.12",
-    "@vueuse/nuxt": "^9.1.0",
-    "nuxt": "3.0.0-rc.8",
+    "@vueuse/nuxt": "^9.4.0",
+    "nuxt": "3.0.0-rc.13",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
-    "unocss": "^0.45.6",
+    "unocss": "^0.46.3",
     "vue-digit-animation": "^0.3.1"
   },
   "dependencies": {
-    "flatted": "^3.2.6",
+    "flatted": "^3.2.7",
     "interactjs": "^1.10.17",
     "lodash-es": "^4.17.21",
-    "pinia": "^2.0.18"
+    "pinia": "^2.0.23"
   }
 }

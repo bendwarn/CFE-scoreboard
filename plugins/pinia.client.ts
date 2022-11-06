@@ -1,4 +1,3 @@
-import { defineNuxtPlugin } from '#app'
 import type { PiniaPluginContext } from 'pinia'
 import { parse, stringify } from 'flatted'
 

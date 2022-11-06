@@ -38,7 +38,7 @@ export default defineNuxtConfig({
     },
   },
   typescript: {
-    shim: false,
+    // shim: false,
     strict: true,
   },
   pwa: {

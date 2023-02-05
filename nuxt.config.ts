@@ -1,5 +1,5 @@
-import { defineNuxtConfig } from 'nuxt'
 import transformerDirective from '@unocss/transformer-directives'
+import transformerVariantGroup from '@unocss/transformer-variant-group'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -38,8 +38,9 @@ export default defineNuxtConfig({
     },
   },
   typescript: {
-    // shim: false,
+    shim: false,
     strict: true,
+    typeCheck: true,
   },
   pwa: {
     manifest: {
@@ -51,7 +52,8 @@ export default defineNuxtConfig({
   unocss: {
     uno: true,
     icons: true,
+    webFonts: true,
     preflight: true,
-    transformers: [transformerDirective()],
+    transformers: [transformerDirective(), transformerVariantGroup()],
   },
 })

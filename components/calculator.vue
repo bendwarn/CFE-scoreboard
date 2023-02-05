@@ -1,6 +1,6 @@
 <template>
   <dialog
-    class="aspect-4/5 backdrop:backdrop-blur -z-10 grid grid-cols-4 gap-2 rounded-lg p-3 text-5xl opacity-0 shadow-lg transition duration-200 open:z-10 open:opacity-100"
+    class="aspect-4/5 -z-10 grid grid-cols-4 gap-2 rounded-lg p-3 text-5xl opacity-0 shadow-lg transition duration-200 backdrop:backdrop-blur open:z-10 open:opacity-100"
     :class="bg"
     ref="dialog"
     @click.self="close"
@@ -244,8 +244,8 @@ watch(
   props,
   (v) => {
     result.value = v.initial
-  },
-  { immediate: true }
+  }
+  // { immediate: true }
 )
 const popError = autoResetRef('', 2000)
 const bg = computed(() => ({ hp: 'bg-red-100', sp: 'bg-blue-100' }[props.container]))

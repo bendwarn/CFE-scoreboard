@@ -113,126 +113,9 @@
   </dialog>
 </template>
 
-<script lang="ts">
-import { add, multiply, subtract, divide } from 'lodash-es'
-const last = (...a: any[]) => a[a.length - 1]
-class Calculation {
-  _symbols: Record<string, Record<string, any>> = {}
-  constructor() {
-    this.defineOperator('**', Math.pow, 'infix', 5, true)
-    this.defineOperator('*', multiply, 'infix', 4)
-    this.defineOperator('/', divide, 'infix', 4)
-    this.defineOperator('+', last, 'prefix', 3)
-    this.defineOperator('-', (x: number) => subtract(0, x), 'prefix', 3)
-    this.defineOperator('+', add, 'infix', 2)
-    this.defineOperator('-', subtract, 'infix', 2)
-    this.defineOperator('(', last, 'prefix')
-    this.defineOperator(')', null, 'postfix')
-  }
-  defineOperator(
-    symbol: string,
-    f: Function | null,
-    notation = 'func',
-    precedence = 0,
-    rightToLeft = false
-  ) {
-    // Store operators keyed by their symbol/name. Some symbols may represent
-    // different usages: e.g. "-" can be unary or binary, so they are also
-    // keyed by their notation (prefix, infix, postfix, func):
-    if (notation == 'func') precedence = 0
-    this._symbols[symbol] = Object.assign({}, this._symbols[symbol], {
-      [notation]: {
-        symbol,
-        f,
-        notation,
-        precedence,
-        rightToLeft,
-        argCount: 1 + +(notation == 'infix'),
-      },
-      symbol,
-      regSymbol:
-        symbol.replace(/[\\^$*+?.()|[\]{}]/g, '\\$&') + (/\w$/.test(symbol) ? '\\b' : ''), // add a break if it's a name
-    })
-  }
-  calculate(expression: string) {
-    let match: any
-    const values: number[] = []
-    const operators = [this._symbols['('].prefix]
-    const exec = () => {
-      const op = operators.pop()
-      values.push(op.f(...values.splice(-op.argCount as number)))
-      return op.precedence
-    }
-    const error = (msg: string) => {
-      const notation = match ? match.index : expression.length
-      return `${msg} at ${notation}:\n${expression}\n${' '.repeat(notation)}^`
-    }
-    const pattern = new RegExp(
-      // Pattern for numbers
-      '\\d+(?:\\.\\d+)?|' +
-        // ...and patterns for individual operators/function names
-        Object.values(this._symbols)
-          // longer symbols should be listed first
-          .sort((a, b) => b.symbol.length - a.symbol.length)
-          .map((val) => val.regSymbol)
-          .join('|') +
-        '|(\\S)',
-      'g'
-    )
-    let afterValue = false
-    pattern.lastIndex = 0 // Reset regular expression object
-    do {
-      match = pattern.exec(expression)
-      const [token, bad] = match || [')', undefined]
-      const notNumber = this._symbols[token]
-      const notNewValue = notNumber && !notNumber.prefix && !notNumber.func
-      const notAfterValue = !notNumber || !(notNumber.postfix || notNumber.infix)
-      // Check for syntax errors:
-      if (bad || (afterValue ? notAfterValue : notNewValue)) {
-        return error('Syntax error')
-      }
-      if (afterValue) {
-        // We either have an infix or postfix operator (they should be mutually exclusive)
-        const curr = notNumber.postfix || notNumber.infix
-        do {
-          const prev = operators[operators.length - 1]
-          if ((curr.precedence - prev.precedence || prev.rightToLeft) > 0) break
-          // Apply previous operator, since it has precedence over current one
-        } while (exec()) // Exit loop after executing an opening parenthesis or function
-        afterValue = curr.notation == 'postfix'
-        if (curr.symbol != ')') {
-          operators.push(curr)
-          // Postfix always has precedence over any operator that follows after it
-          if (afterValue) exec()
-        }
-      } else if (notNumber) {
-        // prefix operator or function
-        operators.push(notNumber.prefix || notNumber.func)
-        if (notNumber.func) {
-          // Require an opening parenthesis
-          match = pattern.exec(expression)
-          if (!match || match[0] != '(') {
-            return error('Function needs parentheses')
-          }
-        }
-      } else {
-        // number
-        values.push(+token!)
-        afterValue = true
-      }
-    } while (match && operators.length)
-    if (operators.length) {
-      return error('Missing closing parenthesis')
-    } else if (match) {
-      return error('Too many closing parentheses')
-    } else {
-      return values.pop() // All done!
-    }
-  }
-}
-export const calcu = new Calculation()
-</script>
 <script setup lang="ts">
+import init, { calculate } from 'calcu'
+
 const props = defineProps<{ initial: string; container: string }>()
 const emit = defineEmits<{
   (e: 'giveResult', value: string): void
@@ -244,10 +127,9 @@ watch(
   props,
   (v) => {
     result.value = v.initial
-  }
-  // { immediate: true }
+  },
+  { immediate: true }
 )
-const popError = autoResetRef('', 2000)
 const bg = computed(() => ({ hp: 'bg-red-100', sp: 'bg-blue-100' }[props.container]))
 const areaColor = computed(
   () =>
@@ -266,16 +148,13 @@ const pop = () => {
     result.value = result.value.slice(0, -1)
   }
 }
-const equal = () => {
-  try {
-    if (result.value + formula.value == '') {
-      emit('giveResult', '0')
-    } else {
-      result.value = `${calcu.calculate(result.value + formula.value)}`
-      emit('giveResult', result.value == '' ? '0' : result.value)
-    }
-  } finally {
-    popError.value = '語法錯誤'
+const equal = async () => {
+  if (result.value + formula.value == '') {
+    emit('giveResult', '0')
+  } else {
+    await init()
+    result.value = calculate(result.value + formula.value)
+    emit('giveResult', result.value == '' ? '0' : result.value)
   }
   close()
 }

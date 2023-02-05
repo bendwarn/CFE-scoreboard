@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "wasm": "cd calcu && wasm-pack build --target web --out-dir pkg && cd .. && pnpm add ./calcu/pkg",
     "dev": "nuxt dev",
     "generate": "nuxt generate"
   },
@@ -30,6 +30,7 @@
     "vue-tsc": "^1.0.24"
   },
   "dependencies": {
+    "calcu": "link:calcu/pkg",
     "flatted": "^3.2.7",
     "interactjs": "^1.10.17",
     "lodash-es": "^4.17.21",

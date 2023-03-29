@@ -29,7 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { OnClickOutside } from '@vueuse/components'
 import { isNil } from 'lodash-es'
 import interact from 'interactjs'
 

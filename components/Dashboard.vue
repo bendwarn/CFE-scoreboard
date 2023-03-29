@@ -31,7 +31,6 @@
 </template>
 
 <script lang="ts" setup>
-import { usePrecision } from '@vueuse/math'
 import interact from 'interactjs'
 import { map, isNaN } from 'lodash-es'
 

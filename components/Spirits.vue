@@ -43,7 +43,6 @@
 </template>
 
 <script lang="ts" setup>
-import { OnClickOutside } from '@vueuse/components'
 import interact from 'interactjs'
 
 import { element, opponent } from '~~/composables/rules'

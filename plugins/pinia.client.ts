@@ -12,7 +12,6 @@ declare module 'pinia' {
 }
 
 function piniaLocal({ store }: PiniaPluginContext) {
-  const isExist = localStorage.getItem(store.$id)
   const history = useRefHistory(ref(store.$state), {
     deep: true,
     dump: stringify,
@@ -23,23 +22,21 @@ function piniaLocal({ store }: PiniaPluginContext) {
   })
   const ls = useLocalStorage(
     store.$id,
-    ref(reactivePick(history, 'source', 'undoStack', 'redoStack')),
+    reactivePick(history, 'source', 'undoStack', 'redoStack'),
     {
       serializer: {
         read: parse,
         write: stringify,
       },
+      mergeDefaults(depositObj, historyRef) {
+        store.parse(depositObj.source)
+        history.commit()
+        history.undoStack.value = depositObj.undoStack
+        history.redoStack.value = depositObj.redoStack
+        return historyRef
+      },
     }
   )
-  if (isExist) {
-    history.batch((cancel) => {
-      cancel()
-      history.undoStack.value = ls.value.undoStack
-      history.redoStack.value = ls.value.redoStack
-      store.parse(ls.value.source)
-      ls.value.source = history.source
-    })
-  }
   const { canRedo, canUndo, redo, undo } = history
   return {
     canRedo,

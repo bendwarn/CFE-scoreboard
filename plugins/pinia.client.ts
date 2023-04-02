@@ -28,13 +28,14 @@ function piniaLocal({ store }: PiniaPluginContext) {
         read: parse,
         write: stringify,
       },
-      mergeDefaults(depositObj, historyRef) {
+      mergeDefaults(depositObj, rawInit) {
         store.parse(depositObj.source)
         history.commit()
         history.undoStack.value = depositObj.undoStack
         history.redoStack.value = depositObj.redoStack
-        return historyRef
+        return rawInit
       },
+      listenToStorageChanges: false,
     }
   )
   const { canRedo, canUndo, redo, undo } = history

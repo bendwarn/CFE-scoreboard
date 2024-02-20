@@ -124,19 +124,19 @@ const dialog = ref()
 const formula = ref('')
 const result = ref('')
 watch(
-  props,
+  computed(() => props.initial),
   (v) => {
-    result.value = v.initial
+    result.value = v
   },
-  { immediate: true }
+  { immediate: true },
 )
-const bg = computed(() => ({ hp: 'bg-red-100', sp: 'bg-blue-100' }[props.container]))
+const bg = computed(() => ({ hp: 'bg-red-100', sp: 'bg-blue-100' })[props.container])
 const areaColor = computed(
   () =>
     ({
       hp: 'text-red-500 border-red-500',
       sp: 'text-blue-500 border-blue-500',
-    }[props.container])
+    })[props.container],
 )
 const append = (element: string) => {
   formula.value += element

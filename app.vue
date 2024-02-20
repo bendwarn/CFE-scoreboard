@@ -1,5 +1,6 @@
 <template>
   <Title>CFE scoreboard</Title>
+  <VitePwaManifest />
   <div
     class="h-90vh m-0 w-screen flex-col bg-green-100 font-sans text-gray-700 lg:h-screen lg:flex-row"
   >
@@ -13,16 +14,16 @@
     />
     <Dashboard
       :pos="'enemy' as opponent"
-      class="h-1/2 w-full rotate-180 border-t-2 border-black lg:h-full lg:flex-1 lg:rotate-0 lg:border-t-0 lg:border-r-2"
+      class="h-1/2 w-full rotate-180 border-t-2 border-black lg:h-full lg:flex-1 lg:rotate-0 lg:border-r-2 lg:border-t-0"
       @req-cal="showCal"
     />
     <Dashboard
       :pos="'friend' as opponent"
-      class="h-1/2 w-full border-t-2 border-black lg:h-full lg:flex-1 lg:border-t-0 lg:border-l-2"
+      class="h-1/2 w-full border-t-2 border-black lg:h-full lg:flex-1 lg:border-l-2 lg:border-t-0"
       @req-cal="showCal"
     />
     <TheField class="absolute right-0 lg:right-auto" />
-    <Gear class="absolute left-0 lg:left-auto lg:bottom-0" />
+    <Gear class="absolute left-0 lg:bottom-0 lg:left-auto" />
   </div>
 </template>
 
@@ -58,15 +59,9 @@ const rules = {
 }
 let done = countChange.initial
 onMounted(async () => {
-  // @ts-ignore
-  const workbox = await window.$workbox
-  if (workbox) {
-    workbox.addEventListener('installed', (event: any) => {
-      if (event.isUpdate) {
-        alert('New version installed, please refresh the page.')
-        location.reload()
-      }
-    })
+  const { $pwa } = useNuxtApp()
+  if ($pwa?.needRefresh) {
+    $pwa.updateServiceWorker()
   }
 
   interact('#undo, #redo').dropzone({

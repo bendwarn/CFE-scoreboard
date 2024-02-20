@@ -6,17 +6,12 @@ export default defineNuxtConfig({
   ssr: false,
   app: {
     baseURL: '/CFE-scoreboard/',
-    buildAssetsDir: process.env.NODE_ENV == 'production' ? 'assets' : '',
     head: {
+      viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
       meta: [
         {
           'http-equiv': 'X-UA-Compatible',
           content: 'IE=edge',
-        },
-        {
-          name: 'viewport',
-          content:
-            'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
         },
       ],
       link: [
@@ -28,15 +23,14 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ['@vueuse/nuxt', '@pinia/nuxt', '@unocss/nuxt', '@kevinmarrec/nuxt-pwa'],
-  nitro: {
-    minify: true,
-    output: {
-      dir: '~/.output',
-      serverDir: '~/.output/server',
-      publicDir: '~/docs',
-    },
-  },
+  modules: [
+    '@vueuse/nuxt',
+    '@vueuse/motion/nuxt',
+    '@pinia/nuxt',
+    '@unocss/nuxt',
+    '@vite-pwa/nuxt',
+    '@nuxt/test-utils/module',
+  ],
   typescript: {
     shim: false,
     strict: true,
@@ -56,4 +50,6 @@ export default defineNuxtConfig({
     preflight: true,
     transformers: [transformerDirective(), transformerVariantGroup()],
   },
+  nitro: { preset: 'github-pages' },
+  devtools: { enabled: true },
 })

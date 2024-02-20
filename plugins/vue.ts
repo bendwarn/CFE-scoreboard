@@ -1,11 +1,10 @@
-import { defineNuxtPlugin } from '#app'
-import { MotionPlugin } from '@vueuse/motion'
 import VueDigitAnimation from 'vue-digit-animation'
+import { consola } from 'consola'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(MotionPlugin)
   nuxtApp.vueApp.use(VueDigitAnimation)
   nuxtApp.vueApp.config.errorHandler = (error, context) => {
     console.log(error)
+    consola.log(error)
   }
 })

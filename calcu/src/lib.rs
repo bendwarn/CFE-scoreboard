@@ -15,7 +15,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = calculate("10-5");
-        assert_eq!(result, "5");
+        let result = calculate("7/3");
+        assert_eq!(result, "2");
     }
 }

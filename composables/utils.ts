@@ -1,3 +1,5 @@
+import { parse, stringify } from 'flatted'
+
 export enum countChange {
   decrease = -1,
   initial,
@@ -10,4 +12,18 @@ export const allreset = () => {
   useStar().reset()
   useField().reset()
   useSpirit().reset()
+}
+
+export const useLocalHistory = (name: string) => {
+  const ls = useLocalStorage(
+    name,
+    {},
+    {
+      serializer: {
+        read: parse,
+        write: stringify,
+      },
+    },
+  )
+  return useRefHistory(ls, { deep: true })
 }

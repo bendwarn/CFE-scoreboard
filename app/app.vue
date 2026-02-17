@@ -14,12 +14,12 @@
     />
     <Dashboard
       :pos="'enemy' as opponent"
-      class="h-1/2 w-full rotate-180 border-t-2 border-black lg:h-full lg:flex-1 lg:rotate-0 lg:border-r-2 lg:border-t-0"
+      class="h-1/2 w-full rotate-180 border-t-2 border-black lg:h-full lg:flex-1 lg:rotate-0 lg:border-t-0 lg:border-r-2"
       @req-cal="showCal"
     />
     <Dashboard
       :pos="'friend' as opponent"
-      class="h-1/2 w-full border-t-2 border-black lg:h-full lg:flex-1 lg:border-l-2 lg:border-t-0"
+      class="h-1/2 w-full border-t-2 border-black lg:h-full lg:flex-1 lg:border-t-0 lg:border-l-2"
       @req-cal="showCal"
     />
     <TheField class="absolute right-0 lg:right-auto" />
@@ -30,9 +30,6 @@
 <script lang="ts" setup>
 import interact from 'interactjs'
 import { noop, capitalize, find } from 'lodash-es'
-
-import type { opponent } from '~~/composables/rules'
-import { countChange } from '~~/composables/utils'
 
 enum cando {
   undo = 'redo',
@@ -99,6 +96,6 @@ onBeforeUnmount(() => {
 
 <style>
 div {
-  @apply flex select-none items-center justify-center text-center;
+  @apply flex items-center justify-center text-center select-none;
 }
 </style>

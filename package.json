@@ -2,8 +2,8 @@
   "private": true,
   "scripts": {
     "wasm": "cd calcu && wasm-pack build --target web --out-dir pkg && cd .. && bp add ./calcu/pkg",
-    "gen": "bun -b nuxi generate",
-    "test": "bun -b nuxi test --dev"
+    "gen": "bun -b nuxt generate",
+    "test": "bun -b nuxt test --dev"
   },
   "name": "cfe-scoreboard",
   "author": "bendwarn",
@@ -17,7 +17,6 @@
     "@types/lodash-es": "^4.17.12",
     "@types/node": "25",
     "@unocss/nuxt": "66",
-    "@unocss/transformer-directives": "66",
     "@vite-pwa/nuxt": "1",
     "@vue/test-utils": "^2.4.6",
     "@vueuse/components": "14",

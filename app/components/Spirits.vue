@@ -5,7 +5,7 @@
       :class="{
         'rounded-sm border-dashed text-red-700 transition-all duration-200': point,
       }"
-      @click="point && spirit[pos][index].point--"
+      @click="point && spirit[pos][index]!.point--"
     />
     <span
       class="i-icon-park-solid:ghost"
@@ -18,7 +18,7 @@
       :class="{
         'rounded-sm border-dashed text-green-400 transition-all duration-200': point,
       }"
-      @click="point && spirit[pos][index].point++"
+      @click="point && spirit[pos][index]!.point++"
     />
     <OnClickOutside @trigger="modal" class="absolute left-1/2 z-10">
       <transition-group
@@ -45,14 +45,11 @@
 <script lang="ts" setup>
 import interact from 'interactjs'
 
-import { element, opponent } from '~~/composables/rules'
-import { elementFill } from '~~/composables/color'
-
 const props = defineProps<{ pos: opponent; index: element }>()
 const spref = ref()
 const spirit = useSpirit()
-const type = computed(() => spirit[props.pos][props.index].type)
-const point = computed(() => spirit[props.pos][props.index].point)
+const type = computed(() => spirit[props.pos][props.index]!.type)
+const point = computed(() => spirit[props.pos][props.index]!.point)
 
 const [show, toggle] = useToggle()
 const throttleToggle = useThrottleFn(toggle, 50, false)
@@ -71,8 +68,8 @@ const modal = () => {
   }
 }
 const assignSpirit = (i: element) => {
-  spirit[props.pos][props.index].type = i
-  spirit[props.pos][props.index].point = 2
+  spirit[props.pos][props.index]!.type = i
+  spirit[props.pos][props.index]!.point = 2
   throttleToggle()
 }
 onMounted(() => {

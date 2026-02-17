@@ -1,6 +1,5 @@
 import type { PiniaPluginContext, Pinia } from 'pinia'
 import { parse, stringify } from 'flatted'
-import { timestamp } from '@vueuse/shared'
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
@@ -36,7 +35,7 @@ function piniaLocal({ store }: PiniaPluginContext) {
       function _createHistoryRecord() {
         return markRaw({
           snapshot: stringify(depositObj.source),
-          timestamp: timestamp(),
+          timestamp: Date.now(),
         })
       }
       history.batch((cancel) => {

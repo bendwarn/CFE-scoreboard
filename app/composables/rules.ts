@@ -69,10 +69,10 @@ export const useShield = defineStore('shield', {
     const hplimit = 150 + people.count * 50
     return {
       enemy: toPlainObject(
-        Array.from({ length: people.count }, () => useClamp(0, 0, hplimit))
+        Array.from({ length: people.count }, () => useClamp(0, 0, hplimit)),
       ) as shieldRecord,
       friend: toPlainObject(
-        Array.from({ length: people.count }, () => useClamp(0, 0, hplimit))
+        Array.from({ length: people.count }, () => useClamp(0, 0, hplimit)),
       ) as shieldRecord,
     }
   },
@@ -102,7 +102,7 @@ export const useStar = defineStore('star', {
   actions: {
     toggle(pos: opponent, index: number, type: element) {
       if (this[opponent[pos]].type != type && this[pos].type != type) {
-        this[pos].summoned[index][type] = true
+        this[pos].summoned[index]![type] = true
         this[pos].type = type
         if (element[type] == bane[this[opponent[pos]].type ?? type]) {
           this[opponent[pos]].type = undefined
@@ -145,10 +145,13 @@ export const useSpirit = defineStore('spirit', {
   actions: {
     parse(lsValue: any) {
       this.enemy.forEach(
-        (v, i) => ((v.type = lsValue.enemy[i].type), (v.point = lsValue.enemy[i].point))
+        (v, i) => ((v.type = lsValue.enemy[i].type), (v.point = lsValue.enemy[i].point)),
       )
       this.friend.forEach(
-        (v, i) => ((v.type = lsValue.friend[i].type), (v.point = lsValue.friend[i].point))
+        (v, i) => (
+          (v.type = lsValue.friend[i].type),
+          (v.point = lsValue.friend[i].point)
+        ),
       )
     },
   },

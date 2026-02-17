@@ -32,9 +32,6 @@
 import { isNil } from 'lodash-es'
 import interact from 'interactjs'
 
-import { elementBG, elementStroke } from '~~/composables/color'
-import { element } from '~~/composables/rules'
-
 const fontmap = [
   'i-emojione-monotone:tiger-face',
   'i-fa-brands:phoenix-framework',

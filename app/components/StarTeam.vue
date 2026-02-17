@@ -14,9 +14,6 @@
 <script lang="ts" setup>
 import interact from 'interactjs'
 
-import { opponent } from '~~/composables/rules'
-import { elementFill } from '~~/composables/color'
-
 const props = defineProps<{ pos: opponent }>()
 const starref = ref()
 const star = useStar()

@@ -1,6 +1,3 @@
-import transformerDirective from '@unocss/transformer-directives'
-import transformerVariantGroup from '@unocss/transformer-variant-group'
-
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
@@ -42,13 +39,6 @@ export default defineNuxtConfig({
       start_url: '/CFE-scoreboard/',
       theme_color: '#eae6d1',
     },
-  },
-  unocss: {
-    uno: true,
-    icons: true,
-    webFonts: true,
-    preflight: true,
-    transformers: [transformerDirective(), transformerVariantGroup()],
   },
   nitro: { preset: 'github-pages' },
   devtools: { enabled: true },

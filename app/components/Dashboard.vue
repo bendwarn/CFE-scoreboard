@@ -17,7 +17,7 @@
         <div
           class="shield h-1/6 rounded-b-2xl bg-sky-200 text-4xl text-blue-800 shadow-lg"
         >
-          <div v-show="shtrans[i]">{{ shtrans[i].toFixed() }}</div>
+          <div v-show="shtrans[i]">{{ shtrans[i]?.toFixed() }}</div>
         </div>
         <Spirits :pos="pos" :index="i" class="-mt-14" />
         <StarPersonal :pos="pos" :index="i" />
@@ -34,16 +34,13 @@
 import interact from 'interactjs'
 import { map, isNaN } from 'lodash-es'
 
-import { opponent } from '~~/composables/rules'
-import { countChange } from '~~/composables/utils'
-
 const props = defineProps<{ pos: opponent }>()
 const emit = defineEmits<{
   (
     event: 'reqCal',
     initial: number,
     category: string,
-    handler: (value: string) => any
+    handler: (value: string) => any,
   ): void
 }>()
 const people = usePeople()
@@ -111,7 +108,7 @@ onMounted(() => {
     interact(ele.firstElementChild as HTMLDivElement)
       .draggable(true)
       .on('click', () => {
-        emit('reqCal', shield[props.pos][i], 'sp', (sh: string) => {
+        emit('reqCal', shield[props.pos][i]!, 'sp', (sh: string) => {
           if (isNaN(+sh)) {
             show.value = true
           } else {

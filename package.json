@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "wasm": "cd calcu && wasm-pack build --target web --out-dir pkg && cd .. && bp add ./calcu/pkg",
-    "gen": "bun -b nuxt generate",
+    "wasm": "cd calcu && wasm-pack build --target web --out-dir pkg && cd ..",
+    "gen": "bun -b nuxt build",
     "test": "bun -b nuxt test --dev"
   },
   "name": "cfe-scoreboard",

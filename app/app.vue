@@ -67,20 +67,20 @@ onMounted(async () => {
       done = countChange.initial
     },
     ondragenter(event) {
-      const act = event.target.id as 'redo' | 'undo'
+      const act = event.target.id as cando
       const ele = event.relatedTarget.classList
       const rule = find(rules, (v, k) => ele.contains(k))!
-      if (rule[`can${capitalize(act)}` as 'canRedo' | 'canUndo']) {
+      if (rule[`can${capitalize(act)}` as 'canRedo' | 'canUndo'].value) {
         done++
         rule[act]()
       }
     },
     ondragleave(event) {
-      const act = cando[event.target.id as 'redo' | 'undo']
+      const act = cando[event.target.id as cando]
       const ele = event.relatedTarget.classList
       const rule = find(rules, (v, k) => ele.contains(k))!
       if (
-        rule[`can${capitalize(act)}` as 'canRedo' | 'canUndo'] &&
+        rule[`can${capitalize(act)}` as 'canRedo' | 'canUndo'].value &&
         done != countChange.initial
       ) {
         done--

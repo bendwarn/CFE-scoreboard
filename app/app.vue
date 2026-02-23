@@ -15,16 +15,18 @@
       :class="doBorder"
     ></div>
     <div
-      class="pointer-events-none absolute top-2/3 left-1 z-30 -translate-y-1/2 rounded-full bg-black/10 px-2 py-3 text-xs text-gray-700 backdrop-blur-sm"
+      class="pointer-events-none absolute top-2/3 left-1 z-3 -translate-y-1/2 rounded-full bg-black/10 px-2 py-3 text-xs text-gray-700 backdrop-blur-sm"
     >
-      <span class="text-lg leading-none">←</span>
-      <span class="[writing-mode:vertical-rl]">拖到此處復原</span>
+      <span class="[writing-mode:vertical-rl]"
+        ><span class="text-lg leading-none">↓</span>拖到該側上一步</span
+      >
     </div>
     <div
-      class="pointer-events-none absolute top-2/3 right-1 z-30 -translate-y-1/2 rounded-full bg-black/10 px-2 py-3 text-xs text-gray-700 backdrop-blur-sm"
+      class="pointer-events-none absolute top-2/3 right-1 z-3 -translate-y-1/2 rounded-full bg-black/10 px-2 py-3 text-xs text-gray-700 backdrop-blur-sm"
     >
-      <span class="[writing-mode:vertical-rl]">拖到此處重做</span>
-      <span class="text-lg leading-none">→</span>
+      <span class="[writing-mode:vertical-rl]"
+        ><span class="text-lg leading-none">↑</span>拖到該側下一步</span
+      >
     </div>
     <Calculator
       :initial="calnum"

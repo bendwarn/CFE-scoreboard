@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import { isNil } from 'lodash-es'
 import interact from 'interactjs'
+import { OnClickOutside } from '@vueuse/components'
 
 const fontmap = [
   'i-emojione-monotone:tiger-face',

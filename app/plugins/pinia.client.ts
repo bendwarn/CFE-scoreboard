@@ -3,8 +3,8 @@ import { parse, stringify } from 'flatted'
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
-    canRedo: Ref<boolean>
-    canUndo: Ref<boolean>
+    canRedo: ComputedRef<boolean>
+    canUndo: ComputedRef<boolean>
     redo: () => void
     undo: () => void
     reset: () => void

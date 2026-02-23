@@ -4,8 +4,28 @@
   <div
     class="h-90vh m-0 w-screen flex-col bg-green-100 font-sans text-gray-700 lg:h-screen lg:flex-row"
   >
-    <div id="undo" class="pointer-events-none absolute left-0 h-full w-1/12"></div>
-    <div id="redo" class="pointer-events-none absolute right-0 h-full w-1/12"></div>
+    <div
+      id="undo"
+      class="pointer-events-none absolute left-0 z-1 h-full w-1/12"
+      :class="doBorder"
+    ></div>
+    <div
+      id="redo"
+      class="pointer-events-none absolute right-0 z-1 h-full w-1/12"
+      :class="doBorder"
+    ></div>
+    <div
+      class="pointer-events-none absolute top-2/3 left-1 z-30 -translate-y-1/2 rounded-full bg-black/10 px-2 py-3 text-xs text-gray-700 backdrop-blur-sm"
+    >
+      <span class="text-lg leading-none">←</span>
+      <span class="[writing-mode:vertical-rl]">拖到此處復原</span>
+    </div>
+    <div
+      class="pointer-events-none absolute top-2/3 right-1 z-30 -translate-y-1/2 rounded-full bg-black/10 px-2 py-3 text-xs text-gray-700 backdrop-blur-sm"
+    >
+      <span class="[writing-mode:vertical-rl]">拖到此處重做</span>
+      <span class="text-lg leading-none">→</span>
+    </div>
     <Calculator
       :initial="calnum"
       :container="container"
@@ -35,6 +55,10 @@ enum cando {
   undo = 'redo',
   redo = 'undo',
 }
+enum can {
+  undo = 'canUndo',
+  redo = 'canRedo',
+}
 
 const calnum = ref('')
 const container = ref('')
@@ -55,6 +79,7 @@ const rules = {
   spirit: useSpirit(),
 }
 let done = countChange.initial
+const doBorder = ref('')
 onMounted(async () => {
   const { $pwa } = useNuxtApp()
   if ($pwa?.needRefresh) {
@@ -65,12 +90,16 @@ onMounted(async () => {
     accept: '.hp, .shield, .star, .field, .spirit',
     ondropactivate() {
       done = countChange.initial
+      doBorder.value = 'border-dashed border-1'
+    },
+    ondropdeactivate() {
+      doBorder.value = ''
     },
     ondragenter(event) {
       const act = event.target.id as cando
       const ele = event.relatedTarget.classList
       const rule = find(rules, (v, k) => ele.contains(k))!
-      if (rule[`can${capitalize(act)}` as 'canRedo' | 'canUndo'].value) {
+      if (rule[can[act]]) {
         done++
         rule[act]()
       }
@@ -79,10 +108,7 @@ onMounted(async () => {
       const act = cando[event.target.id as cando]
       const ele = event.relatedTarget.classList
       const rule = find(rules, (v, k) => ele.contains(k))!
-      if (
-        rule[`can${capitalize(act)}` as 'canRedo' | 'canUndo'].value &&
-        done != countChange.initial
-      ) {
+      if (rule[can[act]] && done != countChange.initial) {
         done--
         rule[act]()
       }

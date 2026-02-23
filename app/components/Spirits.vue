@@ -44,6 +44,7 @@
 
 <script lang="ts" setup>
 import interact from 'interactjs'
+import { OnClickOutside } from '@vueuse/components'
 
 const props = defineProps<{ pos: opponent; index: element }>()
 const spref = ref()

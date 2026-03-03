@@ -2,7 +2,7 @@
   <Title>CFE scoreboard</Title>
   <VitePwaManifest />
   <div
-    class="h-90vh m-0 w-screen flex-col bg-green-100 font-sans text-gray-700 lg:h-screen lg:flex-row"
+    class="h-90vh m-0 w-screen flex-col bg-green-100 text-gray-700 lg:h-screen lg:flex-row"
   >
     <div
       id="undo"
@@ -123,6 +123,12 @@ onBeforeUnmount(() => {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
+
+body {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
 div {
   @apply flex items-center justify-center text-center select-none;
 }

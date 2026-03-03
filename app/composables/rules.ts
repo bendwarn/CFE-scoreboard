@@ -1,6 +1,4 @@
 import { times, constant, toPlainObject, each } from 'lodash-es'
-import { defineStore } from 'pinia'
-import type { Ref } from 'vue'
 
 export enum element {
   metal,

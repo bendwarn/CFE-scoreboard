@@ -3,7 +3,8 @@
   "scripts": {
     "wasm": "cd calcu && wasm-pack build --target web --out-dir pkg && cd ..",
     "gen": "bun -b nuxt build",
-    "test": "bun -b nuxt test --dev"
+    "dev": "bun -b nuxt dev",
+    "vt": "bun run -b pnpm exec vitest run"
   },
   "name": "cfe-scoreboard",
   "author": "bendwarn",
@@ -18,7 +19,6 @@
     "@types/node": "25",
     "@unocss/nuxt": "66",
     "@vite-pwa/nuxt": "1",
-    "@vue/test-utils": "^2.4.6",
     "@vueuse/components": "14",
     "@vueuse/core": "14",
     "@vueuse/math": "14",
@@ -28,6 +28,7 @@
     "happy-dom": "20",
     "jsdom": "28",
     "nuxt": "4",
+    "playwright-core": "^1.58.2",
     "prettier": "3",
     "prettier-plugin-tailwindcss": "0",
     "typescript": "5",

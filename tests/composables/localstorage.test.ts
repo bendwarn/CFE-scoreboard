@@ -13,7 +13,6 @@ describe('localstorage', async () => {
     p.count++
     await nextTick()
     expect(checkLocal('people')).toHaveProperty('undoStack[0].snapshot', '[{"count":2}]')
-    // console.log(localStorage.getItem('people'))
   })
   it('should recover from localStorage', async () => {
     localStorage.setItem(
@@ -25,6 +24,5 @@ describe('localstorage', async () => {
     p.undo()
     await nextTick()
     expect(checkLocal('people')).toHaveProperty('source.count', 2)
-    // console.log(localStorage.getItem('people'))
   })
 })

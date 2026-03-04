@@ -19,6 +19,7 @@
     "@types/node": "25",
     "@unocss/nuxt": "66",
     "@vite-pwa/nuxt": "1",
+    "@vue/test-utils": "^2.4.6",
     "@vueuse/components": "14",
     "@vueuse/core": "14",
     "@vueuse/math": "14",

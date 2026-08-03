@@ -37,16 +37,16 @@ jobs:
           version: latest
           runtime: node@latest
           cache: true
-          install: false
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install dependencies
-        run: |
-          cargo install wasm-pack
-          pnpm wasm
-          pnpm install
+      - name: Install wasm-pack
+        run: cargo install wasm-pack --locked
+
+      - name: Build WebAssembly
+        working-directory: calcu
+        run: wasm-pack build --target web --out-dir pkg
 
       - name: Static HTML export with Nuxt
         run: pnpm nuxt build

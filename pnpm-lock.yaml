@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      calcu:
-        specifier: link:calcu/pkg
-        version: link:calcu/pkg
       flatted:
         specifier: ^3.4.3
         version: 3.4.3

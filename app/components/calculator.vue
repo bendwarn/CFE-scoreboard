@@ -131,7 +131,7 @@
 </template>
 
 <script setup lang="ts">
-import init, { calculate } from 'calcu'
+import init, { calculate } from '../../calcu/pkg/calcu.js'
 
 const props = defineProps<{ initial: string; container: string }>()
 const emit = defineEmits<{

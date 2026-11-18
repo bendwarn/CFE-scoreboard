@@ -114,25 +114,30 @@ onMounted(() => {
       pinchActivated = countChange.initial
     },
   })
-  shieldrefs.value.forEach((ele, i) => {
-    interact(ele.firstElementChild as HTMLDivElement)
-      .draggable(true)
-      .on('click', () => {
-        emit('reqCal', shield[props.pos][i]!, 'sp', (sh: string) => {
-          if (isNaN(+sh)) {
-            show.value = true
-          } else {
-            shield[props.pos][i] = +sh
-          }
-        })
+  watch(
+    () => people.count,
+    (_count, _previous, onCleanup) => {
+      const elements = shieldrefs.value.map((ele) => ele.firstElementChild as HTMLDivElement)
+      elements.forEach((ele, i) => {
+        interact(ele)
+          .draggable(true)
+          .on('click', () => {
+            emit('reqCal', shield[props.pos][i]!, 'sp', (sh: string) => {
+              if (isNaN(+sh)) {
+                show.value = true
+              } else {
+                shield[props.pos][i] = +sh
+              }
+            })
+          })
       })
-  })
+      onCleanup(() => elements.forEach((ele) => interact(ele).unset()))
+    },
+    { immediate: true, flush: 'post' },
+  )
 })
 onBeforeUnmount(() => {
   interact(unrefElement(hpref)).unset()
   interact(unrefElement(team)).unset()
-  shieldrefs.value.forEach((ele, i) => {
-    interact(ele.firstElementChild as HTMLDivElement).unset()
-  })
 })
 </script>

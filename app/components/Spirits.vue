@@ -7,11 +7,32 @@
       }"
       @click="point && spirit[pos][index]!.point--"
     />
-    <span
-      class="icon icon-ghost"
-      :class="elementFill[point ? type : 5]"
-      @click="throttleToggle()"
-    />
+    <OnClickOutside @trigger="modal" class="relative">
+      <span
+        class="icon icon-ghost"
+        :class="elementFill[point ? type : 5]"
+        @click="throttleToggle()"
+      />
+      <div class="absolute left-1/2 z-10">
+        <transition-group
+          enter-from-class="opacity-0 !translate-none"
+          leave-to-class="opacity-0 !translate-none"
+          enter-active-class="transition duration-100"
+          leave-active-class="transition duration-100"
+        >
+          <div
+            v-show="show"
+            v-for="(n, i) in 5"
+            :key="i"
+            class="absolute h-12 w-12"
+            :class="[elementFill[i], transform[i], delay[i]]"
+            @click="assignSpirit(i)"
+          >
+            <span class="icon icon-ghost" />
+          </div>
+        </transition-group>
+      </div>
+    </OnClickOutside>
     <digit-wheel v-show="point" size="5xl" :digit="point" :duration="500"></digit-wheel>
     <span
       class="icon icon-circle-plus"
@@ -20,25 +41,6 @@
       }"
       @click="point && spirit[pos][index]!.point++"
     />
-    <OnClickOutside @trigger="modal" class="absolute left-1/2 z-10">
-      <transition-group
-        enter-from-class="opacity-0 !translate-none"
-        leave-to-class="opacity-0 !translate-none"
-        enter-active-class="transition duration-100"
-        leave-active-class="transition duration-100"
-      >
-        <div
-          v-show="show"
-          v-for="(n, i) in 5"
-          :key="i"
-          class="absolute h-12 w-12"
-          :class="[elementFill[i], transform[i], delay[i]]"
-          @click="assignSpirit(i)"
-        >
-          <span class="icon icon-ghost" />
-        </div>
-      </transition-group>
-    </OnClickOutside>
   </div>
 </template>
 

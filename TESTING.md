@@ -12,6 +12,4 @@ Storybook 包含各個元件及完整記分板，可透過工具列的 Viewport 
 
 規則、狀態管理與端對端測試保留在 Vitest。執行完整測試前，先在另一個終端機啟動 `bun run dev`，再執行 `bun run vt`；完整測試包含 Storybook stories，端對端測試需要 `http://localhost:3000/CFE-scoreboard/`。
 
-GitHub Actions 會在 push 和 pull request 時自動執行完整測試，並顯示預設 timeout 下的測試結果。
-
 Nuxt 開發伺服器與建置會執行型別檢查；Vitest 不會額外啟動另一個型別檢查程序。

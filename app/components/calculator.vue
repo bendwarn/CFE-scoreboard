@@ -1,6 +1,6 @@
 <template>
   <dialog
-    class="top-1/2 left-1/2 -z-10 grid aspect-4/5 min-w-100 -translate-x-1/2 -translate-y-1/2 grid-cols-4 gap-2 rounded-lg p-3 text-6xl opacity-0 shadow-lg transition duration-200 backdrop:backdrop-blur open:z-10 open:opacity-100"
+    class="top-1/2 left-1/2 -z-10 grid aspect-4/5 w-[min(400px,calc(100vw-2rem))] min-w-0 -translate-x-1/2 -translate-y-1/2 grid-cols-4 gap-2 rounded-lg p-3 text-[clamp(2rem,10vw,3.75rem)] opacity-0 shadow-lg transition duration-200 backdrop:backdrop-blur open:z-10 open:opacity-100"
     :class="bg"
     ref="dialog"
     @click.self="close"

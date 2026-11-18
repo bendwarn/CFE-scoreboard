@@ -5,7 +5,7 @@
     ref="gear"
     @click="show = true"
   >
-    <span class="i-fa6-solid:gear" />
+    <span class="icon icon-gear" />
   </div>
   <div class="absolute z-20 flex-col" v-show="show" v-motion-roll-visible-bottom>
     <p>將齒輪拉到場地來初始化</p>

@@ -1,0 +1,12 @@
+/* Match the application-wide element styles in app/app.vue. */
+body {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  user-select: none;
+}

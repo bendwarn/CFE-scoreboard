@@ -1,4 +1,3 @@
-// @vitest-environment nuxt
 import { describe, test, expect } from 'vitest'
 import { syncRef } from '@vueuse/core'
 import { useClamp } from '@vueuse/math'

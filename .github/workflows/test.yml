@@ -1,0 +1,64 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm and Node.js
+        uses: pnpm/setup@v3
+        with:
+          version: 12.18.0
+          runtime: node@24
+          cache: true
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install wasm-pack
+        run: cargo install wasm-pack --locked
+
+      - name: Build WebAssembly
+        working-directory: calcu
+        run: wasm-pack build --target web --out-dir pkg
+
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run tests
+        run: |
+          bun run dev > "$RUNNER_TEMP/nuxt-dev.log" 2>&1 &
+          dev_pid=$!
+          trap 'kill "$dev_pid" 2>/dev/null || true' EXIT
+
+          for attempt in {1..120}; do
+            if grep -q 'Ready in' "$RUNNER_TEMP/nuxt-dev.log"; then
+              break
+            fi
+            if ! kill -0 "$dev_pid" 2>/dev/null; then
+              cat "$RUNNER_TEMP/nuxt-dev.log"
+              exit 1
+            fi
+            sleep 1
+          done
+
+          if ! grep -q 'Ready in' "$RUNNER_TEMP/nuxt-dev.log"; then
+            cat "$RUNNER_TEMP/nuxt-dev.log"
+            exit 1
+          fi
+
+          bun run vt

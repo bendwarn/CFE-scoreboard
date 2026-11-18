@@ -5,14 +5,14 @@
     ref="fieldref"
   >
     <div class="h-full w-full" :class="text" @click="clickIcon">
-      <span v-if="font" :class="font" />
+      <span v-if="font" class="icon" :class="font" />
     </div>
     <OnClickOutside @trigger="modal">
       <transition-group
         enter-from-class="opacity-0 transform-none"
         leave-to-class="opacity-0 transform-none"
-        enter-active-class="transition duration-300"
-        leave-active-class="transition duration-300"
+        enter-active-class="transition duration-100"
+        leave-active-class="transition duration-100"
       >
         <div
           v-show="show"
@@ -22,7 +22,7 @@
           :class="[elementBG[i], elementStroke[i], transform[i], delay[i]]"
           @click="assignField(i)"
         >
-          <span :class="fontmap[i]" /></div
+          <span class="icon" :class="fontmap[i]" /></div
       ></transition-group>
     </OnClickOutside>
   </div>
@@ -34,11 +34,11 @@ import interact from 'interactjs'
 import { OnClickOutside } from '@vueuse/components'
 
 const fontmap = [
-  'i-emojione-monotone:tiger-face',
-  'i-fa-brands:phoenix-framework',
-  'i-fa-solid:water',
-  'i-emojione-monotone:mountain',
-  'i-simple-icons:dungeonsanddragons',
+  'icon-tiger',
+  'icon-phoenix',
+  'icon-water',
+  'icon-mountain',
+  'icon-dragon',
   '',
 ]
 const fieldref = ref()
@@ -86,16 +86,16 @@ onMounted(() => {
         fborder.value = ''
       },
       ondragenter({ relatedTarget }) {
-        relatedTarget.firstElementChild.classList.add('i-eos-icons:rotating-gear')
-        relatedTarget.firstElementChild.classList.remove('i-fa6-solid:gear')
+        relatedTarget.firstElementChild.classList.add('icon-rotating-gear')
+        relatedTarget.firstElementChild.classList.remove('icon-gear')
       },
       ondragleave({ relatedTarget }) {
-        relatedTarget.firstElementChild.classList.remove('i-eos-icons:rotating-gear')
-        relatedTarget.firstElementChild.classList.add('i-fa6-solid:gear')
+        relatedTarget.firstElementChild.classList.remove('icon-rotating-gear')
+        relatedTarget.firstElementChild.classList.add('icon-gear')
       },
       ondrop({ relatedTarget }) {
-        relatedTarget.firstElementChild.classList.remove('i-eos-icons:rotating-gear')
-        relatedTarget.firstElementChild.classList.add('i-fa6-solid:gear')
+        relatedTarget.firstElementChild.classList.remove('icon-rotating-gear')
+        relatedTarget.firstElementChild.classList.add('icon-gear')
         allreset()
       },
     })

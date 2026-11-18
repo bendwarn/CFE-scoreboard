@@ -1,6 +1,8 @@
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   ssr: false,
+  css: ['~/assets/icons.css'],
+  devServer: { host: 'localhost' },
   app: {
     baseURL: '/CFE-scoreboard/',
     head: {
@@ -27,9 +29,11 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@vite-pwa/nuxt',
     '@nuxt/test-utils/module',
+    '@nuxtjs/storybook',
   ],
   typescript: {
-    typeCheck: true,
+    // Nuxt's dev/build check remains enabled; Vitest does not need another watcher.
+    typeCheck: !process.env.VITEST,
   },
   pwa: {
     manifest: {

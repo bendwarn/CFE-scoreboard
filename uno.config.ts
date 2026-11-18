@@ -1,6 +1,5 @@
 import {
   defineConfig,
-  presetIcons,
   presetTypography,
   presetWebFonts,
   presetWind4,
@@ -19,7 +18,6 @@ export default defineConfig({
   },
   presets: [
     presetWind4(),
-    presetIcons(),
     presetTypography(),
     presetWebFonts({
       fonts: {

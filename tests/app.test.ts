@@ -3,48 +3,29 @@ import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from '../app/app.vue'
 
-type InteractApi = {
-  target: unknown
-  dropzoneConfig?: Record<string, any>
-  draggable: () => InteractApi
-  dropzone: (config: Record<string, any>) => InteractApi
-  on: () => InteractApi
-  unset: () => InteractApi
-}
+const listeners = vi.hoisted(() => new Map<string, (event: any) => void>())
 
-const interactApis: InteractApi[] = []
-
-vi.mock('interactjs', () => ({
-  default: vi.fn((target: unknown) => {
-    const api: InteractApi = {
-      target,
-      draggable: () => api,
-      dropzone: (config) => {
-        api.dropzoneConfig = config
-        return api
-      },
-      on: () => api,
-      unset: () => api,
-    }
-    interactApis.push(api)
-    return api
-  }),
-}))
+vi.mock('interactjs', () => {
+  const interact = Object.assign(vi.fn(), {
+    on: (type: string, listener: (event: any) => void) => listeners.set(type, listener),
+    off: (type: string) => listeners.delete(type),
+  })
+  return { default: interact }
+})
 
 describe('app undo/redo drag flow', () => {
   beforeEach(() => {
-    interactApis.length = 0
+    listeners.clear()
     localStorage.clear()
     usePeople().reset()
     useHealth().reset()
   })
 
-  it('should gate undo/redo by canUndo and canRedo refs', async () => {
+  it('gates history by availability and restores a preview when returning to the center', async () => {
     const hp = useHealth()
     const undoSpy = vi.spyOn(hp, 'undo')
     const redoSpy = vi.spyOn(hp, 'redo')
-
-    await mountSuspended(App, {
+    const wrapper = await mountSuspended(App, {
       global: {
         stubs: {
           Title: true,
@@ -57,30 +38,27 @@ describe('app undo/redo drag flow', () => {
       },
     })
 
-    const undoRedoInteract = interactApis.find((api) => api.target === '#undo, #redo')
-    expect(undoRedoInteract).toBeTruthy()
-
-    const classList = {
-      contains: (klass: string) => klass === 'hp',
+    const event = {
+      interaction: {},
+      target: { classList: { contains: (klass: string) => klass === 'hp' } },
+      clientX: 0,
     }
-    const undoEvent = {
-      target: { id: 'undo' },
-      relatedTarget: { classList },
-    }
-
-    undoRedoInteract!.dropzoneConfig!.ondropactivate()
-    undoRedoInteract!.dropzoneConfig!.ondragenter(undoEvent)
+    listeners.get('dragstart')!(event)
+    listeners.get('dragmove')!(event)
     expect(undoSpy).not.toHaveBeenCalled()
+    listeners.get('dragend')!(event)
 
     hp.enemy--
     await nextTick()
-    expect(hp.canUndo).toBe(true)
-
-    undoRedoInteract!.dropzoneConfig!.ondropactivate()
-    undoRedoInteract!.dropzoneConfig!.ondragenter(undoEvent)
+    listeners.get('dragstart')!(event)
+    listeners.get('dragmove')!(event)
     expect(undoSpy).toHaveBeenCalledTimes(1)
-
-    undoRedoInteract!.dropzoneConfig!.ondragleave(undoEvent)
+    listeners.get('dragmove')!({ ...event, clientX: -20 })
+    expect(undoSpy).toHaveBeenCalledTimes(1)
+    listeners.get('dragmove')!({ ...event, clientX: window.innerWidth / 2 })
     expect(redoSpy).toHaveBeenCalledTimes(1)
+    listeners.get('dragend')!(event)
+    wrapper.unmount()
+    expect(listeners.size).toBe(0)
   })
 })

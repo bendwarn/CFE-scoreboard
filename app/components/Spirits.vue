@@ -1,20 +1,20 @@
 <template>
   <div class="spirit relative w-full justify-between text-4xl" ref="spref">
     <span
-      class="i-akar-icons:circle-minus-fill"
+      class="icon icon-circle-minus"
       :class="{
         'rounded-sm border-dashed text-red-700 transition-all duration-200': point,
       }"
       @click="point && spirit[pos][index]!.point--"
     />
     <span
-      class="i-icon-park-solid:ghost"
+      class="icon icon-ghost"
       :class="elementFill[point ? type : 5]"
       @click="throttleToggle()"
     />
     <digit-wheel v-show="point" size="5xl" :digit="point" :duration="500"></digit-wheel>
     <span
-      class="i-akar-icons:circle-plus-fill"
+      class="icon icon-circle-plus"
       :class="{
         'rounded-sm border-dashed text-green-400 transition-all duration-200': point,
       }"
@@ -24,8 +24,8 @@
       <transition-group
         enter-from-class="opacity-0 transform-none"
         leave-to-class="opacity-0 transform-none"
-        enter-active-class="transition duration-300"
-        leave-active-class="transition duration-300"
+        enter-active-class="transition duration-100"
+        leave-active-class="transition duration-100"
       >
         <div
           v-show="show"
@@ -35,7 +35,7 @@
           :class="[elementFill[i], transform[i], delay[i]]"
           @click="assignSpirit(i)"
         >
-          <span class="i-icon-park-solid:ghost" />
+          <span class="icon icon-ghost" />
         </div>
       </transition-group>
     </OnClickOutside>

@@ -51,16 +51,8 @@
 
 <script lang="ts" setup>
 import interact from 'interactjs'
-import { noop, capitalize, find } from 'lodash-es'
-
-enum cando {
-  undo = 'redo',
-  redo = 'undo',
-}
-enum can {
-  undo = 'canUndo',
-  redo = 'canRedo',
-}
+import { noop, find } from 'lodash-es'
+import type { InteractEvent } from '@interactjs/core/InteractEvent'
 
 const calnum = ref('')
 const container = ref('')
@@ -80,45 +72,57 @@ const rules = {
   field: useField(),
   spirit: useSpirit(),
 }
-let done = countChange.initial
+type HistoryDirection = 'undo' | 'redo'
+type HistoryRule = (typeof rules)[keyof typeof rules]
+const drags = new Map<object, { rule: HistoryRule; preview: HistoryDirection | null }>()
 const doBorder = ref('')
-onMounted(async () => {
+
+const onDragStart = (event: InteractEvent<'drag'>) => {
+  const rule = find(rules, (_, key) => event.target.classList.contains(key))
+  if (!rule) return
+  drags.set(event.interaction, { rule, preview: null })
+  doBorder.value = 'border-dashed border-1'
+}
+
+const onDragMove = (event: InteractEvent<'drag'>) => {
+  const drag = drags.get(event.interaction)
+  if (!drag) return
+  const direction = event.clientX <= window.innerWidth / 12
+    ? 'undo'
+    : event.clientX >= window.innerWidth * 11 / 12
+      ? 'redo'
+      : null
+  if (direction === drag.preview) return
+
+  if (drag.preview) {
+    drag.rule[drag.preview === 'undo' ? 'redo' : 'undo']()
+    drag.preview = null
+  }
+  if (direction && drag.rule[direction === 'undo' ? 'canUndo' : 'canRedo']) {
+    drag.rule[direction]()
+    drag.preview = direction
+  }
+}
+
+const onDragEnd = (event: InteractEvent<'drag'>) => {
+  drags.delete(event.interaction)
+  if (!drags.size) doBorder.value = ''
+}
+
+onMounted(() => {
   const { $pwa } = useNuxtApp()
   if ($pwa?.needRefresh) {
     $pwa.updateServiceWorker()
   }
-
-  interact('#undo, #redo').dropzone({
-    accept: '.hp, .shield, .star, .field, .spirit',
-    ondropactivate() {
-      done = countChange.initial
-      doBorder.value = 'border-dashed border-1'
-    },
-    ondropdeactivate() {
-      doBorder.value = ''
-    },
-    ondragenter(event) {
-      const act = event.target.id as cando
-      const ele = event.relatedTarget.classList
-      const rule = find(rules, (v, k) => ele.contains(k))!
-      if (rule[can[act]]) {
-        done++
-        rule[act]()
-      }
-    },
-    ondragleave(event) {
-      const act = cando[event.target.id as cando]
-      const ele = event.relatedTarget.classList
-      const rule = find(rules, (v, k) => ele.contains(k))!
-      if (rule[can[act]] && done != countChange.initial) {
-        done--
-        rule[act]()
-      }
-    },
-  })
+  interact.on('dragstart', onDragStart)
+  interact.on('dragmove', onDragMove)
+  interact.on('dragend', onDragEnd)
 })
 onBeforeUnmount(() => {
-  interact('#undo, #redo').unset()
+  interact.off('dragstart', onDragStart)
+  interact.off('dragmove', onDragMove)
+  interact.off('dragend', onDragEnd)
+  drags.clear()
 })
 </script>
 

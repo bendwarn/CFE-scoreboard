@@ -1,0 +1,27 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: var(--icon) no-repeat center / 100% 100%;
+  mask: var(--icon) no-repeat center / 100% 100%;
+}
+
+.icon-circle-minus { --icon: url('./icons/circle-minus.svg'); }
+.icon-circle-plus { --icon: url('./icons/circle-plus.svg'); }
+.icon-ghost { --icon: url('./icons/ghost.svg'); }
+.icon-tiger { --icon: url('./icons/tiger.svg'); }
+.icon-phoenix { --icon: url('./icons/phoenix.svg'); }
+.icon-water { --icon: url('./icons/water.svg'); }
+.icon-mountain { --icon: url('./icons/mountain.svg'); }
+.icon-dragon { --icon: url('./icons/dragon.svg'); }
+.icon-gear { --icon: url('./icons/gear.svg'); }
+.icon-star { --icon: url('./icons/star.svg'); }
+.icon-rotating-gear {
+  --icon: url('./icons/rotating-gear.svg');
+  animation: icon-rotate 10s linear infinite;
+}
+
+@keyframes icon-rotate {
+  to { transform: rotate(360deg); }
+}

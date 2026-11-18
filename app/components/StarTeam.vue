@@ -6,7 +6,7 @@
       ref="starref"
       @click="star[props.pos].type = undefined"
     >
-      <span class="i-bi:star-fill" />
+      <span class="icon icon-star" />
     </div>
   </transition>
 </template>

@@ -9,7 +9,7 @@
         { 'border-black shadow-lg': summoned![i], 'border-transparent': !summoned![i] },
       ]"
     >
-      <span class="i-bi:star-fill" @click="star.toggle(pos, index, i)" />
+      <span class="icon icon-star" @click="star.toggle(pos, index, i)" />
     </div>
   </div>
 </template>

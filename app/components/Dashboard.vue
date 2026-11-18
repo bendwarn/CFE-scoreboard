@@ -1,11 +1,15 @@
 <template>
   <div class="flex-col">
     <div
-      class="hp h-1/5 w-11/12 touch-none items-end rounded-b-xl border-x-2 border-b-2 border-black bg-red-300 text-5xl text-red-600 shadow-xl lg:items-center"
+      class="hp relative h-1/5 w-11/12 touch-none items-end overflow-hidden rounded-b-xl border-x-2 border-b-2 border-black bg-red-100 text-5xl text-red-600 shadow-xl lg:items-center"
       :class="hpBorder"
       ref="hpref"
     >
-      {{ hptrans }}
+      <div
+        class="hp-fill pointer-events-none absolute inset-y-0 left-0 bg-red-300"
+        :style="{ width: `${(hpTransition / (150 + people.count * 50)) * 100}%` }"
+      ></div>
+      <span class="relative">{{ hptrans }}</span>
     </div>
     <div class="relative h-4/5 w-4/5 touch-none items-stretch" ref="team">
       <div
@@ -52,7 +56,8 @@ const team = ref()
 const shieldrefs = useTemplateRefsList()
 
 const hpoint = toRefs(hp)[props.pos]
-const hptrans = usePrecision(useTransition(hpoint), 0)
+const hpTransition = useTransition(hpoint)
+const hptrans = usePrecision(hpTransition, 0)
 const shpoints = computed(() => map(shield[props.pos]))
 const shtrans = useTransition(shpoints)
 
@@ -70,7 +75,12 @@ onMounted(() => {
       ondropdeactivate() {
         hpBorder.value = ''
       },
-      ondrop: hp.swap,
+      ondrop(event) {
+        const x = event.dragEvent.clientX
+        if (x > window.innerWidth / 12 && x < window.innerWidth * 11 / 12) {
+          hp.swap()
+        }
+      },
     })
     .on('click', () => {
       emit('reqCal', hp[props.pos], 'hp', (payload: string) => {

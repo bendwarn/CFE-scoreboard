@@ -1,11 +1,11 @@
 <template>
   <dialog
-    class="top-1/2 left-1/2 -z-10 grid aspect-4/5 w-[min(400px,calc(100vw-2rem))] min-w-0 -translate-x-1/2 -translate-y-1/2 grid-cols-4 gap-2 rounded-lg p-3 text-[clamp(2rem,10vw,3.75rem)] opacity-0 shadow-lg transition duration-200 backdrop:backdrop-blur open:z-10 open:opacity-100"
+    class="top-1/2 left-1/2 -z-10 grid aspect-4/5 w-[min(400px,calc(100vw-2rem))] min-w-0 -translate-x-1/2 -translate-y-1/2 grid-cols-4 grid-rows-5 gap-2.5 rounded-xl p-4 text-[clamp(1.5rem,8vw,3rem)] leading-none opacity-0 shadow-lg transition duration-200 backdrop:backdrop-blur open:z-10 open:opacity-100"
     :class="bg"
     ref="dialog"
     @click.self="close"
   >
-    <div class="col-span-3 rounded-xl border-4" :class="areaColor">
+    <div class="col-span-3 min-w-0 justify-end overflow-x-auto rounded-xl border-4 px-3 whitespace-nowrap" :class="areaColor">
       {{ result }} {{ formula }}
     </div>
     <div
@@ -114,7 +114,7 @@
       C
     </div>
     <div
-      class="rounded-lg bg-white text-gray-900 shadow focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:outline-none active:hover:scale-105 active:hover:bg-gray-100 active:hover:shadow-md"
+      class="rounded-lg bg-white text-[clamp(1rem,5vw,1.75rem)] text-gray-900 shadow focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:outline-none active:hover:scale-105 active:hover:bg-gray-100 active:hover:shadow-md"
       aria-label="刪除"
       @click="pop"
     >

@@ -5,8 +5,8 @@
     ref="dialog"
     @click.self="close"
   >
-    <div class="col-span-3 min-w-0 justify-end overflow-x-auto rounded-xl border-4 px-3 whitespace-nowrap" :class="areaColor">
-      {{ result }} {{ formula }}
+    <div class="col-span-3 min-w-0 justify-start overflow-x-auto rounded-xl border-4 px-3" :class="areaColor">
+      <span class="m-auto whitespace-nowrap">{{ result }} {{ formula }}</span>
     </div>
     <div
       class="rounded-lg bg-blue-600 text-white shadow hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-800 focus-visible:ring-offset-2 focus-visible:outline-none active:bg-blue-700 active:hover:scale-105 active:hover:shadow-md"
@@ -114,7 +114,7 @@
       C
     </div>
     <div
-      class="rounded-lg bg-white text-[clamp(1rem,5vw,1.75rem)] text-gray-900 shadow focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:outline-none active:hover:scale-105 active:hover:bg-gray-100 active:hover:shadow-md"
+      class="rounded-lg bg-white  text-gray-900 shadow focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:outline-none active:hover:scale-105 active:hover:bg-gray-100 active:hover:shadow-md"
       aria-label="刪除"
       @click="pop"
     >

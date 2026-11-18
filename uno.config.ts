@@ -1,7 +1,6 @@
 import {
   defineConfig,
   presetTypography,
-  presetWebFonts,
   presetWind4,
   transformerDirectives,
   transformerVariantGroup,
@@ -19,11 +18,6 @@ export default defineConfig({
   presets: [
     presetWind4(),
     presetTypography(),
-    presetWebFonts({
-      fonts: {
-        // ...
-      },
-    }),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
 })

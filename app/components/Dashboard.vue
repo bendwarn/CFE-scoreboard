@@ -70,7 +70,7 @@ onMounted(() => {
     .dropzone({
       accept: '.hp',
       ondropactivate() {
-        hpBorder.value = 'border-dashed'
+        hpBorder.value = 'border-dashed !border-x-4 !border-b-4'
       },
       ondropdeactivate() {
         hpBorder.value = ''

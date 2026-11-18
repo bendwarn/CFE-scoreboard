@@ -3,6 +3,7 @@ import { expect, userEvent } from 'storybook/test'
 import TheField from '../app/components/TheField.vue'
 import { element, useField } from '../app/composables/rules'
 import { resetScoreboard } from './support/reset'
+import { expectMenuTransition } from './support/menu-transition'
 
 const meta = {
   title: 'Scoreboard/TheField',
@@ -29,5 +30,13 @@ export const Water: Story = {
   play: async ({ canvasElement }) => {
     await userEvent.click(canvasElement.querySelector('.field > div')!)
     await expect(useField().field).toBeNull()
+  },
+}
+
+export const MenuTransition: Story = {
+  play: async ({ canvasElement }) => {
+    const trigger = canvasElement.querySelector('.field > div')!
+    const option = canvasElement.querySelector('.field .icon-tiger')!.parentElement!
+    await expectMenuTransition(trigger, option)
   },
 }

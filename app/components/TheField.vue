@@ -9,8 +9,8 @@
     </div>
     <OnClickOutside @trigger="modal">
       <transition-group
-        enter-from-class="opacity-0 transform-none"
-        leave-to-class="opacity-0 transform-none"
+        enter-from-class="opacity-0 !translate-none"
+        leave-to-class="opacity-0 !translate-none"
         enter-active-class="transition duration-100"
         leave-active-class="transition duration-100"
       >
@@ -80,7 +80,7 @@ onMounted(() => {
     .dropzone({
       accept: '.gear',
       ondropactivate() {
-        fborder.value = 'border-dashed'
+        fborder.value = 'border-dashed !border-4'
       },
       ondropdeactivate() {
         fborder.value = ''

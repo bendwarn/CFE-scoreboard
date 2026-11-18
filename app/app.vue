@@ -81,7 +81,7 @@ const onDragStart = (event: InteractEvent<'drag'>) => {
   const rule = find(rules, (_, key) => event.target.classList.contains(key))
   if (!rule) return
   drags.set(event.interaction, { rule, preview: null })
-  doBorder.value = 'border-dashed border-1'
+  doBorder.value = 'border-dashed border-4'
 }
 
 const onDragMove = (event: InteractEvent<'drag'>) => {
@@ -127,10 +127,9 @@ onBeforeUnmount(() => {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
-
 body {
-  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang TC',
+    'Microsoft JhengHei', 'Noto Sans CJK TC', sans-serif;
 }
 
 div {

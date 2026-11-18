@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook-vue/nuxt'
 import Spirits from '../app/components/Spirits.vue'
 import { element, opponent, useSpirit } from '../app/composables/rules'
 import { resetScoreboard } from './support/reset'
+import { expectMenuTransition } from './support/menu-transition'
 
 const meta = {
   title: 'Scoreboard/Spirits',
@@ -31,4 +32,11 @@ export const Active: Story = {
     },
     template: '<div style="width: min(280px, 80vw); padding: 70px 0"><Spirits v-bind="args" /></div>',
   }),
+}
+
+export const MenuTransition: Story = {
+  play: async ({ canvasElement }) => {
+    const icons = canvasElement.querySelectorAll('.spirit .icon-ghost')
+    await expectMenuTransition(icons[0]!, icons[1]!.parentElement!)
+  },
 }

@@ -114,7 +114,7 @@
       C
     </div>
     <div
-      class="rounded-lg bg-white  text-gray-900 shadow focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:outline-none active:hover:scale-105 active:hover:bg-gray-100 active:hover:shadow-md"
+      class="rounded-lg bg-white text-gray-900 shadow focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:outline-none active:hover:scale-105 active:hover:bg-gray-100 active:hover:shadow-md"
       aria-label="刪除"
       @click="pop"
     >

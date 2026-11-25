@@ -3,6 +3,7 @@
   "scripts": {
     "gen": "nuxt build",
     "dev": "nuxt dev",
+    "lint": "eslint . --max-warnings 0",
     "vt": "vitest run",
     "sb": "storybook dev -p 6006",
     "build-storybook": "storybook build",

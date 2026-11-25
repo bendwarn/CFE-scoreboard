@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     storybookTest({
       configDir: fileURLToPath(new URL('./.storybook', import.meta.url)),
-      storybookScript: 'pnpm storybook --no-open',
+      storybookScript: 'bun run sb --no-open',
     }),
   ],
   test: {

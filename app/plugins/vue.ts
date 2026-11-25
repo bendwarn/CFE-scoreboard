@@ -3,7 +3,7 @@ import { consola } from 'consola'
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(VueDigitAnimation)
-  nuxtApp.vueApp.config.errorHandler = (error, context) => {
+  nuxtApp.vueApp.config.errorHandler = (error) => {
     console.log(error)
     consola.log(error)
   }

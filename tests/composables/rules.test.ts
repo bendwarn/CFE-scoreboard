@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { element, opponent, usePeople, useSpirit, useStar } from '../../app/composables/rules'
+import { element, usePeople, useSpirit, useStar } from '../../app/composables/rules'
+import type { opponent } from '../../app/composables/rules'
 
 describe('rules stores', () => {
   beforeEach(() => {

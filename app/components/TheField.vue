@@ -32,6 +32,7 @@
 import { isNil } from 'lodash-es'
 import interact from 'interactjs'
 import { OnClickOutside } from '@vueuse/components'
+import { historyDragKey } from '../utils/history-drag'
 
 const fontmap = [
   'icon-tiger',
@@ -42,6 +43,7 @@ const fontmap = [
   '',
 ]
 const fieldref = ref()
+const registerHistoryDrag = inject(historyDragKey, () => {})
 const fborder = ref('')
 const field = useField()
 const [show, toggle] = useToggle()
@@ -75,7 +77,7 @@ const assignField = (i: element) => {
   throttleToggle()
 }
 onMounted(() => {
-  interact(unrefElement(fieldref))
+  const target = interact(unrefElement(fieldref))
     .draggable(true)
     .dropzone({
       accept: '.gear',
@@ -99,6 +101,7 @@ onMounted(() => {
         allreset()
       },
     })
+  registerHistoryDrag(target)
 })
 onBeforeUnmount(() => {
   interact(unrefElement(fieldref)).unset()

@@ -13,13 +13,15 @@
 
 <script lang="ts" setup>
 import interact from 'interactjs'
+import { historyDragKey } from '../utils/history-drag'
 
 const props = defineProps<{ pos: opponent }>()
 const starref = ref()
+const registerHistoryDrag = inject(historyDragKey, () => {})
 const star = useStar()
 const type = computed(() => elementFill[star[props.pos].type ?? 5])
 onMounted(() => {
-  interact(unrefElement(starref)).draggable(true)
+  registerHistoryDrag(interact(unrefElement(starref)).draggable(true))
 })
 onBeforeUnmount(() => {
   interact(unrefElement(starref)).unset()

@@ -1,15 +1,25 @@
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { defineComponent, inject, onBeforeUnmount, onMounted } from 'vue'
 import App from '../app/app.vue'
+import { historyDragKey } from '../app/utils/history-drag'
 
-const listeners = vi.hoisted(() => new Map<string, (event: any) => void>())
-
-vi.mock('interactjs', () => {
-  const interact = Object.assign(vi.fn(), {
-    on: (type: string, listener: (event: any) => void) => listeners.set(type, listener),
-    off: (type: string) => listeners.delete(type),
-  })
-  return { default: interact }
+const listeners = new Map<string, (event: any) => void>()
+const DashboardStub = defineComponent({
+  setup() {
+    const registerHistoryDrag = inject(historyDragKey)!
+    onMounted(() => {
+      const target = {
+        on(type: string, listener: (event: any) => void) {
+          listeners.set(type, listener)
+          return target
+        },
+      }
+      registerHistoryDrag(target as Parameters<typeof registerHistoryDrag>[0])
+    })
+    onBeforeUnmount(() => listeners.clear())
+  },
+  template: '<div />',
 })
 
 describe('app undo/redo drag flow', () => {
@@ -28,9 +38,9 @@ describe('app undo/redo drag flow', () => {
       global: {
         stubs: {
           Title: true,
-          VitePwaManifest: true,
+          NuxtPwaManifest: true,
           Calculator: { template: '<dialog />' },
-          Dashboard: { template: '<div />' },
+          Dashboard: DashboardStub,
           TheField: { template: '<div />' },
           Gear: { template: '<div />' },
         },

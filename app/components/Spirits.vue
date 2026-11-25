@@ -46,6 +46,7 @@
 
 <script lang="ts" setup>
 import interact from 'interactjs'
+import { historyDragKey } from '../utils/history-drag'
 import { OnClickOutside } from '@vueuse/components'
 
 const props = defineProps<{ pos: opponent; index: element }>()
@@ -53,6 +54,7 @@ const spref = ref()
 const spirit = useSpirit()
 const type = computed(() => spirit[props.pos][props.index]!.type)
 const point = computed(() => spirit[props.pos][props.index]!.point)
+const registerHistoryDrag = inject(historyDragKey, () => {})
 
 const [show, toggle] = useToggle()
 const throttleToggle = useThrottleFn(toggle, 50, false)
@@ -76,7 +78,7 @@ const assignSpirit = (i: element) => {
   throttleToggle()
 }
 onMounted(() => {
-  interact(unrefElement(spref)).draggable(true)
+  registerHistoryDrag(interact(unrefElement(spref)).draggable(true))
 })
 onBeforeUnmount(() => {
   interact(unrefElement(spref)).unset()

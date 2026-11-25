@@ -4,6 +4,7 @@ import type { Stats } from 'node:fs'
 const config: StorybookConfig = {
   stories: ['../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: ['@storybook/addon-vitest'],
+  features: { experimentalDocgenServer: true },
   framework: {
     name: '@storybook-vue/nuxt',
     options: {},
@@ -43,8 +44,15 @@ const config: StorybookConfig = {
       }
     }
     config.optimizeDeps ??= {}
+    // The Nuxt preset adds optional docs dependencies that cannot be resolved
+    // from this pnpm workspace; Vite does not need to pre-bundle them here.
     config.optimizeDeps.include = [
-      ...(config.optimizeDeps.include ?? []),
+      ...(config.optimizeDeps.include ?? []).filter((dependency) => ![
+        '@nuxtjs/storybook > @storybook-vue/nuxt > @storybook/vue3 > lodash/kebabCase',
+        'react/jsx-runtime',
+        'react',
+        'react-dom/client',
+      ].includes(dependency)),
       'vue-digit-animation > numeral',
       'interactjs',
     ]

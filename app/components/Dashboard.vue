@@ -37,6 +37,7 @@
 <script lang="ts" setup>
 import interact from 'interactjs'
 import { map, isNaN } from 'lodash-es'
+import { historyDragKey } from '../utils/history-drag'
 
 const props = defineProps<{ pos: opponent }>()
 const emit = defineEmits<{
@@ -54,6 +55,7 @@ const hpBorder = ref('')
 const hpref = ref()
 const team = ref()
 const shieldrefs = useTemplateRefsList()
+const registerHistoryDrag = inject(historyDragKey, () => {})
 
 const hpoint = toRefs(hp)[props.pos]
 const hpTransition = useTransition(hpoint)
@@ -65,7 +67,7 @@ const show = autoResetRef(false, 2000)
 
 let pinchActivated = countChange.initial
 onMounted(() => {
-  interact(unrefElement(hpref))
+  const hpTarget = interact(unrefElement(hpref))
     .draggable(true)
     .dropzone({
       accept: '.hp',
@@ -91,6 +93,7 @@ onMounted(() => {
         }
       })
     })
+  registerHistoryDrag(hpTarget)
   interact(unrefElement(team)).gesturable({
     onmove({ scale }) {
       if (1.5 < scale && pinchActivated < countChange.increase) {
@@ -119,7 +122,7 @@ onMounted(() => {
     (_count, _previous, onCleanup) => {
       const elements = shieldrefs.value.map((ele) => ele.firstElementChild as HTMLDivElement)
       elements.forEach((ele, i) => {
-        interact(ele)
+        const target = interact(ele)
           .draggable(true)
           .on('click', () => {
             emit('reqCal', shield[props.pos][i]!, 'sp', (sh: string) => {
@@ -130,6 +133,7 @@ onMounted(() => {
               }
             })
           })
+        registerHistoryDrag(target)
       })
       onCleanup(() => elements.forEach((ele) => interact(ele).unset()))
     },

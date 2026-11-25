@@ -1,6 +1,6 @@
 <template>
   <Title>CFE scoreboard</Title>
-  <VitePwaManifest />
+  <NuxtPwaManifest />
   <div
     class="h-90vh m-0 w-screen flex-col bg-green-100 text-gray-700 lg:h-screen lg:flex-row"
   >
@@ -50,9 +50,9 @@
 </template>
 
 <script lang="ts" setup>
-import interact from 'interactjs'
 import { noop, find } from 'lodash-es'
 import type { InteractEvent } from '@interactjs/core/InteractEvent'
+import { historyDragKey } from './utils/history-drag'
 
 const calnum = ref('')
 const container = ref('')
@@ -109,19 +109,19 @@ const onDragEnd = (event: InteractEvent<'drag'>) => {
   if (!drags.size) doBorder.value = ''
 }
 
+provide(historyDragKey, (target) => {
+  target.on('dragstart', onDragStart)
+  target.on('dragmove', onDragMove)
+  target.on('dragend', onDragEnd)
+})
+
 onMounted(() => {
   const { $pwa } = useNuxtApp()
   if ($pwa?.needRefresh) {
     $pwa.updateServiceWorker()
   }
-  interact.on('dragstart', onDragStart)
-  interact.on('dragmove', onDragMove)
-  interact.on('dragend', onDragEnd)
 })
 onBeforeUnmount(() => {
-  interact.off('dragstart', onDragStart)
-  interact.off('dragmove', onDragMove)
-  interact.off('dragend', onDragEnd)
   drags.clear()
 })
 </script>

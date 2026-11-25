@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { createPage, setup } from '@nuxt/test-utils/e2e'
 import type { Page } from 'playwright-core'
 
@@ -9,6 +9,9 @@ describe('history drag', async () => {
   beforeEach(async () => {
     page = await createPage('/CFE-scoreboard/')
     await page.setViewportSize({ width: 1000, height: 800 })
+  })
+  afterEach(async () => {
+    await page?.close()
   })
 
   it('keeps undo and redo outside the screen, even over another HP dropzone', async () => {

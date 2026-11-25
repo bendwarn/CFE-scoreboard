@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { createPage, setup } from '@nuxt/test-utils/e2e'
+import type { Page } from 'playwright-core'
 
 describe('calculator e2e', async () => {
   await setup({
@@ -8,9 +9,15 @@ describe('calculator e2e', async () => {
     server: false,
   })
 
-  it('should compute hp with wasm in real browser flow', async () => {
-    const page = await createPage('/CFE-scoreboard/')
+  let page: Page
+  beforeEach(async () => {
+    page = await createPage('/CFE-scoreboard/')
+  })
+  afterEach(async () => {
+    await page?.close()
+  })
 
+  it('should compute hp with wasm in real browser flow', async () => {
     await page.locator('.hp').first().click()
     const dialog = page.locator('dialog[open]')
     await dialog.waitFor({ state: 'visible' })
@@ -28,7 +35,6 @@ describe('calculator e2e', async () => {
     { width: 390, height: 844 },
     { width: 1440, height: 900 },
   ])('keeps the calculator inside a $width × $height viewport', async (viewport) => {
-    const page = await createPage('/CFE-scoreboard/')
     await page.setViewportSize(viewport)
     await page.locator('.hp').first().click()
     const dialog = page.locator('dialog[open]')
@@ -39,6 +45,5 @@ describe('calculator e2e', async () => {
     expect(box.x + box.width).toBeLessThanOrEqual(viewport.width)
     expect(box.y + box.height).toBeLessThanOrEqual(viewport.height)
     await expect.poll(() => page.getByLabel('等於').isVisible()).toBe(true)
-    await page.close()
   })
 })

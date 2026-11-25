@@ -1,4 +1,3 @@
-// @vitest-environment nuxt
 import { beforeEach, describe, expect, it } from 'vitest'
 import { element, opponent, usePeople, useSpirit, useStar } from '../../app/composables/rules'
 

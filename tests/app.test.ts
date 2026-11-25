@@ -1,4 +1,3 @@
-// @vitest-environment nuxt
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from '../app/app.vue'

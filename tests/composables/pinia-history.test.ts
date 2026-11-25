@@ -1,4 +1,3 @@
-// @vitest-environment nuxt
 import { beforeEach, describe, expect, it } from 'vitest'
 import { parse } from 'flatted'
 import { defineStore } from 'pinia'

@@ -13,12 +13,24 @@ export async function expectMenuTransition(trigger: Element, option: Element) {
   option.addEventListener('transitionrun', onStart)
   option.addEventListener('transitionend', onEnd)
   try {
-    for (const count of [1, 2]) {
+    // Let the initial hidden state and its translation styles reach the browser
+    // before triggering Vue's enter transition.
+    await waitFor(() => {
+      expect(option).not.toBeVisible()
+      expect(getComputedStyle(option).translate).not.toBe('none')
+    })
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+
+    for (const opening of [true, false]) {
+      const previousStarted = started
+      const previousFinished = finished
       await userEvent.click(trigger)
       await waitFor(() => {
-        expect(started).toBe(count)
-        expect(finished).toBe(count)
+        expect(started).toBeGreaterThan(previousStarted)
+        expect(finished).toBeGreaterThan(previousFinished)
       })
+      if (opening) await expect(option).toBeVisible()
+      else await expect(option).not.toBeVisible()
     }
   } finally {
     option.removeEventListener('transitionrun', onStart)
